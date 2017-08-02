@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.seo_title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="__sync_contentCategory" content="meterA">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+
+    <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
+
+    <%= t.include("partials/_head.html") %>
+
+  </head>
+
+  <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
+
+    <%= t.include("partials/_nav.html") %>
+
+    <div class="swiper-container flex-container">
+
+      <div class="swiper-wrapper">
+
+        <div class="intro swiper-slide">
+            <div class="hed"><%=json.transbay_timeline.Hed%></div>
+            <div class="intro"><%=json.transbay_timeline.Deck%></div>
+
+            <div class="arrow">
+              <span>Scroll right</span><br>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <% json.transbay_timeline.timeline.forEach(function(t) { %>
+
+          <% if (t.Type == "Text") { %>
+
+            <div class="milestone swiper-slide">
+              <div class="year big"><%= t.Year %></div>
+              <div class="desc big"><%= t.Text %></div>
+            </div>
+
+          <% } else if (t.Type == "Triptych") { %>
+
+            <div class="milestone swiper-slide">
+              <div class="year"><%= t.Year %></div>
+              <div class="desc"><%= t.Text %></div>
+            </div>
+
+          <% } else if (t.Type == "Wide") { %>
+
+            <div class="milestone bg swiper-slide" style="background-image: url('http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg'); background-size: 1500px; background-position: center center; background-repeat: no-repeat">
+              <div class="overlay">
+                <div class="year"><%= t.Year %></div>
+                <div class="desc "><%= t.Text %></div>
+              </div>
+            </div>
+
+          <% } else { %>
+
+            <div class="milestone swiper-slide">
+              <div class="inline-img">
+                <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg"></img>
+              </div>
+              <div class="year"><%= t.Year %></div>
+              <div class="desc"><%= t.Text %></div>
+            </div>
+
+          <% } %>
+
+        <% }); %>
+
+       <div class="swiper-slide milestone">
+         <div class="read-story-link">
+           <p>Read the story: </p>
+           <div class="story"><a href="http://www.sfchronicle.com/aboutsfgate/article/Rejuvenating-SF-Civic-Center-Plaza-a-10922433.php" target="_blank">Rejuvenating Civic Center Plaza — a challenge beyond design</a></div>
+         </div>
+
+
+         <div class="read-story-link toppadding">
+           <p>Related Stories</p>
+           <div class="story"><a href="http://www.sfchronicle.com/bayarea/place/article/Powers-that-be-can-revive-Civic-Center-3788197.php" target="_blank">Powers that be can revive Civic Center</a></div>
+           <div class="story"><a href="http://www.sfchronicle.com/bayarea/place/article/15-seconds-that-changed-San-Francisco-Call-it-3235808.php" target="_blank">15 seconds that changed San Francisco</a></div>
+           <div class="story"><a href="http://www.sfchronicle.com/bayarea/place/article/Veterans-Building-restoration-defers-to-original-6522789.php" target="_blank">Veterans Building restoration defers to original vision</a></div>
+           <div class="story"><a href="http://www.sfchronicle.com/bayarea/article/Loma-Prieta-quake-left-legacy-of-repair-renewal-5816995.php" target="_blank">Loma Prieta quake left legacy of repair, renewal</a></div>
+         </div>
+
+          <div class="credits">
+            <div class="group">
+            <p>Credits</p>
+              <div class="entry">John King &bull;
+                <a href="mailto:jking@sfchronicle.com">jking@sfchronicle.com</a> &bull;
+                <a href = "https://twitter.com/johnkingsfchron" target="_blank">@JohnKingSFChron</a>
+              </div>
+              <div class="entry">Bill Van Niekerken &bull;
+                <a href="mailto:bvanniekerken@sfchronicle.com">bvanniekerken@sfchronicle.com</a>
+              </div>
+              <div class="entry">Emma O'Neill &bull;
+                <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a> &bull;
+                <a href = "https://twitter.com/emmaruthoneill" target="_blank">@emmaruthoneill</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+    </div>
+
+    <script>
+      var mySwiper = new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: false,
+        grabCursor: true,
+        pagination: '.swiper-pagination',
+        keyboardControl: true,
+        mousewheelControl: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        pagination: '.swiper-pagination',
+        paginationType: 'progress'
+      })
+    </script>
+
+    <script src="../app.js" async></script>
+    <%= t.include("partials/_helloSFC.html") %>
+
+  </body>
+</html>
