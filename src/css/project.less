@@ -1,3 +1,34 @@
+
+@highlight: #0D3B66;
+
+.swiper-container {
+  font-family: @med-graphics;
+  text-align: center;
+  margin: auto;
+}
+
+.main-hed {
+  font-family: @bold-graphics;
+  font-size: 30px;
+  padding-bottom: 50px;
+  max-width: 600px;
+  margin: auto;
+}
+.author {
+  padding-bottom: 30px;
+}
+.main-deck {
+  max-width: 800px;
+  padding-bottom: 30px;
+  margin: auto;
+}
+.instructions {
+  font-size: 15px;
+  .fa {
+    font-size: 20px;
+  }
+}
+
 .flex-container {
    .display-flex;
    flex-flow:row;
@@ -13,57 +44,117 @@
 
 .navigation{
   padding-top: 3px;
-  .link{
-    font-size: 0.9em;
-    margin-top: 0;
+}
+
+.flex-slide {
+  .display-flex;
+  .align-items(center);
+  .justify-content(center);
+  .year {
+    font-family: @boldest-graphics;
+    font-size: 50px;
+    color: @highlight;
+    margin-top: -30px;
+    padding-bottom: 20px;
+  }
+  .desc {
+    max-width: 600px;
   }
 }
 
-.milestone {
-  position:relative;
-  padding: 12px;
-  color:black;
-  font-size:22px;
-  background-color: whitesmoke;
-  text-align:center;
-  width:100%;
-  .flex(none);
-  overflow-y:scroll;
-   &.bg{
-    background-position:center;
-    background-repeat:no-repeat;
-    height:100%;
-    background-color: #3e3e3e;
-    -webkit-box-shadow: inset 0 -100px 53px 9px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: inset 0 -100px 53px 9px rgba(0, 0, 0, 0.75);
-    box-shadow: inset 0 -100px 53px 9px rgba(0, 0, 0, 0.75);
+.vertical-slide {
+  .vertical-img {
+    height: 65%;
+    img {
+      height: 100%;
+    }
+  }
+  .year {
+    padding: 20px 0;
+    font-family: @boldest-graphics;
+  }
+  .desc {
+    font-size: 17px;
+    max-width: 600px;
+    margin: auto;
+    line-height: 1.2;
+    padding: 20px 0;
+  }
+}
+
+.overlay {
+  background: rgba(255,255,255,0.8);
+  .desc {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .year {
+    font-family: @boldest-graphics;
+    padding: 10px 0;
+  }
+  padding: 0 30px 30px 30px;
+}
+
+.conclusion-slide {
+  font-size: 16px;
+  .header {
+    font-size: 20px;
+  }
+  line-height: 1.5;
+  .display-flex;
+  .align-items(center);
+  .justify-content(center);
+  .link-group {
+    padding: 20px 0;
+  }
+}
+
+.triptych {
+  .display-flex;
+  .align-items(center);
+  .justify-content(center);
+  .year {
+    font-family: @boldest-graphics;
+    padding: 5px 0;
+  }
+  .desc {
+    padding: 5px 0;
+    line-height: 1.2;
+    font-size: 18px;
+    padding-bottom: 30px;
+  }
+
+  .triptych-container {
+    .display-flex;
+    .flex-wrap(wrap);
+    margin: auto 30px;
+    .triptych-image {
+      .flex(0 0 32%);
+      img {
+        width: 90%;
+      }
+      margin: auto;
+      text-align: center;
+    }
   }
 }
 
 .swiper-button-next, .swiper-button-prev{
-
   @media @mobile{
     display: none;
   }
 }
-
-.swiper-container-horizontal>.swiper-pagination-progress {
-/*  bottom: 3px;
-  top: initial;*/
-}
-
 .swiper-pagination-progress .swiper-pagination-progressbar {
-      background: #8c1515;
+  background: @highlight;
 }
-
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
   display: none;
 }
 .swiper-button-next{
   background-image:
-url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%238c1515'%2F%3E%3C%2Fsvg%3E")
+url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%230D3B66'%2F%3E%3C%2Fsvg%3E")
 }
 .swiper-button-prev{
   background-image:
-url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%238c1515'%2F%3E%3C%2Fsvg%3E")
+url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%230D3B66'%2F%3E%3C%2Fsvg%3E")
 }

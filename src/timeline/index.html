@@ -28,35 +28,64 @@
 
       <div class="swiper-wrapper">
 
-        <div class="intro swiper-slide">
-            <div class="hed"><%=json.transbay_timeline.Hed%></div>
-            <div class="intro"><%=json.transbay_timeline.Deck%></div>
+        <div class="swiper-slide flex-slide">
+          <div class="inner-content">
+            <div class="main-hed"><%=json.transbay_timeline.Hed%></div>
+            <div class="main-deck"><%=json.transbay_timeline.Deck%></div>
 
-            <div class="arrow">
+            <div class="author">By <a href="mailto:jking@sfchronicle.com">John King</a> and <a href="mailto:bvanniekerken@sfchronicle.com">Bill Van Niekerken</a></div>
+
+            <div class="instructions">
               <span>Scroll right</span><br>
               <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
             </div>
+          </div>
         </div>
 
         <% json.transbay_timeline.timeline.forEach(function(t) { %>
 
           <% if (t.Type == "Text") { %>
 
-            <div class="milestone swiper-slide">
-              <div class="year big"><%= t.Year %></div>
-              <div class="desc big"><%= t.Text %></div>
+            <div class="swiper-slide flex-slide">
+              <div class="inner-content">
+                <div class="year"><%= t.Year %></div>
+                <div class="desc"><%= t.Text %></div>
+              </div>
+            </div>
+
+          <% } else if (t.Type == "Vertical") { %>
+
+            <div class="swiper-slide vertical-slide">
+              <div class="year"><%= t.Year %></div>
+              <div class="vertical-img">
+                <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg"></img>
+              </div>
+              <div class="desc"><%= t.Text %></div>
             </div>
 
           <% } else if (t.Type == "Triptych") { %>
 
-            <div class="milestone swiper-slide">
-              <div class="year"><%= t.Year %></div>
-              <div class="desc"><%= t.Text %></div>
+            <div class="swiper-slide triptych">
+              <div class="inner-content">
+                <div class="year"><%= t.Year %></div>
+                <div class="desc"><%= t.Text %></div>
+                <div class="triptych-container">
+                  <div class="triptych-image">
+                    <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image.split(',')[0] %>/3/1500x1000.jpg"></img>
+                  </div>
+                  <div class="triptych-image">
+                    <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image.split(',')[1] %>/3/1500x1000.jpg"></img>
+                  </div>
+                  <div class="triptych-image">
+                    <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image.split(',')[2] %>/3/1500x1000.jpg"></img>
+                  </div>
+                </div>
+              </div>
             </div>
 
           <% } else if (t.Type == "Wide") { %>
 
-            <div class="milestone bg swiper-slide" style="background-image: url('http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg'); background-size: 1500px; background-position: center center; background-repeat: no-repeat">
+            <div class="bg swiper-slide" style="background-image: url('http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg'); background-size: cover; background-position: center center; background-repeat: no-repeat">
               <div class="overlay">
                 <div class="year"><%= t.Year %></div>
                 <div class="desc "><%= t.Text %></div>
@@ -65,7 +94,7 @@
 
           <% } else { %>
 
-            <div class="milestone swiper-slide">
+            <div class="swiper-slide">
               <div class="inline-img">
                 <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg"></img>
               </div>
@@ -77,46 +106,45 @@
 
         <% }); %>
 
-       <div class="swiper-slide milestone">
-         <div class="read-story-link">
-           <p>Read the story: </p>
-           <div class="story"><a href="http://www.sfchronicle.com/aboutsfgate/article/Rejuvenating-SF-Civic-Center-Plaza-a-10922433.php" target="_blank">Rejuvenating Civic Center Plaza — a challenge beyond design</a></div>
+       <div class="swiper-slide conclusion-slide">
+
+        <div class="inner-content">
+
+         <div class="link-group">
+           <p class="header">Read the story: </p>
+           <p><a href="http://www.sfchronicle.com/aboutsfgate/article/Rejuvenating-SF-Civic-Center-Plaza-a-10922433.php" target="_blank">Rejuvenating Civic Center Plaza — a challenge beyond design</a></p>
          </div>
 
-
-         <div class="read-story-link toppadding">
-           <p>Related Stories</p>
-           <div class="story"><a href="http://www.sfchronicle.com/bayarea/place/article/Powers-that-be-can-revive-Civic-Center-3788197.php" target="_blank">Powers that be can revive Civic Center</a></div>
-           <div class="story"><a href="http://www.sfchronicle.com/bayarea/place/article/15-seconds-that-changed-San-Francisco-Call-it-3235808.php" target="_blank">15 seconds that changed San Francisco</a></div>
-           <div class="story"><a href="http://www.sfchronicle.com/bayarea/place/article/Veterans-Building-restoration-defers-to-original-6522789.php" target="_blank">Veterans Building restoration defers to original vision</a></div>
-           <div class="story"><a href="http://www.sfchronicle.com/bayarea/article/Loma-Prieta-quake-left-legacy-of-repair-renewal-5816995.php" target="_blank">Loma Prieta quake left legacy of repair, renewal</a></div>
+         <div class="link-group">
+           <p class="header">Related Stories</p>
+           <div><a href="http://www.sfchronicle.com/bayarea/place/article/Powers-that-be-can-revive-Civic-Center-3788197.php" target="_blank">Powers that be can revive Civic Center</a></div>
+           <div><a href="http://www.sfchronicle.com/bayarea/place/article/15-seconds-that-changed-San-Francisco-Call-it-3235808.php" target="_blank">15 seconds that changed San Francisco</a></div>
+           <div><a href="http://www.sfchronicle.com/bayarea/place/article/Veterans-Building-restoration-defers-to-original-6522789.php" target="_blank">Veterans Building restoration defers to original vision</a></div>
+           <div><a href="http://www.sfchronicle.com/bayarea/article/Loma-Prieta-quake-left-legacy-of-repair-renewal-5816995.php" target="_blank">Loma Prieta quake left legacy of repair, renewal</a></div>
          </div>
 
-          <div class="credits">
-            <div class="group">
-            <p>Credits</p>
-              <div class="entry">John King &bull;
-                <a href="mailto:jking@sfchronicle.com">jking@sfchronicle.com</a> &bull;
-                <a href = "https://twitter.com/johnkingsfchron" target="_blank">@JohnKingSFChron</a>
-              </div>
-              <div class="entry">Bill Van Niekerken &bull;
-                <a href="mailto:bvanniekerken@sfchronicle.com">bvanniekerken@sfchronicle.com</a>
-              </div>
-              <div class="entry">Emma O'Neill &bull;
-                <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a> &bull;
-                <a href = "https://twitter.com/emmaruthoneill" target="_blank">@emmaruthoneill</a>
-              </div>
+        <div class="link-group">
+          <p class="header">Credits</p>
+            <div class="entry">John King &bull;
+              <a href="mailto:jking@sfchronicle.com">jking@sfchronicle.com</a> &bull;
+              <a href = "https://twitter.com/johnkingsfchron" target="_blank">@JohnKingSFChron</a>
             </div>
-          </div>
+            <div class="entry">Bill Van Niekerken &bull;
+              <a href="mailto:bvanniekerken@sfchronicle.com">bvanniekerken@sfchronicle.com</a>
+            </div>
+            <div class="entry">Emma O'Neill &bull;
+              <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a> &bull;
+              <a href = "https://twitter.com/emmaruthoneill" target="_blank">@emmaruthoneill</a>
+            </div>
         </div>
-
       </div>
-
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-
+      </div>
     </div>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
 
     <script>
       var mySwiper = new Swiper ('.swiper-container', {

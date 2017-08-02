@@ -10,6 +10,8 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+@highlight: #0D3B66;
+
 //elements
 body {
   padding: 0;
@@ -36,17 +38,17 @@ main {
 }
 
 a {
-  color: @gray-blue;
+  color: @highlight;
   text-decoration: none;
   outline: 0 !important;
   &:hover {
-    color: darken(@gray-blue,10%);
+    color: darken(@highlight,10%);
   }
   img {
     border: none;
   }
   :hover {
-    color: darken(@gray-blue,10%);
+    color: darken(@highlight,10%);
   }
 }
 
@@ -84,7 +86,7 @@ p {
 
   a {
     text-decoration: none;
-    color: @gray-blue;
+    color: @highlight;
   }
 
   @media @mobile {
@@ -210,29 +212,29 @@ text {
     margin-bottom: 40px;
 }
 
-.title {
-  font-family: @body-bold;
-  font-size: 60px;
-  padding: 0 10px;
-  text-align: center;
-  margin: 10px auto 0;
-  max-width: 835px;
-
-  &.long {
-    font-size: 50px;
-    line-height: 1.2;
-    margin: 20px auto 0;
-    margin-top: 10px;
-    margin-bottom: 25px;
-
-    &.text-width {
-      max-width:800px;
-    }
-    @media @mobile {
-      font-size: 1.8em;
-    }
-  }
-}
+// .title {
+//   font-family: @body-bold;
+//   font-size: 60px;
+//   padding: 0 10px;
+//   text-align: center;
+//   margin: 10px auto 0;
+//   max-width: 835px;
+//
+//   &.long {
+//     font-size: 50px;
+//     line-height: 1.2;
+//     margin: 20px auto 0;
+//     margin-top: 10px;
+//     margin-bottom: 25px;
+//
+//     &.text-width {
+//       max-width:800px;
+//     }
+//     @media @mobile {
+//       font-size: 1.8em;
+//     }
+//   }
+// }
 
 .over-img {
   position: absolute;
@@ -244,7 +246,7 @@ text {
 }
 
 .specialhead-top {
-  color: @gray-blue;
+  color: @highlight;
   font-family: @banner;
   font-size: 18px;
   text-transform: uppercase;
@@ -291,7 +293,7 @@ text {
 
   &.special {
     a {
-      color: @gray-blue;
+      color: @highlight;
     }
   }
   &.social {
@@ -299,7 +301,7 @@ text {
     margin: 0 6px;
     padding: 4px 2px;
     a {
-      color: @gray-blue;
+      color: @highlight;
     }
   }
   &.email {
@@ -415,6 +417,9 @@ header {
 .inline-img {
   max-width: 730px;
   margin: 2em auto;
+  img {
+    width: 100%;
+  }
 
   .caption{
     padding:0;
