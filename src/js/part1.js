@@ -56,6 +56,8 @@ function activate() {
   } else {
     sticker.classList.remove('fixed-class');
     sticker_ph.style.display = 'none'; // removes placeholder
+    testImg.style.width  = "100%";
+    testImg.style.marginLeft  = "0px";
   }
 
   var currentPosition = getPageScroll();
