@@ -82,6 +82,35 @@
               </div>
             </div>
 
+          <% } else if (t.Type == "Diptych") { %>
+
+            <div class="swiper-slide diptych-content">
+
+              <% console.log("Diptych"); %>
+
+              <div class="element">
+                <div class="vertical-img">
+                  <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg"></img>
+                  <div class="caption"><%=t.Photographer%></div>
+                </div>
+              </div>
+              <div class="element">
+                <div class="year"><%= t.Year %></div>
+                <div class="desc"><%= t.Text %></div>
+              </div>
+            </div>
+
+          <% } else if (t.Type == "Full Vertical") { %>
+
+            <div class="bg swiper-slide <%=t.ImageClass%>" style="background-image: url('http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg'); background-size: auto 100%; background-position: center center; background-repeat: no-repeat">
+              <div class="overlay">
+                <div class="year"><%= t.Year %></div>
+                <div class="desc "><%= t.Text %></div>
+              </div>
+
+              <div class="caption floating"><%=t.Photographer%></div>
+           </div>
+
           <% } else if (t.Type == "Wide") { %>
 
             <% console.log(t.ImageClass) %>
@@ -93,7 +122,7 @@
               </div>
 
               <div class="caption floating"><%=t.Photographer%></div>
-            </div>
+           </div>
 
           <% } %>
 

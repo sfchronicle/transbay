@@ -28,13 +28,36 @@
     </div>
 
     <% json.transbay_part_1.text.forEach(function(d,didx){ %>
-      <p><%=d.value %></p>
+      <% if (d.type == "text") { %>
+        <p><%=d.value %></p>
+      <% } else if (d.type == "interactive"){ %>
+        <div class="interactive">
+          <div class="interactive-title"><%=d.value[0].Title%></div>
+          <div class="interactive-deck"><%=d.value[0].Deck%></div>
+          <div id="stick-here"></div>
+          <div id="stick-me">
+            <div id="floor-image">
+              <img src="../assets/graphics/test_pano.jpg"></img>
+            </div>
+            <div class="item">
+              <div class="photo" id="interactive-photo"></div>
+              <div class="desc" id="interactive-desc"></div>
+            </div>
+          </div>
+          <div id="stick-ph"></div>
+        </div>
+        <div id="stop-stick-here"></div>
+      <% } %>
     <% }) %>
 
     <%= t.include("partials/_credits.html") %>
     <%= t.include("partials/_footer.html") %>
 
-    <script src="../app.js" async></script>
+    <script>
+      var floor1Data = <%= JSON.stringify(csv.Floor1) %>;
+    </script>
+
+    <script src="../app_part1.js" async></script>
     <%= t.include("partials/_helloSFC.html") %>
 
   </body>

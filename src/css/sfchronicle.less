@@ -10,20 +10,19 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-@highlight: #BF4E2C;//#0D3B66;
-
 //elements
 body {
   padding: 0;
   margin: 0;
   //remove 300ms click delay in Safari, AKA still the worst
   touch-action: manipulation;
-
   background-color: @white;
   font-size: @base-font;
   line-height:@line-height;
   color: @black;
   font-family: @body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 iframe{
@@ -89,9 +88,9 @@ p {
     color: @highlight;
   }
 
-  // @media @mobile {
-  //     font-size: 0.8em;
-  // }
+  @media @mobile {
+      font-size: 0.8em;
+  }
 
 }
 
@@ -128,7 +127,7 @@ li {
   font-size: 15px;
   text-align: center;
   padding-bottom: 5px;
-  font-family: @block-graphics;
+  font-family: @med-graphics;
   margin: 20px auto;
   &.lesspadding {
     margin: 10px auto;
@@ -156,7 +155,7 @@ li {
   font-size: 12px;
   // color: @white;
   font-style: italic;
-  font-family: @block-graphics;
+  font-family: @med-graphics;
   @media @tablet {
     padding: 10px 20px;
   }
@@ -192,37 +191,49 @@ text {
 
 // heading styles ---------------------------------------
 
-// .title-container {
-  // background-image: url("./assets/photos/test-img.jpg");
+.title-container {
+  background-image: url("./assets/photos/test-img.jpg");
 
-//   &.top-margin {
-//     margin-top: 3.5em;
-//   }
-// }
+  &.top-margin {
+    margin-top: 3.5em;
+  }
+}
 
-// .title {
-//   font-family: @body-bold;
-//   font-size: 60px;
-//   padding: 0 10px;
-//   text-align: center;
-//   margin: 10px auto 0;
-//   max-width: 835px;
-//
-//   &.long {
-//     font-size: 50px;
-//     line-height: 1.2;
-//     margin: 20px auto 0;
-//     margin-top: 10px;
-//     margin-bottom: 25px;
-//
-//     &.text-width {
-//       max-width:800px;
-//     }
-//     @media @mobile {
-//       font-size: 1.8em;
-//     }
-//   }
-// }
+.author {
+    margin-top: 10px;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom:0;
+}
+.date {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title {
+  font-family: @title;
+  font-size: 60px;
+  padding: 0 10px;
+  text-align: center;
+  margin: 10px auto 0;
+  max-width: 835px;
+
+  &.long {
+    font-size: 50px;
+    line-height: 1.2;
+    margin: 20px auto 0;
+    margin-top: 10px;
+    margin-bottom: 25px;
+
+    &.text-width {
+      max-width:800px;
+    }
+    @media @mobile {
+      font-size: 1.8em;
+    }
+  }
+}
 
 .over-img {
   position: absolute;
@@ -367,25 +378,11 @@ header {
   text-align: left;
   font-family: @med-graphics;
   font-size: 12px;
-  margin-top: -5px;
-  // margin-top: 5px;
-  @media @mobile {
-    padding: 0 10px;
-  }
+  margin-top: 5px;
+  padding: 0 10px;
   max-width: 100%;
   &.landing {
     margin-bottom: 2.5em;
-  }
-  &.floating {
-    position: absolute;
-    font-family: @med-graphics;
-    padding: 10px 20px;
-    bottom: 0px;
-    right: 0px;
-    background: rgba(255,255,255,0.7);
-    @media @mobile {
-      bottom: 5px;
-    }
   }
 }
 
@@ -419,9 +416,6 @@ header {
 .inline-img {
   max-width: 730px;
   margin: 2em auto;
-  img {
-    width: 100%;
-  }
 
   .caption{
     padding:0;
@@ -582,7 +576,7 @@ footer {
   padding: 10px;
   text-align: center;
   font-size: 15px;
-  font-family: @body;
+  font-family: @med-graphics;
   width: 80%;
   @media @mobile {
     width: 100%;
