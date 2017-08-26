@@ -35,14 +35,19 @@
           <div class="interactive-title"><%=d.value[0].Title%></div>
           <div class="interactive-deck"><%=d.value[0].Deck%></div>
           <div id="stick-here"></div>
-          <div id="stick-me">
-            <div id="floor-image">
-              <img src="../assets/graphics/test_pano.jpg"></img>
+          <div class="absolute-container">
+            <div id="stick-ph-top"></div>
+            <div id="stick-me">
+              <div id="floor-image">
+                <img src="../assets/graphics/test_pano.jpg"></img>
+              </div>
+              <div id="intro"><%=d.value[0].Description%></div>
+              <div class="item">
+                <div class="photo" id="interactive-photo"></div>
+                <div class="desc" id="interactive-desc"></div>
+              </div>
             </div>
-            <div class="item">
-              <div class="photo" id="interactive-photo"></div>
-              <div class="desc" id="interactive-desc"></div>
-            </div>
+            <div class="scroll-height" id="scroll-height"></div>
           </div>
           <div id="stick-ph"></div>
         </div>
@@ -54,7 +59,7 @@
     <%= t.include("partials/_footer.html") %>
 
     <script>
-      var floor1Data = <%= JSON.stringify(csv.Floor1) %>;
+      var floor1Data = <%= JSON.stringify(json.Floor1) %>;
     </script>
 
     <script src="../app_part1.js" async></script>
