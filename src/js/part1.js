@@ -1,5 +1,23 @@
 require("./lib/social"); //Do not delete
 
+// timeline event listeners ----------------------------------------------------------------
+
+var timelineOpen = 0;
+
+document.getElementById("timeline-open").addEventListener("click",function() {
+  document.getElementById("timeline-wrapper").classList.add("view");
+  timelineOpen = 1;
+},false);
+
+document.getElementById("close-timeline-button").addEventListener("click",function() {
+  document.getElementById("timeline-wrapper").classList.remove("view");
+  timelineOpen = 0;
+  document.getElementById('timeline-top-border').scrollIntoView();
+},false);
+
+
+// -----------------------------------------------------------------------------------------
+
 var i = 0;
 window.onscroll = function() {activate()};
 
@@ -30,7 +48,7 @@ var testImg = testDiv.getElementsByTagName('img')[0];
 var updateImg = function(i,testImg) {
 
   if (i > 0) {
-    testImg.style.marginLeft = -100*i+ 'px';
+    testImg.style.marginLeft = -120*i+ 'px';
   }
   if (screen.width <= 2000) {
     testImg.style.width  = "150%";
@@ -45,8 +63,6 @@ var updateInfo = function(data) {
   document.querySelector("#interactive-desc").innerHTML = "<div>"+data.text+"</div>";
 };
 
-// updateInfo(floor1Data[0]);
-console.log(floor1Data);
 
 function activate() {
 
@@ -66,9 +82,6 @@ function activate() {
     sticker_ph_top.style.display = "none";
   } else {
     sticker.classList.remove('fixed-class');
-    // sticker.classList.add('absolute-class');
-    // sticker_ph.style.height = "0px";
-    // sticker_ph.style.height = "300px";
     sticker_ph.style.display = 'none'; // removes placeholder
     sticker_ph_top.style.display = 'none';
 
@@ -84,8 +97,7 @@ function activate() {
   }
 
   var currentPosition = getPageScroll()-document.getElementById('stick-here').offsetTop;//-document.getElementById('floor-image').clientHeight;
-  i = Math.floor(currentPosition/1500*4);
-  console.log(i);
+  i = Math.floor(currentPosition/2000*4);
   if (i == 0) {
     updateImg(0,testImg);
   }
@@ -99,10 +111,54 @@ function activate() {
     document.querySelector("#interactive-desc").innerHTML = "";
     document.querySelector("#intro").innerHTML = "The third level of the structure will hold 37 bus bays around an elongated central island where riders will wait, board and depart. The main tenant will be AC Transit, but some of the bays will be used by other buses crossing the bay, including Muni’s Treasure Island service. Unlike the gloomy 1939 terminal, this waiting area will be naturally lit and ventilated, thanks to perforated metal panels that surround it.";
   }
-  // if (i >= 4) {
-  //   document.getElementById('scroll-height').style.height = "500px";
-  // } else {
-  //   document.getElementById('scroll-height').style.height = "1500px";
-  // }
+
+  // scrolling commands for timeline ------------------------------------------------------------------
+
+  if (timelineOpen == 1) {
+    var timeline_top = document.getElementById('stick-timeline').getBoundingClientRect().top + window_top;
+    var timeline_ticker = document.getElementById('ticker');
+    var timeline_bottom = document.getElementById('e18').getBoundingClientRect().bottom + window_top - 30;
+    var timeline_close = document.getElementById('close-timeline-button');
+
+  //  var timeline_ph = document.getElementById('timeline-placeholder');
+
+    if ((window_top > timeline_top) && (window_top < timeline_bottom)) {
+
+        timeline_ticker.style.display = "block";
+        timeline_ticker.classList.add('sticky');
+
+        timeline_close.style.display = "block";
+        timeline_close.classList.add('sticky');
+
+    } else {
+        timeline_ticker.classList.remove('sticky');
+        timeline_ticker.style.display = "none";
+
+        timeline_close.classList.remove('sticky');
+        timeline_close.style.display = "none";
+
+    }
+
+    console.log(timelineData);
+
+    for (var i = 0; i < timelineData.length; i++ ) {
+    	var a = document.getElementById("e"+i);
+    	var at = document.getElementById("t-"+i);
+
+      console.log(a);
+      console.log(at);
+
+      var ed_top = a.getBoundingClientRect().top + window_top - 100;
+  	  var ede_top = a.getBoundingClientRect().bottom + window_top - 100;
+
+      if (window_top > ed_top && window_top < ede_top) {
+        at.classList.add('active');
+        a.classList.add('active');
+      } else {
+        at.classList.remove('active');
+        a.classList.remove('active');
+    	}
+    }
+  }
 
 }

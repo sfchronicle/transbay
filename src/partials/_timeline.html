@@ -1,0 +1,44 @@
+
+<div id="timeline-top-border">
+<div class="timeline-interactive">
+  <div class="interactive-title"><%=json.transbay_timeline.Hed%></div>
+  <div class="interactive-deck"><%=json.transbay_timeline.Deck%>
+
+    <div class="read-more button" id="timeline-open">Click to read a full timeline of Transbay development.<i class="fa fa-caret-down" aria-hidden="true"></i></div>
+  </div>
+
+  <div id="stick-timeline"></div>
+  <div id="timeline-wrapper">
+    <div id="ticker">
+      <div class="years left"><%=json.transbay_timeline.timeline[0].Year%></div>
+      <% var difference = json.transbay_timeline.timeline[18].Year - json.transbay_timeline.timeline[0].Year; %>
+      <div id="markers">
+      <% json.transbay_timeline.timeline.forEach(function(d,didx){ %>
+        <% if (d.Year.split(" ").length > 1) { %>
+          <% var percent = (d.Year.split(" ")[1]-json.transbay_timeline.timeline[0].Year)/difference*100; %>
+        <% } else { %>
+          <% var percent = (d.Year-json.transbay_timeline.timeline[0].Year)/difference*100; %>
+        <% } %>
+        <div class="marker" id="t-<%=didx%>" style="left:<%=percent%>%"></div>
+      <% }); %>
+      </div>
+      <div class="years right"><%=json.transbay_timeline.timeline[18].Year%></div>
+    </div>
+    <div id="close-timeline-button">Close timeline  X</div>
+    <div id="timeline">
+      <% json.transbay_timeline.timeline.forEach(function(d,didx){ %>
+        <div class="event" id="e<%=didx%>">
+          <div class="eventtext">
+            <div class='dateyear'><%=d.Year%></div>
+            <div class='datetext'><%=d.Text%></div>
+          </div>
+          <% if (d.Image){ %>
+          <div class="eventimage">
+            <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image%>/3/1500x1000.jpg"></img>
+          </div>
+          <% } %>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</div>
