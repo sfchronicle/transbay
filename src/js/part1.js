@@ -113,7 +113,7 @@ function activate() {
   }
 
   var currentPosition = getPageScroll()-document.getElementById('stick-here').offsetTop;//-document.getElementById('floor-image').clientHeight;
-  i = Math.floor(currentPosition/2000*4);
+  i = Math.floor(currentPosition/3000*4);
   if (i == 0) {
     updateImg(0,testImg);
   }
