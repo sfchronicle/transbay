@@ -31,6 +31,8 @@ document.getElementById("close-timeline-button").addEventListener("click",functi
   timeline_close.style.display = "none";
 },false);
 
+console.log(timelineData);
+
 
 // -----------------------------------------------------------------------------------------
 
@@ -133,7 +135,7 @@ function activate() {
   if (timelineOpen == 1) {
     timeline_top = document.getElementById('stick-timeline').getBoundingClientRect().top + window_top-100;
     timeline_ticker = document.getElementById('ticker');
-    timeline_bottom = document.getElementById('e18').getBoundingClientRect().bottom + window_top - 30;
+    timeline_bottom = document.getElementById('e16').getBoundingClientRect().bottom + window_top - 30;
     timeline_close = document.getElementById('close-timeline-button');
 
     if ((window_top > timeline_top) && (window_top < timeline_bottom)) {

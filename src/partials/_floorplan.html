@@ -1,0 +1,24 @@
+<div class="interactive">
+  <div class="interactive-title"><%=json.transbay_interactive_text.Title%></div>
+  <div class="interactive-deck"><%=json.transbay_interactive_text.Deck%></div>
+
+  <% json.transbay_interactive_text.stages.forEach(function(d,didx){ %>
+
+    <div class="floor-image">
+      <img src="../assets/graphics/test_pano.jpg">
+    </div>
+    <div class="intro"><%=d.Deck%></div>
+
+    <% d.images.forEach(function(im,imidx){ %>
+
+      <div class="inset" id="stage<%=didx%>image<%=imidx%>">
+        <div class="inset-image">
+          <img src="../assets/photos/part1/<%=im.Image%>"></img>
+        </div>
+        <div class="inset-caption"><%=im.Caption%></div>
+      </div>
+
+    <% }); %>
+
+  <% }); %>
+</div>

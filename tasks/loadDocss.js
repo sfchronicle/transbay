@@ -1,6 +1,6 @@
 /*
 
-Uses the Google Drive API to parse Google Doc 
+Uses the Google Drive API to parse Google Doc
 with ArchieML generate JSON file
 
 Sheets must be "published to web" before they
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
     async.each(docKeys, function(key) {
 
       gDrive.files.export({ fileId: key, mimeType: 'text/html'}, function (err, docHtml) {
-       
+
         var handler = new htmlparser.DomHandler(function (error, dom) {
           var tagHandlers = {
             _base: function (tag) {
@@ -111,12 +111,13 @@ module.exports = function(grunt) {
           parsedText = parsedText.replace(/<[^<>]*>/g, function (match) {
             return match.replace(/”|“/g, '"').replace(/‘|’/g, "'");
           });
-    
+
           var parsed = archieml.load(parsedText);
 
           gDrive.files.get({ fileId:key }, function (err, doc) {
             var doc_title = doc.name;
             var filename = "data/" + lowerCase(doc_title) + ".json";
+            console.log(filename);
             grunt.file.write(filename, JSON.stringify(parsed, null, 2));
           });
 
@@ -126,7 +127,7 @@ module.exports = function(grunt) {
         parser.write(docHtml);
         parser.done();
         grunt.log.ok();
-        
+
       });
     }, done);
   });

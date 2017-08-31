@@ -22,7 +22,7 @@
       <div class="title-overlay">
         <div class="title"><%=json.transbay_part_1.Title%></div>
         <div class="deck"><%=json.transbay_part_1.Deck%></div>
-        <div class="date">By <a href="emailto:jking@sfchronicle.com">John King</a></div>
+        <div class="date">By <a href="mailto:jking@sfchronicle.com">John King</a></div>
         <div class="date"><%=json.transbay_part_1.Date%></div>
       </div>
     </div>
@@ -33,27 +33,7 @@
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
-        <div class="interactive">
-          <div class="interactive-title"><%=d.value[0].Title%></div>
-          <div class="interactive-deck"><%=d.value[0].Deck%></div>
-          <div id="stick-here"></div>
-          <div class="absolute-container">
-            <div id="stick-ph-top"></div>
-            <div id="stick-me">
-              <div id="floor-image">
-                <img src="../assets/graphics/test_pano.jpg"></img>
-              </div>
-              <div id="intro"><%=d.value[0].Description%></div>
-              <div class="item">
-                <div class="photo" id="interactive-photo"></div>
-                <div class="desc" id="interactive-desc"></div>
-              </div>
-            </div>
-            <div class="scroll-height" id="scroll-height"></div>
-          </div>
-          <div id="stick-ph"></div>
-        </div>
-        <div id="stop-stick-here"></div>
+        <%= t.include("partials/_floorplan.html") %>
       <% } %>
     <% }) %>
 
@@ -61,8 +41,8 @@
     <%= t.include("partials/_footer.html") %>
 
     <script>
-      var floor1Data = <%= JSON.stringify(json.Floor1) %>;
-      var timelineData = <%= JSON.stringify(json.transbay_timeline.timeline) %>;
+      var timelineData = <%= JSON.stringify(json.transbay_timeline.timeline) %>
+      var floorplanData = <%= JSON.stringify(json.transit_center_graphic_text) %>
     </script>
 
     <script src="../app_part1.js" async></script>

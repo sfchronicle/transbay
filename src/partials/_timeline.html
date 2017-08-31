@@ -11,7 +11,7 @@
   <div id="timeline-wrapper">
     <div id="ticker">
       <div class="years left"><%=json.transbay_timeline.timeline[0].Year%></div>
-      <% var difference = json.transbay_timeline.timeline[18].Year - json.transbay_timeline.timeline[0].Year; %>
+      <% var difference = json.transbay_timeline.timeline[16].Year - json.transbay_timeline.timeline[0].Year; %>
       <div id="markers">
       <% json.transbay_timeline.timeline.forEach(function(d,didx){ %>
         <% if (d.Year.split(" ").length > 1) { %>
@@ -22,7 +22,7 @@
         <div class="marker" id="t-<%=didx%>" style="left:<%=percent%>%"></div>
       <% }); %>
       </div>
-      <div class="years right"><%=json.transbay_timeline.timeline[18].Year%></div>
+      <div class="years right"><%=json.transbay_timeline.timeline[16].Year%></div>
     </div>
     <div id="close-timeline-button">Close timeline  X</div>
     <div id="timeline">
