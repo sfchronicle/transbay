@@ -5,11 +5,14 @@
   <div id="stick-here"></div>
   <% json.transbay_interactive_text.stages.forEach(function(d,didx){ %>
 
-    <div id="showfloor<%=didx%>">
+    <div class="floor-title"><%=d.Title%></div>
+    <div  class="floor-info" id="showfloor<%=didx%>">
+
       <div class="floor-image" id="floor<%=didx%>">
         <img src="../assets/graphics/test_pano.jpg">
       </div>
       <div id="stick-ph<%=didx%>"></div>
+
       <div class="intro"><%=d.Deck%></div>
 
       <% d.images.forEach(function(im,imidx){ %>

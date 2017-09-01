@@ -64,7 +64,6 @@ var updateImg = function(i,testImg) {
 }
 
 var placeholderHeight = document.getElementById('floor0').clientHeight;
-console.log(placeholderHeight);
 var IDXprev = -1;
 
 function activate() {
@@ -74,36 +73,53 @@ function activate() {
 
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - placeholderHeight + 50;
+  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;// - placeholderHeight;
 
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
-    // console.log(s);
     var sticker_ph = document.getElementById('stick-ph'+s);
     var showf = document.getElementById("showfloor"+s);
     var f = document.getElementById("floor"+s);
 
     var f_top = showf.getBoundingClientRect().top + window_top - 37;
     if (s < (floorplanData.stages.length-1)){
-      var f_bottom = showf.getBoundingClientRect().bottom + window_top - placeholderHeight + 50;
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top;// + 100;
     } else {
-      var f_bottom = showf.getBoundingClientRect().bottom + window_top + 100;
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top;// - 500;
     }
 
     if (window_top > f_top && window_top < f_bottom) {
-      console.log("we are at floor "+s);
+
       f.classList.add('fixed');
       sticker_ph.style.height = placeholderHeight+"px";
       sticker_ph.style.display = 'block';
       IDXprev = s;
+
+      // zoom image
+      var floorDiv = document.getElementById("floor"+s);
+      var floorImg = floorDiv.getElementsByTagName('img')[0];
+      if ((window_top+350) > f_bottom){
+        floorImg.style.width  = "100%";
+      } else {
+        floorImg.style.width  = "180%";
+      }
+
     } else if (IDXprev == s){
-      console.log("we are not at floor "+s)
       f.classList.remove('fixed');
       sticker_ph.style.display = 'none';
+
+      // unzoom image
+      var floorDiv = document.getElementById("floor"+s);
+      var floorImg = floorDiv.getElementsByTagName('img')[0];
+      floorImg.style.width  = "100%";
     }
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
-      console.log("we are not in the interactive");
       f.classList.remove('fixed');
       sticker_ph.style.display = 'none';
+
+      // unzoom image
+      var floorDiv = document.getElementById("floor"+s);
+      var floorImg = floorDiv.getElementsByTagName('img')[0];
+      floorImg.style.width  = "100%";
     }
 
   };
