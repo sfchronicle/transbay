@@ -74,7 +74,7 @@ function activate() {
 
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
+  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - placeholderHeight + 50;
 
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
     // console.log(s);
@@ -84,9 +84,9 @@ function activate() {
 
     var f_top = showf.getBoundingClientRect().top + window_top - 37;
     if (s < (floorplanData.stages.length-1)){
-      var f_bottom = showf.getBoundingClientRect().bottom + window_top + 100;
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top - placeholderHeight + 50;
     } else {
-      var f_bottom = showf.getBoundingClientRect().bottom + window_top - placeholderHeight;
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top + 100;
     }
 
     if (window_top > f_top && window_top < f_bottom) {
