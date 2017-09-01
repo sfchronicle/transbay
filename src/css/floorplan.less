@@ -4,4 +4,42 @@
   img {
     width: 100%;
   }
+  &.fixed {
+    position: fixed;
+    top: 37px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  height: auto;
+}
+
+.interactive-graphic {
+  .intro, .inset-caption {
+    font-family: @med-graphics;
+    line-height: 1.2;
+  }
+  .intro {
+    max-width: 900px;
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.6);
+    margin-bottom: 100px;
+  }
+  .inset {
+    max-width: 400px;
+    text-align: left;
+    background: rgba(255,255,255,0.6);
+    margin-bottom: 100px;
+    margin-left: 30px;
+    img {
+      width: 100%;
+    }
+  }
+  .inset-caption {
+    padding: 20px;
+    padding-top: 10px;
+    font-size: 18px;
+  }
 }

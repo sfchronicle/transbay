@@ -31,19 +31,10 @@ document.getElementById("close-timeline-button").addEventListener("click",functi
   timeline_close.style.display = "none";
 },false);
 
-console.log(timelineData);
-
 
 // -----------------------------------------------------------------------------------------
 
-var i = 0;
 window.onscroll = function() {activate()};
-
-if (screen.width <= 480) {
-  var offset = 400;
-} else {
-  var offset = 500;
-}
 
 // desktop scrolling controls ----------------------------------------------------------------
 
@@ -60,9 +51,6 @@ function getPageScroll() {
   return yScroll;
 }
 
-var testDiv = document.getElementById("floor-image");
-var testImg = testDiv.getElementsByTagName('img')[0];
-
 var updateImg = function(i,testImg) {
 
   if (i > 0) {
@@ -75,60 +63,50 @@ var updateImg = function(i,testImg) {
   }
 }
 
-// fills in HTML for year as years toggle
-var updateInfo = function(data) {
-  document.querySelector("#interactive-photo").innerHTML = "<img src="+data.image+"></img>";
-  document.querySelector("#interactive-desc").innerHTML = "<div>"+data.text+"</div>";
-};
-
+var placeholderHeight = document.getElementById('floor0').clientHeight;
+console.log(placeholderHeight);
+var IDXprev = -1;
 
 function activate() {
 
-  var sticker = document.getElementById('stick-me');
-  var sticker_ph = document.getElementById('stick-ph');
-  var sticker_ph_top = document.getElementById('stick-ph-top');
-  var window_top = document.body.scrollTop;
+  // general scrolling variable ----------------------------
+  var window_top = document.body.scrollTop;//getPageScroll();//
 
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top-document.getElementById('stick-me').clientHeight;
-  var div_top = document.getElementById('stick-here').getBoundingClientRect().top + window_top;
+  // scrolling commands for interactive graphic ----------------
+  var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
+  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
 
-  if ((window_top > div_top) && (window_top < sticker_stop)) {
-    sticker.classList.add('fixed-class');
-    sticker.classList.remove('absolute-class');
-    sticker_ph.style.height = "800px";//document.getElementById('stick-me').clientHeight;
-    sticker_ph.style.display = 'block'; // puts in a placeholder for where sticky used to be for smooth scrolling
-    sticker_ph_top.style.display = "none";
-  } else {
-    sticker.classList.remove('fixed-class');
-    sticker_ph.style.display = 'none'; // removes placeholder
-    sticker_ph_top.style.display = 'none';
+  for (var s = 0; s < floorplanData.stages.length; s++ ) {
+    // console.log(s);
+    var sticker_ph = document.getElementById('stick-ph'+s);
+    var showf = document.getElementById("showfloor"+s);
+    var f = document.getElementById("floor"+s);
 
-    testImg.style.width  = "100%";
-    testImg.style.marginLeft  = "0px";
-  }
-  if (window_top >= sticker_stop) {
-    sticker_ph_top.style.height = "800px";//document.getElementById('stick-me').clientHeight;
-    sticker_ph_top.style.display = 'block'; // puts in a placeholder for where sticky used to be for smooth scrolling
-    sticker_ph.style.display = 'none';
-    sticker.classList.remove('fixed-class');
-    sticker.classList.add('absolute-class');
-  }
+    var f_top = showf.getBoundingClientRect().top + window_top - 37;
+    if (s < (floorplanData.stages.length-1)){
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top + 100;
+    } else {
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top - placeholderHeight;
+    }
 
-  var currentPosition = getPageScroll()-document.getElementById('stick-here').offsetTop;//-document.getElementById('floor-image').clientHeight;
-  i = Math.floor(currentPosition/3000*4);
-  if (i == 0) {
-    updateImg(0,testImg);
-  }
-  if (i < 4 && i > 0) {
-    var data = floor1Data[i-1];
-    updateInfo(data);
-    updateImg(i-1,testImg);
-    document.querySelector("#intro").innerHTML = "";
-  } else if (i <= -1) {
-    document.querySelector("#interactive-photo").innerHTML = "";
-    document.querySelector("#interactive-desc").innerHTML = "";
-    document.querySelector("#intro").innerHTML = "The third level of the structure will hold 37 bus bays around an elongated central island where riders will wait, board and depart. The main tenant will be AC Transit, but some of the bays will be used by other buses crossing the bay, including Muni’s Treasure Island service. Unlike the gloomy 1939 terminal, this waiting area will be naturally lit and ventilated, thanks to perforated metal panels that surround it.";
-  }
+    if (window_top > f_top && window_top < f_bottom) {
+      console.log("we are at floor "+s);
+      f.classList.add('fixed');
+      sticker_ph.style.height = placeholderHeight+"px";
+      sticker_ph.style.display = 'block';
+      IDXprev = s;
+    } else if (IDXprev == s){
+      console.log("we are not at floor "+s)
+      f.classList.remove('fixed');
+      sticker_ph.style.display = 'none';
+    }
+    if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
+      console.log("we are not in the interactive");
+      f.classList.remove('fixed');
+      sticker_ph.style.display = 'none';
+    }
+
+  };
 
   // scrolling commands for timeline ------------------------------------------------------------------
 
