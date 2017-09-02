@@ -1,4 +1,5 @@
 require("./lib/social"); //Do not delete
+require("d3");
 
 // timeline event listeners ----------------------------------------------------------------
 
@@ -22,9 +23,9 @@ document.getElementById("timeline-open").addEventListener("click",function() {
 document.getElementById("close-timeline-button").addEventListener("click",function() {
   document.getElementById("timeline-wrapper").classList.remove("view");
   timelineOpen = 0;
-  // document.getElementById('timeline-top-border').scrollIntoView();
-  var top = $('#timeline-top-border').offset().top;
-  $('html,body').animate({scrollTop: top}, 1000);
+  document.getElementById('timeline-top-border').scrollIntoView();
+  // var top = $('#timeline-top-border').offset().top;
+  // $('html,body').animate({scrollTop: top}, 1000);
   timeline_ticker.classList.remove('sticky');
   timeline_ticker.style.display = "none";
   timeline_close.classList.remove('sticky');
@@ -64,6 +65,7 @@ var updateImg = function(i,testImg) {
 }
 
 var placeholderHeight = document.getElementById('floor0').clientHeight;
+var placeholderWidth = document.getElementById('floor0').clientWidth;
 var IDXprev = -1;
 
 function activate() {
@@ -99,9 +101,14 @@ function activate() {
       var floorImg = floorDiv.getElementsByTagName('img')[0];
       if ((window_top+350) > f_bottom){
         floorImg.style.width  = "100%";
+        floorImg.style.marginLeft = "0px";
       } else {
         floorImg.style.width  = "180%";
+        var scrollLeft = Math.round((f_bottom-window_top)/(f_bottom-f_top)*placeholderWidth)-placeholderWidth;
+        console.log(scrollLeft);
+        floorImg.style.marginLeft = scrollLeft+ 'px';
       }
+
 
     } else if (IDXprev == s){
       f.classList.remove('fixed');
@@ -111,6 +118,7 @@ function activate() {
       var floorDiv = document.getElementById("floor"+s);
       var floorImg = floorDiv.getElementsByTagName('img')[0];
       floorImg.style.width  = "100%";
+      floorImg.style.marginLeft = "0px";
     }
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
       f.classList.remove('fixed');
@@ -120,6 +128,7 @@ function activate() {
       var floorDiv = document.getElementById("floor"+s);
       var floorImg = floorDiv.getElementsByTagName('img')[0];
       floorImg.style.width  = "100%";
+      floorImg.style.marginLeft = "0px";
     }
 
   };
