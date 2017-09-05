@@ -84,16 +84,17 @@ function activate() {
     var floorImg = document.getElementById("background-floor"+s);
     var overlayDiv = document.getElementById("overlay-floor"+s);
 
+    // we are in the interactive, above the bottom and below the top
     if (window_top > f_top && window_top < f_bottom) {
 
+      console.log("we are in the interactive");
       f.classList.add('fixed');
       sticker_ph.style.height = placeholderHeight+"px";
       sticker_ph.style.display = 'block';
       IDXprev = s;
 
-      // zoom image
-
       if ((window_top+350) > f_bottom){
+        console.log("at second place");
         floorImg.style.opacity = "1";
         overlayDiv.style.opacity = "1";
         floorImg.style.width  = "100%";
@@ -101,6 +102,7 @@ function activate() {
         overlayDiv.style.marginLeft = "0px";
         overlayDiv.style.visibility  = "visible";
       } else if (window_top > zoomf_top){
+        console.log("at third place");
         floorImg.style.opacity = "1";
         overlayDiv.style.opacity = "1";
         floorImg.style.width  = "120%";
@@ -110,6 +112,7 @@ function activate() {
         floorImg.style.marginLeft = scrollLeft+ 'px';
         overlayDiv.style.marginLeft = scrollLeft+ 'px';
       } else {
+        console.log("at fourth place");
         floorImg.style.opacity = "1";
         overlayDiv.style.opacity = "1";
         floorImg.style.width  = "100%";
@@ -119,32 +122,32 @@ function activate() {
         overlayDiv.style.visibility  = "visible";
       }
 
-    } else if (IDXprev == s){
-      console.log("here we are");
+    // we are not in the interactive, but we will display the first and last images in their relative positions
+    } else if ((IDXprev == s) && (IDXprev != -1)){
+      console.log("we are not in the interactive and we are not at the top or bottom");
       floorImg.style.opacity = "0";
       overlayDiv.style.opacity = "0";
-      // f.classList.remove('fixed');
-      // sticker_ph.style.display = 'none';
-      //
-      // // unzoom image
-      // floorImg.style.width  = "100%";
-      // floorImg.style.marginLeft = "0px";
-      // overlayDiv.style.width  = "100%";
-      // overlayDiv.style.marginLeft = "0px";
-      // overlayDiv.style.visibility  = "visible";
     }
+
+    // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
-      // floorDiv.style.visibility = "hidden";
       f.classList.remove('fixed');
       sticker_ph.style.display = 'none';
-      // unzoom image
       floorImg.style.width  = "100%";
       floorImg.style.marginLeft = "0px";
       overlayDiv.style.width  = "100%";
       overlayDiv.style.marginLeft = "0px";
       overlayDiv.style.visibility = "hidden";
     }
-
+    // we want to show the top image at the top
+    if (window_top < sticker_start) {
+      floorImg.style.opacity = "1";
+    }
+    // we want to show the bottom image at the bottom
+    if (window_top >= sticker_stop) {
+      console.log("we are at the bottom");
+      floorImg.style.opacity = "1";
+    }
   };
 
   // scrolling commands for timeline ------------------------------------------------------------------
