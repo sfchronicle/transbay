@@ -58,9 +58,11 @@ var IDXprev = -1;
 if (screen.width <= 480) {
   var floorZoom = "180%";
   var zoomMult = 0.9;
+  var zoomOffset = 450;
 } else {
   var floorZoom = "130%";
   var zoomMult = 0.3;
+  var zoomOffset = 250;
 }
 
 function activate() {
@@ -87,7 +89,7 @@ function activate() {
     } else {
       var f_bottom = showf.getBoundingClientRect().bottom + window_top;// - 500;
     }
-    var zoomf_top = zoomf.getBoundingClientRect().top + window_top - 37 - 250;
+    var zoomf_top = zoomf.getBoundingClientRect().top + window_top - 37 - zoomOffset;
     var floorImg = document.getElementById("background-floor"+s);
     var overlayDiv = document.getElementById("overlay-floor"+s);
 

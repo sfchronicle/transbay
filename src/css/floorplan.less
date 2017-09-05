@@ -37,6 +37,10 @@
   .interactive-deck {
     padding: 20px 0 0 0;
     line-height: 1.2;
+    @media @mobile {
+      padding: 20px;
+      font-size: 18px;
+    }
   }
   .floor-title {
     text-align: center;
@@ -64,7 +68,7 @@
     margin-bottom: 500px;
     margin-top: 50px;
     @media @mobile {
-      margin-bottom: 300px;
+      margin-bottom: 200px;
       width: 100%;
     }
   }
@@ -88,7 +92,7 @@
       width: 80%;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 500px;
+      margin-top: 300px;
       margin-bottom: 200px;
     }
   }
@@ -102,5 +106,8 @@
     transition: all 250ms ease-in;
   }
   margin: 100px auto;
+  @media @mobile {
+    margin: 0;
+  }
   // margin-bottom: 200px;
 }
