@@ -5,26 +5,32 @@
   <div id="stick-here"></div>
   <% json.transbay_interactive_text.stages.forEach(function(d,didx){ %>
 
-    <div class="floor-title"><%=d.Title%></div>
     <div  class="floor-info" id="showfloor<%=didx%>">
 
       <div class="floor-image" id="floor<%=didx%>">
-        <img src="../assets/graphics/test_pano.jpg">
+        <img src="../assets/graphics/<%=d.Plan%>" id="background-floor<%=didx%>">
+        <img src='../assets/graphics/<%=d.Plan%>' id="overlay-floor<%=didx%>"></img>
       </div>
       <div id="stick-ph<%=didx%>"></div>
 
       <div class="intro"><%=d.Deck%></div>
 
-      <% d.images.forEach(function(im,imidx){ %>
+      <div class="intro"><%=d.FlowLines%></div>
 
-        <div class="inset" id="stage<%=didx%>image<%=imidx%>">
-          <div class="inset-image">
-            <img src="../assets/photos/part1/<%=im.Image%>"></img>
+      <div id="zoom-floor<%=didx%>">
+
+        <% d.images.forEach(function(im,imidx){ %>
+
+          <div class="inset <%=im.Class%>" id="stage<%=didx%>image<%=imidx%>">
+            <div class="inset-image">
+              <img src="../assets/photos/part1/<%=im.Image%>"></img>
+            </div>
+            <div class="inset-caption"><%=im.Caption%></div>
           </div>
-          <div class="inset-caption"><%=im.Caption%></div>
-        </div>
 
-      <% }); %>
+        <% }); %>
+      </div>
+
     </div>
 
   <% }); %>

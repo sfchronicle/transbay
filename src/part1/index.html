@@ -34,6 +34,10 @@
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
         <%= t.include("partials/_floorplan.html") %>
+      <% } else if (d.type == "graphic"){ %>
+        <div class="inline-img">
+          <img src="../assets/graphics/<%=d.value[0].Image%>"></img>
+        </div>
       <% } else if (d.type == "flowchart"){ %>
         <div class="interactive">
           <div class="interactive-title"><%=d.value[0].Hed%></div>

@@ -1,5 +1,5 @@
 .floor-image {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: auto;
   overflow-x: hidden;
   img {
@@ -10,9 +10,19 @@
     top: 37px;
     left: 0;
     right: 0;
-    z-index: -1;
+    z-index: -2;
   }
   height: auto;
+  transition: visibility 500ms ease-in;
+}
+
+#overlay-floor0, #overlay-floor1, #overlay-floor2, #overlay-floor3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: visibility 0ms ease-in !important;
+  visibility: hidden;
 }
 
 // .floor-info {
@@ -44,19 +54,29 @@
     width: 30%;
   }
   .intro {
-    max-width: 900px;
+    font-family: @block-graphics;
+    font-size: 18px;
+    max-width: 600px;
     width: 80%;
     margin: auto;
     padding: 30px;
-    background: rgba(255,255,255,0.6);
-    margin-bottom: 300px;
+    background: rgba(255,255,255,0.8);
+    margin-bottom: 500px;
+    margin-top: 50px;
   }
   .inset {
     max-width: 400px;
-    text-align: left;
+    text-align: right;
     background: rgba(255,255,255,0.6);
     margin-bottom: 300px;
-    margin-left: 30px;
+    // &.left {
+    //   margin-left: 30px;
+    //   margin-right: auto;
+    // }
+    // &.right {
+      margin-right: 30px;
+      margin-left: auto;
+    // }
     img {
       width: 100%;
     }
