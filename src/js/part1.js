@@ -55,6 +55,13 @@ function getPageScroll() {
 }
 
 var IDXprev = -1;
+if (screen.width <= 480) {
+  var floorZoom = "180%";
+  var zoomMult = 0.9;
+} else {
+  var floorZoom = "130%";
+  var zoomMult = 0.3;
+}
 
 function activate() {
 
@@ -105,9 +112,9 @@ function activate() {
         console.log("at third place");
         floorImg.style.opacity = "1";
         overlayDiv.style.opacity = "1";
-        floorImg.style.width  = "120%";
+        floorImg.style.width = floorZoom;
         overlayDiv.style.visibility  = "hidden";
-        var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*0.2;
+        var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
         console.log(scrollLeft);
         floorImg.style.marginLeft = scrollLeft+ 'px';
         overlayDiv.style.marginLeft = scrollLeft+ 'px';
@@ -122,13 +129,12 @@ function activate() {
         overlayDiv.style.visibility  = "visible";
       }
 
-    // we are not in the interactive, but we will display the first and last images in their relative positions
+    // we are not in the interactive
+    // if the
     } else if ((IDXprev == s) && (IDXprev != -1)){
-      console.log("we are not in the interactive and we are not at the top or bottom");
       floorImg.style.opacity = "0";
       overlayDiv.style.opacity = "0";
     }
-
     // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
       f.classList.remove('fixed');
@@ -143,11 +149,7 @@ function activate() {
     if (window_top < sticker_start) {
       floorImg.style.opacity = "1";
     }
-    // we want to show the bottom image at the bottom
-    if (window_top >= sticker_stop) {
-      console.log("we are at the bottom");
-      floorImg.style.opacity = "1";
-    }
+    // showing the image at the bottom doesn't work because the relative position is above where you would see it as a reader
   };
 
   // scrolling commands for timeline ------------------------------------------------------------------
@@ -200,28 +202,20 @@ var fadeTime = 100;
 // PARK animations --------------------------------------------------
 // -----------------------------------------------------------------------------
 
-
 var parkFloor = $("#overlay-floor0");
 var iPark = -1;
-//prepend the assets folder to these
 var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKTEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
-//callback version
+//callback
 var swap_park = function() {
   parkFloor.fadeOut(fadeTime, function() {
-    //get the next image
     iPark = (iPark + 1) % park_urls.length; // hello modulo, my old friend
-    //update the src
     parkFloor.attr("src", park_urls[iPark]);
-    //fade in once it's loaded
     parkFloor.one("load", function() {
-      //once fade completes, schedule the next swap
       parkFloor.fadeIn(fadeTime, () => setTimeout(swap_park, timeoutTime));
     });
   })
 };
-
-//either way
 setTimeout(swap_park, timeoutTime);
 
 // -----------------------------------------------------------------------------
@@ -230,26 +224,19 @@ setTimeout(swap_park, timeoutTime);
 
 var busFloor = $("#overlay-floor1");
 var iBus = -1;
-//prepend the assets folder to these
 var bus_urls = ["transitcenter_BUSARROWS3.png","transitcenter_BUSARROWS2.png","transitcenter_BUSARROWS1.png"].map(s => "../assets/graphics/" + s);
 
-//callback version
+//callback
 var swap_bus = function() {
   busFloor.fadeOut(fadeTime, function() {
-    //get the next image
     iBus = (iBus + 1) % bus_urls.length; // hello modulo, my old friend
-    //update the src
     busFloor.attr("src", bus_urls[iBus]);
     busFloor.attr("z-index","100");
-    //fade in once it's loaded
     busFloor.one("load", function() {
-      //once fade completes, schedule the next swap
       busFloor.fadeIn(fadeTime, () => setTimeout(swap_bus, timeoutTime));
     });
   })
 };
-
-//either way
 setTimeout(swap_bus, timeoutTime);
 
 // -----------------------------------------------------------------------------
@@ -258,28 +245,20 @@ setTimeout(swap_bus, timeoutTime);
 
 var mezFloor = $("#overlay-floor2");
 var iMez = -1;
-//prepend the assets folder to these
 var mez_urls = ["transitcenter_MEZZANINEARROWS.png","transitcenter_MEZZANINENOARROWS.png"].map(s => "../assets/graphics/" + s);
 
-//callback version
+//callback
 var swap_mez = function() {
   mezFloor.fadeOut(fadeTime, function() {
-    //get the next image
     iMez = (iMez + 1) % mez_urls.length; // hello modulo, my old friend
-    //update the src
     mezFloor.attr("src", mez_urls[iMez]);
     mezFloor.attr("z-index","100");
-    //fade in once it's loaded
     mezFloor.one("load", function() {
-      //once fade completes, schedule the next swap
       mezFloor.fadeIn(fadeTime, () => setTimeout(swap_mez, timeoutTime));
     });
   })
 };
-
-//either way
 setTimeout(swap_mez, timeoutTime);
-
 
 // -----------------------------------------------------------------------------
 // GROUND animations --------------------------------------------------
@@ -287,27 +266,22 @@ setTimeout(swap_mez, timeoutTime);
 
 var groundFloor = $("#overlay-floor3");
 var iGround = -1;
-//prepend the assets folder to these
 var ground_urls = ["transitcenter_GROUNDARROWS.png","transitcenter_GROUNDNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
-//callback version
+//callback
 var swap_ground = function() {
   groundFloor.fadeOut(fadeTime, function() {
-    //get the next image
     iGround = (iGround + 1) % ground_urls.length; // hello modulo, my old friend
-    //update the src
     groundFloor.attr("src", ground_urls[iGround]);
     groundFloor.attr("z-index","100");
-    //fade in once it's loaded
     groundFloor.one("load", function() {
-      //once fade completes, schedule the next swap
       groundFloor.fadeIn(fadeTime, () => setTimeout(swap_ground, timeoutTime));
     });
   })
 };
-
-//either way
 setTimeout(swap_ground, timeoutTime);
+
+
 // flow chart for financial data ---------------------------------------------------
 //
 //
