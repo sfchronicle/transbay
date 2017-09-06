@@ -222,7 +222,7 @@ function activate() {
         floorImg.style.width = floorZoom;
 
         // hide the overlay
-        overlayDiv.style.opacity = "1";
+        overlayDiv.style.opacity = "0";
         overlayDiv.style.visibility  = "hidden";
 
         // setting the panning on the image
@@ -290,8 +290,6 @@ function activate() {
     }
     // NOTE: showing the image at the bottom doesn't work because the relative position is above where you would see it as a reader
   };
-  console.log(window_top);
-  console.log(sticker_stop);
   if (window_top > sticker_stop-document.getElementById('floor3').clientHeight) {
     console.log("hiding the bottom image");
     document.getElementById("background-floor3").style.visibility = "hidden";

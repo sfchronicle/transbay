@@ -1,3 +1,18 @@
+.credit, .source {
+  max-width: 900px;
+  margin: auto;
+  &.floorplan {
+    margin-top: 400px;
+  }
+  text-align: right;
+}
+.source {
+  padding-top: 10px;
+}
+// .credits-container {
+//   background: white;
+// }
+
 .floor-image {
   max-width: 1600px;
   margin: auto;
@@ -13,7 +28,8 @@
     z-index: -2;
   }
   height: auto;
-  transition: visibility 500ms ease-in;
+  transition: visibility 200ms ease-in;
+  transition: opacity 500ms ease-in;
 }
 
 #overlay-floor0, #overlay-floor1, #overlay-floor2, #overlay-floor3 {
@@ -21,7 +37,7 @@
   top: 0;
   left: 0;
   z-index: 1;
-  transition: visibility 0ms ease-in !important;
+  // transition: visibility 0ms ease-in !important;
   visibility: hidden;
 }
 
@@ -76,6 +92,10 @@
     padding-bottom: 260px;
     margin-bottom: 37px;
   }
+  #stage3image3 {
+    margin-bottom: 300px;
+    padding-bottom: 0;
+  }
   .inset {
     max-width: 400px;
     text-align: right;
@@ -107,7 +127,7 @@
   }
   img {
     width: 100%;
-    transition: all 250ms ease-in;
+    transition: all 400ms ease-in;
   }
   margin: 100px auto;
   @media @mobile {
