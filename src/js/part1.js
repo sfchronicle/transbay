@@ -156,6 +156,7 @@ if (screen.width <= 480) {
 
 var lastScrollTop = document.body.scrollTop;
 var direction;
+var swapPark = 0, swapBus = 0, swapMez = 0, swapGround = 0;
 
 function activate() {
 
@@ -239,25 +240,26 @@ function activate() {
       } else {
         // console.log("at top of section, showing overlays, no zoom, no pan");
 
+
         // activate correct overlays
-        // if (s == 0 && !(swapPark)) {
-        //   console.log("loop park overlays");
-        //   // clearTimeout(swap_park);
-        //   setTimeout(swap_park, timeoutTime);
-        //   var swapPark = 1;
-        // } else if (s == 1 && !swapBus) {
-        //   console.log("loop bus overlays");
-        //   setTimeout(swap_bus, timeoutTime);
-        //   var swapBus = 1;
-        // } else if (s == 2 && !swapMez) {
-        //   console.log("loop mezzanine overlays");
-        //   setTimeout(swap_mez, timeoutTime);
-        //   var swapMez = 1;
-        // } else if (s == 3 && !swapGround) {
-        //   console.log("loop ground overlays");
-        //   setTimeout(swap_ground, timeoutTime);
-        //   var swapGround = 1;
-        // }
+        if ((s == 0) && (swapPark != 1)) {
+          console.log("loop park overlays");
+          // clearTimeout(swap_park);
+          setTimeout(swap_park, timeoutTime);
+          swapPark = 1;
+        } else if ((s == 1) && (swapBus != 1)) {
+          console.log("loop bus overlays");
+          setTimeout(swap_bus, timeoutTime);
+          swapBus = 1;
+        } else if ((s == 2) && (swapMez != 1)) {
+          console.log("loop mezzanine overlays");
+          setTimeout(swap_mez, timeoutTime);
+          swapMez = 1;
+        } else if ((s == 3) && (swapGround != 1)) {
+          console.log("loop ground overlays");
+          setTimeout(swap_ground, timeoutTime);
+          swapGround = 1;
+        }
 
         floorImg.style.opacity = "1";
         floorImg.style.width  = "100%";
