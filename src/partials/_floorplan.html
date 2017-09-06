@@ -21,11 +21,13 @@
 
         <% d.images.forEach(function(im,imidx){ %>
 
-          <div class="inset <%=im.Class%>" id="stage<%=didx%>image<%=imidx%>">
-            <div class="inset-image">
-              <img src="../assets/photos/part1/<%=im.Image%>"></img>
+          <div class="inset-container" id="stage<%=didx%>image<%=imidx%>">
+            <div class="inset <%=im.Class%>">
+              <div class="inset-image">
+                <img src="../assets/photos/part1/<%=im.Image%>"></img>
+              </div>
+              <div class="inset-caption"><%=im.Caption%></div>
             </div>
-            <div class="inset-caption"><%=im.Caption%></div>
           </div>
 
         <% }); %>
