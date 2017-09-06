@@ -38,10 +38,12 @@
           </div>
           <% } %>
           <% if (d.Text2){ %>
-            <div class='datetext'><%=d.Text2%></div>
-            <div class="eventimage">
-              <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image2%>/3/1500x1000.jpg"></img>
-            </div>
+            <div class='datetext text2'><%=d.Text2%></div>
+            <% if (d.Image2){ %>
+              <div class="eventimage">
+                <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image2%>/3/1500x1000.jpg"></img>
+              </div>
+            <% } %>
           <% } %>
         </div>
       <% }); %>

@@ -18,7 +18,7 @@ var timer;
 
 var parkFloor = $("#overlay-floor0");
 var iPark = -1;
-var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKTEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
+var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_park = function() {
@@ -173,6 +173,7 @@ function activate() {
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
   var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
+  var circle = document.getElementById("highlightCircle");
 
   // loop through the floors to see which one we are in and
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
@@ -214,6 +215,8 @@ function activate() {
         overlayDiv.style.opacity = "1";
         overlayDiv.style.marginLeft = "0px";
 
+        circle.style.opacity = "0";
+
       // going through the images part of a section: zoom & pan image
       } else if (window_top > zoomf_top){
         // console.log("in the middle of a section, zooming and panning");
@@ -236,10 +239,13 @@ function activate() {
         floorImg.style.marginLeft = scrollLeft+ 'px';
         overlayDiv.style.marginLeft = scrollLeft+ 'px';
 
+        // show the highlight circle
+        circle.style.top = placeholderHeight/2-50+"px";
+        circle.style.opacity = "1";
+
       // at the top of the image, showing the overlays and no zoom and no pan
       } else {
         // console.log("at top of section, showing overlays, no zoom, no pan");
-
 
         // activate correct overlays
         if ((s == 0) && (swapPark != 1)) {
@@ -269,12 +275,16 @@ function activate() {
         overlayDiv.style.width  = "100%";
         overlayDiv.style.marginLeft = "0px";
         overlayDiv.style.visibility  = "visible";
+
+        circle.style.opacity = "0";
       }
 
     // we are not in the interactive
     } else {
       floorImg.style.opacity = "0";
       overlayDiv.style.opacity = "0";
+
+      circle.style.opacity = "0";
     }
     // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
@@ -285,6 +295,8 @@ function activate() {
       overlayDiv.style.width  = "100%";
       overlayDiv.style.marginLeft = "0px";
       overlayDiv.style.visibility = "hidden";
+
+      circle.style.opacity = "0";
     }
     // we want to show the top image at the top
     if (window_top < sticker_start) {
