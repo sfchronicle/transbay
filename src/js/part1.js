@@ -196,7 +196,7 @@ function activate() {
     // we are in a section of the interactive, above the bottom and below the top
     if (window_top >= f_top && window_top <= f_bottom) {
 
-      console.log("we are in the interactive");
+      // console.log("we are in the interactive");
       f.classList.add('fixed');
       sticker_ph.style.height = placeholderHeight+"px";
       sticker_ph.style.display = 'block';
@@ -204,7 +204,7 @@ function activate() {
 
       // at the bottom of a section, un-zoom the image but keep it visible and sticky
       if ((window_top + 350) > f_bottom){
-        console.log("at the bottom of a section, unzooming but keeping it visible and sticky");
+        // console.log("at the bottom of a section, unzooming but keeping it visible and sticky");
         floorImg.style.opacity = "1";
         floorImg.style.visibility = "visible";
         floorImg.style.width  = "100%";
@@ -215,7 +215,7 @@ function activate() {
 
       // going through the images part of a section: zoom & pan image
       } else if (window_top > zoomf_top){
-        console.log("in the middle of a section, zooming and panning");
+        // console.log("in the middle of a section, zooming and panning");
 
         // show the background image and zoom it
         floorImg.style.opacity = "1";
@@ -227,7 +227,7 @@ function activate() {
 
         // setting the panning on the image
         if (direction == "up") {
-          var scrollLeft = (Math.round(placeholderWidth-(f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth))*zoomMult;
+          var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
         } else {
           var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
         }
@@ -237,7 +237,7 @@ function activate() {
 
       // at the top of the image, showing the overlays and no zoom and no pan
       } else {
-        console.log("at top of section, showing overlays, no zoom, no pan");
+        // console.log("at top of section, showing overlays, no zoom, no pan");
 
         // activate correct overlays
         // if (s == 0 && !(swapPark)) {
@@ -290,12 +290,13 @@ function activate() {
     }
     // NOTE: showing the image at the bottom doesn't work because the relative position is above where you would see it as a reader
   };
-  if (window_top > sticker_stop-document.getElementById('floor3').clientHeight) {
-    console.log("hiding the bottom image");
-    document.getElementById("background-floor3").style.visibility = "hidden";
-  } else {
-    document.getElementById("background-floor3").style.visibility = "visible";
-  }
+  // THIS IS NOT QUITE WORKING
+  // if (window_top > sticker_stop-document.getElementById('floor3').clientHeight) {
+  //   console.log("hiding the bottom image");
+  //   document.getElementById("background-floor3").style.visibility = "hidden";
+  // } else {
+  //   document.getElementById("background-floor3").style.visibility = "visible";
+  // }
 
   // scrolling commands for timeline ------------------------------------------------------------------
 
