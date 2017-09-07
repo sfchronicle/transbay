@@ -12,11 +12,11 @@ var timeoutTime = 500;
 var fadeTime = 300;
 var timer;
 
-// -----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // PARK animations --------------------------------------------------
 // -----------------------------------------------------------------------------
 
-var parkFloor = $("#overlay-floor0");
+var parkFloor = $("#overlay-floor3");
 var iPark = -1;
 var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
@@ -35,7 +35,7 @@ var swap_park = function() {
 // BUS animations --------------------------------------------------
 // -----------------------------------------------------------------------------
 
-var busFloor = $("#overlay-floor1");
+var busFloor = $("#overlay-floor2");
 var iBus = -1;
 var bus_urls = ["transitcenter_BUSARROWS3.png","transitcenter_BUSARROWS2.png","transitcenter_BUSARROWS1.png"].map(s => "../assets/graphics/" + s);
 
@@ -55,7 +55,7 @@ var swap_bus = function() {
 // MEZZANINE animations --------------------------------------------------
 // -----------------------------------------------------------------------------
 
-var mezFloor = $("#overlay-floor2");
+var mezFloor = $("#overlay-floor1");
 var iMez = -1;
 var mez_urls = ["transitcenter_MEZZANINEARROWS.png","transitcenter_MEZZANINENOARROWS.png"].map(s => "../assets/graphics/" + s);
 
@@ -75,7 +75,7 @@ var swap_mez = function() {
 // GROUND animations --------------------------------------------------
 // -----------------------------------------------------------------------------
 
-var groundFloor = $("#overlay-floor3");
+var groundFloor = $("#overlay-floor0");
 var iGround = -1;
 var ground_urls = ["transitcenter_GROUNDARROWS.png","transitcenter_GROUNDNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
@@ -149,7 +149,7 @@ if (screen.width <= 480) {
   var zoomMult = 0.9;
   var zoomOffset = 450;
 } else {
-  var floorZoom = "125%";
+  var floorZoom = "100%";
   var zoomMult = 0.3;
   var zoomOffset = 250;
 }
@@ -157,6 +157,8 @@ if (screen.width <= 480) {
 var lastScrollTop = document.body.scrollTop;
 var direction;
 var swapPark = 0, swapBus = 0, swapMez = 0, swapGround = 0;
+var circle = document.getElementById("highlightCircle");
+var circleFlag, circleTop, circleLeft;
 
 function activate() {
 
@@ -168,14 +170,13 @@ function activate() {
     direction = "up";
   }
   lastScrollTop = window_top;
-  console.log(direction);
 
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
   var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
-  var circle = document.getElementById("highlightCircle");
 
   // loop through the floors to see which one we are in and
+  circleFlag = 0;
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
     var sticker_ph = document.getElementById('stick-ph'+s);
     var showf = document.getElementById("showfloor"+s);
@@ -194,6 +195,8 @@ function activate() {
     var zoomf_top = zoomf.getBoundingClientRect().top + window_top - 37 - zoomOffset;
     var floorImg = document.getElementById("background-floor"+s);
     var overlayDiv = document.getElementById("overlay-floor"+s);
+
+    console.log(circleFlag);
 
     // we are in a section of the interactive, above the bottom and below the top
     if (window_top >= f_top && window_top <= f_bottom) {
@@ -215,11 +218,9 @@ function activate() {
         overlayDiv.style.opacity = "1";
         overlayDiv.style.marginLeft = "0px";
 
-        circle.style.opacity = "0";
-
       // going through the images part of a section: zoom & pan image
       } else if (window_top > zoomf_top){
-        // console.log("in the middle of a section, zooming and panning");
+        console.log("in the middle of a section, zooming and panning");
 
         // show the background image and zoom it
         floorImg.style.opacity = "1";
@@ -230,38 +231,42 @@ function activate() {
         overlayDiv.style.visibility  = "hidden";
 
         // setting the panning on the image
-        if (direction == "up") {
-          var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
-        } else {
-          var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
-        }
+        // if (direction == "up") {
+        //   var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
+        // } else {
+        //   var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
+        // }
+        var scrollLeft = "0";
         console.log(scrollLeft);
         floorImg.style.marginLeft = scrollLeft+ 'px';
         overlayDiv.style.marginLeft = scrollLeft+ 'px';
 
         // show the highlight circle
-        circle.style.top = placeholderHeight/2-50+"px";
-        circle.style.opacity = "1";
+        circleFlag = 1;
+        var testIDX = Math.min(Math.max(Math.floor((window_top - zoomf_top)/600),0),floorplanData["stages"][s]["images"].length-1);
+        console.log(testIDX);
+        circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight;
+        circleLeft = floorplanData["stages"][s]["images"][testIDX]["LeftPercent"]*placeholderWidth;
 
       // at the top of the image, showing the overlays and no zoom and no pan
       } else {
         // console.log("at top of section, showing overlays, no zoom, no pan");
 
         // activate correct overlays
-        if ((s == 0) && (swapPark != 1)) {
+        if ((s == 3) && (swapPark != 1)) {
           console.log("loop park overlays");
           // clearTimeout(swap_park);
           setTimeout(swap_park, timeoutTime);
           swapPark = 1;
-        } else if ((s == 1) && (swapBus != 1)) {
+        } else if ((s == 2) && (swapBus != 1)) {
           console.log("loop bus overlays");
           setTimeout(swap_bus, timeoutTime);
           swapBus = 1;
-        } else if ((s == 2) && (swapMez != 1)) {
+        } else if ((s == 1) && (swapMez != 1)) {
           console.log("loop mezzanine overlays");
           setTimeout(swap_mez, timeoutTime);
           swapMez = 1;
-        } else if ((s == 3) && (swapGround != 1)) {
+        } else if ((s == 0) && (swapGround != 1)) {
           console.log("loop ground overlays");
           setTimeout(swap_ground, timeoutTime);
           swapGround = 1;
@@ -275,17 +280,14 @@ function activate() {
         overlayDiv.style.width  = "100%";
         overlayDiv.style.marginLeft = "0px";
         overlayDiv.style.visibility  = "visible";
-
-        circle.style.opacity = "0";
       }
 
     // we are not in the interactive
     } else {
       floorImg.style.opacity = "0";
       overlayDiv.style.opacity = "0";
-
-      circle.style.opacity = "0";
     }
+
     // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
       f.classList.remove('fixed');
@@ -296,7 +298,7 @@ function activate() {
       overlayDiv.style.marginLeft = "0px";
       overlayDiv.style.visibility = "hidden";
 
-      circle.style.opacity = "0";
+      circleFlag = 0;
     }
     // we want to show the top image at the top
     if (window_top < sticker_start) {
@@ -304,6 +306,17 @@ function activate() {
     }
     // NOTE: showing the image at the bottom doesn't work because the relative position is above where you would see it as a reader
   };
+
+  if (circleFlag == 1) {
+
+    circle.style.opacity = "1";
+    circle.style.left = circleLeft+"px";
+    circle.style.top = circleTop+"px";
+  } else {
+    circle.style.opacity = "0";
+  }
+
+
   // THIS IS NOT QUITE WORKING
   // if (window_top > sticker_stop-document.getElementById('floor3').clientHeight) {
   //   console.log("hiding the bottom image");
