@@ -18,7 +18,7 @@ var timer;
 
 var parkFloor = $("#overlay-floor3");
 var iPark = -1;
-var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKNOARROWS.png"].map(s => "../assets/graphics/" + s);
+var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKTEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_park = function() {
@@ -57,7 +57,7 @@ var swap_bus = function() {
 
 var mezFloor = $("#overlay-floor1");
 var iMez = -1;
-var mez_urls = ["transitcenter_MEZZANINEARROWS.png","transitcenter_MEZZANINENOARROWS.png"].map(s => "../assets/graphics/" + s);
+var mez_urls = ["transitcenter_MEZZANINEARROWS.png","transitcenter_MEZZANINETEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_mez = function() {
@@ -77,7 +77,7 @@ var swap_mez = function() {
 
 var groundFloor = $("#overlay-floor0");
 var iGround = -1;
-var ground_urls = ["transitcenter_GROUNDARROWS.png","transitcenter_GROUNDNOARROWS.png"].map(s => "../assets/graphics/" + s);
+var ground_urls = ["transitcenter_GROUNDARROWS.png","transitcenter_GROUNDTEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_ground = function() {
@@ -145,12 +145,12 @@ function getPageScroll() {
 
 var IDXprev = -1;
 if (screen.width <= 480) {
-  var floorZoom = "180%";
-  var zoomMult = 0.9;
+  var floorZoom = "160%";
+  var zoomMult = 1.6;
   var zoomOffset = 450;
 } else {
   var floorZoom = "100%";
-  var zoomMult = 0.3;
+  var zoomMult = 1;
   var zoomOffset = 250;
 }
 
@@ -187,16 +187,11 @@ function activate() {
     var placeholderWidth = document.getElementById('floor'+s).clientWidth;
 
     var f_top = showf.getBoundingClientRect().top + window_top - 37;
-    // if (s < (floorplanData.stages.length-1)){
-    //   var f_bottom = showf.getBoundingClientRect().bottom + window_top;// + 100;
-    // } else {
-    var f_bottom = showf.getBoundingClientRect().bottom + window_top;// - 500;
-    // }
+    var f_bottom = showf.getBoundingClientRect().bottom + window_top;
+
     var zoomf_top = zoomf.getBoundingClientRect().top + window_top - 37 - zoomOffset;
     var floorImg = document.getElementById("background-floor"+s);
     var overlayDiv = document.getElementById("overlay-floor"+s);
-
-    console.log(circleFlag);
 
     // we are in a section of the interactive, above the bottom and below the top
     if (window_top >= f_top && window_top <= f_bottom) {
@@ -222,7 +217,7 @@ function activate() {
       } else if (window_top > zoomf_top){
         console.log("in the middle of a section, zooming and panning");
 
-        // show the background image and zoom it
+        // show the background image and zoom it (on mobile only)
         floorImg.style.opacity = "1";
         floorImg.style.width = floorZoom;
 
@@ -230,23 +225,32 @@ function activate() {
         overlayDiv.style.opacity = "0";
         overlayDiv.style.visibility  = "hidden";
 
-        // setting the panning on the image
-        // if (direction == "up") {
-        //   var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
-        // } else {
-        //   var scrollLeft = (Math.round((f_bottom-window_top)/(f_bottom-zoomf_top)*placeholderWidth)-placeholderWidth)*zoomMult;
-        // }
-        var scrollLeft = "0";
-        console.log(scrollLeft);
-        floorImg.style.marginLeft = scrollLeft+ 'px';
-        overlayDiv.style.marginLeft = scrollLeft+ 'px';
-
         // show the highlight circle
         circleFlag = 1;
-        var testIDX = Math.min(Math.max(Math.floor((window_top - zoomf_top)/600),0),floorplanData["stages"][s]["images"].length-1);
-        console.log(testIDX);
-        circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight;
-        circleLeft = floorplanData["stages"][s]["images"][testIDX]["LeftPercent"]*placeholderWidth;
+
+        if (screen.width <= 480) {
+
+          // was thinking about using this as a variable for zooming but am not right now
+          var panDiff = (zoomMult-1)*screen.width;
+
+          var testIDX = Math.min(Math.max(Math.floor((window_top - zoomf_top)/1000),0),floorplanData["stages"][s]["images"].length-1);
+          var leftNum = +floorplanData["stages"][s]["images"][testIDX]["LeftPercent"]*zoomMult;
+          if (leftNum <= 0.5) {
+            console.log("feature is on left");
+            var scrollLeft = (0.5 - leftNum)*placeholderWidth-20;//-20/zoomMult;
+            circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight+5*zoomMult;//*zoomMult;//*zoomMult;
+          } else {
+            console.log("feature is on right");
+            var scrollLeft = -(leftNum - 0.5)*placeholderWidth-30;
+            circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight+5*zoomMult;//*zoomMult;//*zoomMult;//*zoomMult;
+          }
+          floorImg.style.marginLeft = scrollLeft+ 'px';
+          overlayDiv.style.marginLeft = scrollLeft+ 'px';
+        } else {
+          var testIDX = Math.min(Math.max(Math.floor((window_top - zoomf_top)/600),0),floorplanData["stages"][s]["images"].length-1);
+          circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight;
+          circleLeft = floorplanData["stages"][s]["images"][testIDX]["LeftPercent"]*placeholderWidth;
+        }
 
       // at the top of the image, showing the overlays and no zoom and no pan
       } else {
@@ -255,7 +259,6 @@ function activate() {
         // activate correct overlays
         if ((s == 3) && (swapPark != 1)) {
           console.log("loop park overlays");
-          // clearTimeout(swap_park);
           setTimeout(swap_park, timeoutTime);
           swapPark = 1;
         } else if ((s == 2) && (swapBus != 1)) {
@@ -298,6 +301,7 @@ function activate() {
       overlayDiv.style.marginLeft = "0px";
       overlayDiv.style.visibility = "hidden";
 
+      // not showing the highlight circle
       circleFlag = 0;
     }
     // we want to show the top image at the top
@@ -307,12 +311,25 @@ function activate() {
     // NOTE: showing the image at the bottom doesn't work because the relative position is above where you would see it as a reader
   };
 
+  // checking to see if we are displaying the circle and applying styles
   if (circleFlag == 1) {
 
+    // we are showing the highlight
     circle.style.opacity = "1";
-    circle.style.left = circleLeft+"px";
-    circle.style.top = circleTop+"px";
+
+    // we want to center the circle for mobile and move around the graphic
+    if (screen.width <= 480) {
+      circle.style.top = circleTop+"px";
+      circle.style.right = "0";
+      circle.style.left = "0";
+
+    // we want to move the circle around on desktop
+    } else {
+      circle.style.left = circleLeft+"px";
+      circle.style.top = circleTop+"px";
+    }
   } else {
+    // we are hiding the highlight
     circle.style.opacity = "0";
   }
 
