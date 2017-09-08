@@ -16,7 +16,7 @@ var timer;
 
 var parkFloor = $("#overlay-floor3");
 var iPark = -1;
-var park_urls = ["transitcenter_PARKARROWS.png","transitcenter_PARKTEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
+var park_urls = ["transitcenter_PARKARROWS.png","nada_background.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_park = function() {
@@ -55,7 +55,7 @@ var swap_bus = function() {
 
 var mezFloor = $("#overlay-floor1");
 var iMez = -1;
-var mez_urls = ["transitcenter_MEZZANINEARROWS.png","transitcenter_MEZZANINETEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
+var mez_urls = ["transitcenter_MEZZANINEARROWS.png","nada_background.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_mez = function() {
@@ -75,7 +75,7 @@ var swap_mez = function() {
 
 var groundFloor = $("#overlay-floor0");
 var iGround = -1;
-var ground_urls = ["transitcenter_GROUNDARROWS.png","transitcenter_GROUNDTEXTNOARROWS.png"].map(s => "../assets/graphics/" + s);
+var ground_urls = ["transitcenter_GROUNDARROWS.png","nada_background.png"].map(s => "../assets/graphics/" + s);
 
 //callback
 var swap_ground = function() {

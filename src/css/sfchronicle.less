@@ -429,6 +429,22 @@ header {
   }
 }
 
+.wide-inline-img {
+  max-width: 1000px;
+  margin: 3em auto;
+  img {
+    width: 100%;
+  }
+
+  .caption{
+    padding:0;
+
+      @media @text-width{
+        padding:0 10px;
+      }
+  }
+}
+
 .inline-graphic {
     max-width: 640px;
     margin: 2em auto;

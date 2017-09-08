@@ -35,13 +35,12 @@
       <% } else if (d.type == "interactive"){ %>
         <%= t.include("partials/_floorplan.html") %>
       <% } else if (d.type == "graphic"){ %>
-        <div class="inline-img">
+        <div class="wide-inline-img">
           <img src="../assets/graphics/<%=d.value[0].Image%>"></img>
         </div>
       <% } else if (d.type == "flowchart"){ %>
         <div class="interactive">
           <div class="interactive-title"><%=d.value[0].Hed%></div>
-          <div class="interactive-deck"><%=d.value[0].Deck%></div>
           <div class="total-head">$2.59 Billion</div>
           <div class="chart-headings">
             <div class="chart-head left">Sources</div>
@@ -55,7 +54,7 @@
             <div class="entry">Interactive producer: <a href="mailto:eoneill@sfchronicle.com">Emma O'Neill</a></div>
           </div>
           <div class="flowchart source">
-            <div class="entry">Source: This is where we got the data.</div>
+            <div class="entry">Source: <%=d.value[0].Source%></div>
           </div>
         </div>
 
