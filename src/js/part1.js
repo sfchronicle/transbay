@@ -1,8 +1,6 @@
 require("./lib/social"); //Do not delete
-// require("d3");
-// require("d3.chart");
-// var Sankey = require('./lib/d3.chart.sankey');
-
+var d3 = require("d3");
+var d3Sankey = require("d3-sankey");
 
 // -----------------------------------------------------------------------------
 // ANIMATIONS variables
@@ -417,137 +415,224 @@ function activate() {
 
 
 // flow chart for financial data ---------------------------------------------------
-//
-//
-// var units = "Widgets";
-//
-// // set the dimensions and margins of the graph
-// var margin = {top: 10, right: 10, bottom: 10, left: 10},
-//     width = 700 - margin.left - margin.right,
-//     height = 300 - margin.top - margin.bottom;
-//
-// // format variables
-// var formatNumber = d3.format(",.0f"),    // zero decimal places
-//     format = function(d) { return formatNumber(d) + " " + units; },
-//     color = d3.scaleOrdinal(d3.schemeCategory20);
-//
-// // append the svg object to the body of the page
-// var svg = d3.select("#flowchart").append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//   .append("g")
-//     .attr("transform",
-//           "translate(" + margin.left + "," + margin.top + ")");
-//
-// // Set the sankey diagram properties
-// var sankey = d3.sankey()
-//     .nodeWidth(36)
-//     .nodePadding(40)
-//     .size([width, height]);
-//
-// var path = sankey.link();
-//
-// // load the data
-// d3.csv("sankey.csv", function(error, data) {
-//
-//   //set up graph in same style as original example but empty
-//   graph = {"nodes" : [], "links" : []};
-//
-//   data.forEach(function (d) {
-//     graph.nodes.push({ "name": d.source });
-//     graph.nodes.push({ "name": d.target });
-//     graph.links.push({ "source": d.source,
-//                        "target": d.target,
-//                        "value": +d.value });
-//    });
-//
-//   // return only the distinct / unique nodes
-//   graph.nodes = d3.keys(d3.nest()
-//     .key(function (d) { return d.name; })
-//     .object(graph.nodes));
-//
-//   // loop through each link replacing the text with its index from node
-//   graph.links.forEach(function (d, i) {
-//     graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
-//     graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
-//   });
-//
-//   // now loop through each nodes to make nodes an array of objects
-//   // rather than an array of strings
-//   graph.nodes.forEach(function (d, i) {
-//     graph.nodes[i] = { "name": d };
-//   });
-//
-//   sankey
-//       .nodes(graph.nodes)
-//       .links(graph.links)
-//       .layout(32);
-//
-//   // add in the links
-//   var link = svg.append("g").selectAll(".link")
-//       .data(graph.links)
-//     .enter().append("path")
-//       .attr("class", "link")
-//       .attr("d", path)
-//       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-//       .sort(function(a, b) { return b.dy - a.dy; });
-//
-//   // add the link titles
-//   link.append("title")
-//         .text(function(d) {
-//     		return d.source.name + " → " +
-//                 d.target.name + "\n" + format(d.value); });
-//
-//   // add in the nodes
-//   var node = svg.append("g").selectAll(".node")
-//       .data(graph.nodes)
-//     .enter().append("g")
-//       .attr("class", "node")
-//       .attr("transform", function(d) {
-// 		  return "translate(" + d.x + "," + d.y + ")"; })
-//       .call(d3.drag()
-//         .subject(function(d) {
-//           return d;
-//         })
-//         .on("start", function() {
-//           this.parentNode.appendChild(this);
-//         })
-//         .on("drag", dragmove));
-//
-//   // add the rectangles for the nodes
-//   node.append("rect")
-//       .attr("height", function(d) { return d.dy; })
-//       .attr("width", sankey.nodeWidth())
-//       .style("fill", function(d) {
-// 		  return d.color = color(d.name.replace(/ .*/, "")); })
-//       .style("stroke", function(d) {
-// 		  return d3.rgb(d.color).darker(2); })
-//     .append("title")
-//       .text(function(d) {
-// 		  return d.name + "\n" + format(d.value); });
-//
-//   // add in the title for the nodes
-//   node.append("text")
-//       .attr("x", -6)
-//       .attr("y", function(d) { return d.dy / 2; })
-//       .attr("dy", ".35em")
-//       .attr("text-anchor", "end")
-//       .attr("transform", null)
-//       .text(function(d) { return d.name; })
-//     .filter(function(d) { return d.x < width / 2; })
-//       .attr("x", 6 + sankey.nodeWidth())
-//       .attr("text-anchor", "start");
-//
-//   // the function for moving the nodes
-//   function dragmove(d) {
-//     d3.select(this)
-//       .attr("transform",
-//             "translate("
-//                + d.x + ","
-//                + (d.y = Math.max(
-//                   0, Math.min(height - d.dy, d3.event.y))
-//                  ) + ")");
-//     sankey.relayout();
-//     link.attr("d", path);
-//   }
-// });
+
+// setting sizes of interactive
+var margin = {
+  top: 0,
+  right: 0,
+  bottom: 50,
+  left: 0
+};
+if (screen.width > 768) {
+  var width = 700 - margin.left - margin.right;
+  var height = 500 - margin.top - margin.bottom;
+} else if (screen.width <= 768 && screen.width > 480) {
+  var width = 700 - margin.left - margin.right;
+  var height = 450 - margin.top - margin.bottom;
+} else if (screen.width <= 480 && screen.width > 340) {
+  console.log("big phone");
+  var margin = {
+    top: 20,
+    right: 0,
+    bottom: 40,
+    left: 0
+  };
+  var width = 340 - margin.left - margin.right;
+  var height = 350 - margin.top - margin.bottom;
+} else if (screen.width <= 340) {
+  console.log("mini iphone")
+  var margin = {
+    top: 20,
+    right: 0,
+    bottom: 40,
+    left: 0
+  };
+  var width = 310 - margin.left - margin.right;
+  var height = 300 - margin.top - margin.bottom;
+}
+
+var svg = d3.select("#flowchart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+//set up graph in same style as original example but empty
+var graph = {"nodes" : [], "links" : []};
+
+financialData.forEach(function (d) {
+  graph.nodes.push({ "name": d.source });
+  graph.nodes.push({ "name": d.target });
+
+  graph.links.push({ "source": d.source,
+                     "target": d.target,
+                     "value": +d.value });
+});
+
+console.log(graph);
+
+// return only the distinct / unique nodes
+graph.nodes = d3.keys(d3.nest()
+  .key(function (d) { return d.name; })
+  .object(graph.nodes));
+
+// loop through each link replacing the text with its index from node
+graph.links.forEach(function (d, i) {
+  graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+  graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
+});
+
+// now loop through each nodes to make nodes an array of objects
+// rather than an array of strings
+graph.nodes.forEach(function (d, i) {
+  graph.nodes[i] = { "name": d };
+});
+
+var tooltip = document.querySelector("#flowchart-tooltip");
+
+function color_sankey(index,type) {
+  // color the nodes
+  if (type == "node") {
+    if (index == 0) {
+      return "#45B57B";//red
+    } else if (index == 1) {
+      return "#d8d8d8";
+    } else if (index == 2) {
+      return "#5E9BB8";//blue
+    }
+  // color the links
+  } else {
+    if (index == 1) {
+      return "#45B57B";//red
+    } else if (index == 2) {
+      return "#5E9BB8";//blue
+    }
+  }
+}
+
+var showTooltip = function(d, target) {
+  tooltip.classList.add("show");
+  if (d.source.depth == 1){
+    tooltip.innerHTML = `
+      <div class="tooltip-title">Expenditure:</div>
+      <div>${d.target.name}</div>
+      <div class="tooltip-num">$ ${d.target.value} M</div>
+    `;
+  } else {
+    tooltip.innerHTML = `
+      <div class="tooltip-title">Funding source:</div>
+      <div>${d.source.name}</div>
+      <div class="tooltip-num">$${d.source.value} M</div>
+    `;
+  }
+}
+
+var showNodeTooltip = function(d, target) {
+  tooltip.classList.add("show");
+  if (d.depth == 0){
+    tooltip.innerHTML = `
+      <div class="tooltip-title">Funding source:</div>
+      <div>${d.name}</div>
+      <div>$ ${d.value} M</div>
+    `;
+  } else {
+    tooltip.innerHTML = `
+      <div class="tooltip-title">Expenditure:</div>
+      <div>${d.name}</div>
+      <div>$ ${d.value} M</div>
+    `;
+  }
+}
+
+document.querySelector("#flowchart").addEventListener("mousemove", function(e) {
+  var x = e.clientX;
+  var y = e.clientY;
+  tooltip.style.left = x + 20 + "px";
+  tooltip.style.top = y + 20 + "px";
+});
+
+// Set the sankey diagram properties
+var sankey = d3Sankey.sankey()
+  .nodeWidth(20)
+  .nodePadding(10)
+  .size([width,height])
+  // .extent([[1, 1], [width - 1, height - 6]]);
+
+var link = svg.append("g")
+    .attr("class", "links")
+    .attr("fill", "none")
+    .attr("stroke", "#000")
+    .attr("stroke-opacity", 0.2)
+  .selectAll("path");
+
+var node = svg.append("g")
+    .attr("class", "nodes")
+    .attr("font-family", "sans-serif")
+    .attr("font-size", 10)
+  .selectAll("g");
+
+sankey(graph);
+
+link = link
+ .data(graph.links)
+ .enter().append("path")
+   .attr("d", d3Sankey.sankeyLinkHorizontal())
+   .attr("stroke-width", function(d) {
+     return Math.max(1, d.width);
+   })
+   .attr("stroke",function (d) {
+     return color_sankey(d.target.depth,"link");
+   })
+   .on("mouseover", function(d) {
+     showTooltip(d, this);
+      d3.select(this)
+        .attr("opacity", '1.0') // Un-sets the "explicit" fill (might need to be null instead of '')
+        .classed("active", true ) // should then accept fill from CSS
+    })
+    .on("mouseout",  function() {
+      tooltip.classList.remove("show");
+      d3.select(this)
+        .attr("opacity","0.6")
+        .classed("active", false)
+    });
+
+node = node
+ .data(graph.nodes)
+ .enter().append("g");
+
+node.append("rect")
+   .attr("x", function(d) {
+     return d.x0;
+   })
+   .attr("y", function(d) { return d.y0; })
+   .attr("height", function(d) {
+     return d.y1 - d.y0;
+   })
+   .attr("width", function(d) {
+     return d.x1 - d.x0;
+   })
+   .attr("fill",function(d) {
+     return color_sankey(d.depth,"node");
+   })
+   .on("mouseover", function(d) {
+     showNodeTooltip(d, this);
+      d3.select(this)
+        .attr("opacity", '1.0') // Un-sets the "explicit" fill (might need to be null instead of '')
+        .classed("active", true ) // should then accept fill from CSS
+    })
+    .on("mouseout",  function() {
+      tooltip.classList.remove("show");
+      d3.select(this)
+        .attr("opacity","0.8")
+        .classed("active", false)
+    })
+
+node.append("text")
+   .attr("x", function(d) { return d.x0 - 6; })
+   .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+   .attr("dy", "0.35em")
+   .attr("text-anchor", "end")
+   .text(function(d) { return d.name; })
+ .filter(function(d) { return d.x0 < width / 2; })
+   .attr("x", function(d) { return d.x1 + 6; })
+   .attr("text-anchor", "start");

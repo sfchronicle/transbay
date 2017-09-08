@@ -1,0 +1,84 @@
+
+.links {
+  stroke-opacity: 1.0 !important;
+  path {
+    opacity: 0.6;
+  }
+}
+
+rect {
+  opacity: 0.8;
+}
+
+#flowchart {
+  position: relative;
+}
+
+#flowchart-tooltip {
+  position: fixed;
+  width: 250px;
+  font-family: @med-graphics;
+  visibility: hidden;
+  font-size: 14px;
+  background: white;//lighten(@light-gray,12%);
+  border-radius: 2px;
+  border: 1px solid @light-gray;
+  padding: 10px 20px;
+  z-index: 10;
+  line-height: 1.2;
+  font-style: italic;
+  &.show {
+    visibility: visible;
+  }
+  .tooltip-title {
+    font-style: normal;
+    border-bottom: 1px solid @dark-gray;
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+    // font-style: italic;
+    font-family: @block-graphics;
+    // font-size: 16px;
+  }
+  .tooltip-num {
+    font-style: normal;
+    font-family: @block-graphics;
+    padding-top: 4px;
+  }
+}
+
+.chart-headings {
+  max-width: 700px;
+  margin: auto;
+  font-family: @med-graphics;
+  font-size: 16px;
+  display: block;
+  height: 25px;
+  padding-bottom: 5px;
+  .chart-head {
+    display: inline-block;
+    &.left {
+      float: left;
+    }
+    &.right {
+      float: right;
+    }
+  }
+}
+.chart-div {
+  border-bottom: 1px solid @dark-gray;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.credit.flowchart, .source.flowchart {
+  max-width: 800px;
+  margin: auto;
+}
+.source.flowchart {
+  padding-top: 0;
+}
+
+.total-head {
+  text-align: center;
+}
