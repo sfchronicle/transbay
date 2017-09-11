@@ -34,14 +34,16 @@
           </div>
           <% if (d.Image){ %>
           <div class="eventimage">
-            <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image%>/3/1500x1000.jpg"></img>
+            <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image%>/3/1500x1000.jpg?v=14"></img>
+            <div class="caption"><%=d.Credit%></div>
           </div>
           <% } %>
           <% if (d.Text2){ %>
             <div class='datetext text2'><%=d.Text2%></div>
             <% if (d.Image2){ %>
               <div class="eventimage">
-                <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image2%>/3/1500x1000.jpg"></img>
+                <img src="http://ww2.hdnux.com/photos/54/11/64/<%=d.Image2%>/3/1500x1000.jpg?v=14"></img>
+                <div class="caption"><%=d.Credit2%></div>
               </div>
             <% } %>
           <% } %>

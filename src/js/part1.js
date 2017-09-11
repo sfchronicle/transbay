@@ -6,7 +6,7 @@ var d3Sankey = require("d3-sankey");
 // ANIMATIONS variables
 // -----------------------------------------------------------------------------
 
-var timeoutTime = 700;
+var timeoutTime = 600;
 var fadeTime = 500;
 var timer;
 
@@ -159,13 +159,14 @@ function activate() {
   // scrolling commands for floorplan ----------------
 
   // scrolling commands for interactive graphic ----------------
-  var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
-
-  var swapPark = 0, swapBus = 0, swapMez = 0, swapGround = 0;
+  var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top - 37;
+  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37;
 
   // initialize circle highlight to be hidden, in case we're not in the image section
   circleFlag = 0;
+
+  console.log("position is");
+  console.log(window_top);
 
   // starting the loop
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
@@ -176,7 +177,7 @@ function activate() {
     // container div that contains all the stuff for the floor
     var showf = document.getElementById("showfloor"+s);
     var f_top = showf.getBoundingClientRect().top + window_top - 37;
-    var f_bottom = showf.getBoundingClientRect().bottom + window_top;
+    var f_bottom = showf.getBoundingClientRect().bottom + window_top - 37;
 
     // image that we're going to fix at the top
     var floorImg = document.getElementById("background-floor"+s);
@@ -193,153 +194,155 @@ function activate() {
     // checking to see if we are in the container for the floor
     if (window_top >= f_top && window_top <= f_bottom) {
 
-      console.log("in the container");
+      console.log("changing to");
+      console.log(s);
 
       // how big the placeholder is (the top image)
-      var placeholderHeight = document.getElementById('floor'+s).clientHeight;
-      var placeholderWidth = document.getElementById('floor'+s).clientWidth;
+      var placeholderHeight = document.getElementById('floor'+s).getElementsByTagName('img')[0].clientHeight;
+      var placeholderWidth = document.getElementById('floor'+s).getElementsByTagName('img')[0].clientWidth;
+
+      // console.log(placeholderHeight);
 
       // fix the div at the top and show the inset
       f.classList.add('fixed');
       sticker_ph.style.height = placeholderHeight+"px";
       sticker_ph.style.display = 'block';
+
       inset.style.visibility = "visible";
       IDXprev = s;
 
       // show the image
       floorImg.style.opacity = "1";
+      floorImg.style.visibility = "visible";
 
       // show the overlay
       // overlayDiv.style.opacity = "1";
 
       // figure out how many images belong to this floor
       var insetList = document.getElementsByClassName("update-marker"+s);
-      console.log("should be this many insets");
-      console.log(insetList.length);
-      // loop through images and fill in inset accordingly
-      for (var insetIDX = 0; insetIDX < insetList.length; insetIDX++) {
-        var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37 - screen.height/2;
-        var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - screen.height/2;
-        if (window_top >= inset_top && window_top <= inset_bottom) {
-          // console.log("AT INDEX");
-          console.log(insetIDX);
-          // at 0 index, we display a text bloock
-          if (insetIDX == 0) {
-            // console.log("looping through the overlays");
 
-            floorImg.style.opacity = "1";
-            floorImg.style.visibility = "visible";
-            floorImg.style.width  = "100%";
-            floorImg.style.marginLeft = "0px";
-            // here we want to loop through the arrows
-            // activate correct overlays
-            if ((s == 3) && (swapPark != 1)) {
-              // console.log("loop park overlays");
-              setTimeout(swap_park, timeoutTime);
-              swapPark = 1;
-            } else if ((s == 2) && (swapBus != 1)) {
-              // console.log("loop bus overlays");
-              setTimeout(swap_bus, timeoutTime);
-              swapBus = 1;
-            } else if ((s == 1) && (swapMez != 1)) {
-              // console.log("loop mezzanine overlays");
-              setTimeout(swap_mez, timeoutTime);
-              swapMez = 1;
-            } else if ((s == 0) && (swapGround != 1)) {
-              // console.log("loop ground overlays");
-              setTimeout(swap_ground, timeoutTime);
-              swapGround = 1;
+        // loop through images and fill in inset accordingly
+        for (var insetIDX = 0; insetIDX < insetList.length; insetIDX++) {
+          var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37 - screen.height/2;
+          var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - 37 - screen.height/2;
+          if (window_top >= inset_top && window_top < inset_bottom) {
+
+            // f.style.opacity = "1";
+            // console.log("AT INDEX");
+            // at 0 index, we display a text bloock
+            if (insetIDX == 0) {
+              // console.log("looping through the overlays");
+
+              // here we want to loop through the arrows
+              // activate correct overlays
+              if ((s == 3) && (swapPark != 1)) {
+                console.log("loop park overlays");
+                setTimeout(swap_park, timeoutTime);
+                swapPark = 1;
+              } else if ((s == 2) && (swapBus != 1)) {
+                console.log("loop bus overlays");
+                setTimeout(swap_bus, timeoutTime);
+                swapBus = 1;
+              } else if ((s == 1) && (swapMez != 1)) {
+                console.log("loop mezzanine overlays");
+                setTimeout(swap_mez, timeoutTime);
+                swapMez = 1;
+              } else if ((s == 0) && (swapGround != 1)) {
+                console.log("loop ground overlays");
+                setTimeout(swap_ground, timeoutTime);
+                swapGround = 1;
+              }
+
+              document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck + "<div class='arrows-desc'>"+floorplanData.stages[s].FlowLines+"</div>";
+              document.getElementById("inset-image"+s).innerHTML = "";
+              document.getElementById("inset-caption"+s).innerHTML = "";
+
+              // showing the overlay and unzooming and unpanning it
+              // overlayDiv.style.opacity = "1";
+              overlayDiv.style.visibility  = "visible";
+
+            // at the other indicies, we display an image and caption
+            } else {
+              var imageIDX = insetIDX-1;
+              // here we want to fill in image/text/move circle
+              var tempData = floorplanData.stages[s].images[imageIDX];
+              document.getElementById("inset-textblock"+s).innerHTML = "";
+              document.getElementById("inset-image"+s).innerHTML = "<img src=../assets/photos/part1/"+tempData.Image+"></img>";
+              if (tempData.Class == "vertical") {
+                document.getElementById("inset-image"+s).classList.add("vertical");
+                document.getElementById("inset-caption"+s).classList.add("vertical");
+              } else {
+                document.getElementById("inset-image"+s).classList.remove("vertical");
+                document.getElementById("inset-caption"+s).classList.remove("vertical");
+              }
+              document.getElementById("inset-caption"+s).innerHTML = tempData.Caption;
+
+              // compute how to move the circle to center on the feature
+              circleTop = tempData["TopPercent"]*placeholderHeight;
+              circleLeft = tempData["LeftPercent"]*placeholderWidth;
+
+              // show the highlight circle
+              circleFlag = 1;
+
+              // hide the overlay
+              overlayDiv.style.visibility  = "hidden";
             }
-
-            document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck + "<div class='arrows-desc'>"+floorplanData.stages[s].FlowLines+"</div>";
-            document.getElementById("inset-image"+s).innerHTML = "";
-            document.getElementById("inset-caption"+s).innerHTML = "";
-
-            // showing the overlay and unzooming and unpanning it
-            // overlayDiv.style.opacity = "1";
-            overlayDiv.style.visibility  = "visible";
-
-          // at the other indicies, we display an image and caption
-          } else {
-            var imageIDX = insetIDX-1;
-            // here we want to fill in image/text/move circle
-            var tempData = floorplanData.stages[s].images[imageIDX];
-            document.getElementById("inset-textblock"+s).innerHTML = "";
-            document.getElementById("inset-image"+s).innerHTML = "<img src=../assets/photos/part1/"+tempData.Image+"></img>";
-            if (tempData.Class == "vertical") {
-              document.getElementById("inset-image"+s).classList.add("vertical");
-            }
-            document.getElementById("inset-caption"+s).innerHTML = tempData.Caption;
-
-            // compute how to move the circle to center on the feature
-            circleTop = tempData["TopPercent"]*placeholderHeight;
-            circleLeft = tempData["LeftPercent"]*placeholderWidth;
-
-            // show the highlight circle
-            circleFlag = 1;
-
-            // hide the overlay
-            overlayDiv.style.visibility  = "hidden";
           }
         }
-      // } else {
-        // overlayDiv.style.opacity = "0";
-        // circle.style.opacity = "0";
-      }
+
     // we are not in that container
     } else {
 
-      console.log("not in the container");
+      // f.classList.remove('fixed');
+      // sticker_ph.style.display = 'none';
 
-      f.classList.remove('fixed');
-      sticker_ph.style.display = 'none';
       inset.style.visibility = "hidden";
-      floorImg.style.opacity = "0.2";
-
-      // we are hiding the highlight
-      circle.style.opacity = "0";
-
+      //
+      floorImg.style.opacity = "0.3";
+      //
+      // // we are hiding the highlight
+      // circle.style.opacity = "0";
+      //
       overlayDiv.style.visibility  = "hidden";
 
-    }
-
-    // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
-    if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
-      f.classList.remove('fixed');
-      sticker_ph.style.display = 'none';
-      inset.style.visibility = "hidden";
     }
     // we want to show the top image at the top
     if (window_top < sticker_start) {
       floorImg.style.opacity = "1";
+      console.log("supposed to show the top image");
     }
-
-    // checking to see if we are displaying the circle and applying styles
-    if (circleFlag == 1) {
-
-      // we are showing the highlight
-      circle.style.opacity = "1";
-
-      // we want to center the circle for mobile and move around the graphic
-      if (screen.width <= 480) {
-        circle.style.top = circleTop+"px";
-        circle.style.right = "0";
-        circle.style.left = "0";
-
-      // we want to move the circle around on desktop
-      } else {
-        circle.style.left = circleLeft+"px";
-        circle.style.top = circleTop+"px";
-      }
-    } else {
-      // we are hiding the highlight
-      circle.style.opacity = "0";
-    }
-
 
   };
 
+  // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
+  if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
+    f.classList.remove('fixed');
+    sticker_ph.style.display = 'none';
+    inset.style.visibility = "hidden";
+  }
 
+
+  // checking to see if we are displaying the circle and applying styles
+  if (circleFlag == 1) {
+
+    // we are showing the highlight
+    circle.style.opacity = "1";
+
+    // we want to center the circle for mobile and move around the graphic
+    if (screen.width <= 480) {
+      circle.style.top = circleTop+"px";
+      circle.style.right = "0";
+      circle.style.left = "0";
+
+    // we want to move the circle around on desktop
+    } else {
+      circle.style.left = circleLeft+"px";
+      circle.style.top = circleTop+"px";
+    }
+  } else {
+    // we are hiding the highlight
+    circle.style.opacity = "0";
+  }
 
 
   // scrolling commands for timeline ------------------------------------------------------------------
@@ -383,228 +386,249 @@ function activate() {
 
 // flow chart for financial data ---------------------------------------------------
 
-// setting sizes of interactive
-var margin = {
-  top: 0,
-  right: 0,
-  bottom: 50,
-  left: 0
-};
-if (screen.width > 768) {
-  var width = 700 - margin.left - margin.right;
-  var height = 500 - margin.top - margin.bottom;
-} else if (screen.width <= 768 && screen.width > 480) {
-  var width = 700 - margin.left - margin.right;
-  var height = 450 - margin.top - margin.bottom;
-} else if (screen.width <= 480 && screen.width > 340) {
-  console.log("big phone");
+var windowWidth = $(window).width();
+console.log("window width = ");
+console.log(windowWidth);
+var maxWidthFlowChart = 700;
+
+
+function flowChart() {
+
+  // setting sizes of interactive
   var margin = {
-    top: 20,
+    top: 0,
     right: 0,
-    bottom: 40,
+    bottom: 50,
     left: 0
   };
-  var width = 340 - margin.left - margin.right;
-  var height = 350 - margin.top - margin.bottom;
-} else if (screen.width <= 340) {
-  console.log("mini iphone")
-  var margin = {
-    top: 20,
-    right: 0,
-    bottom: 40,
-    left: 0
-  };
-  var width = 310 - margin.left - margin.right;
-  var height = 300 - margin.top - margin.bottom;
-}
+  if (screen.width > 768) {
+    // var width = 700 - margin.left - margin.right;
+    var height = 500 - margin.top - margin.bottom;
+  } else if (screen.width <= 768 && screen.width > 480) {
+    // var width = 700 - margin.left - margin.right;
+    var height = 450 - margin.top - margin.bottom;
+  } else if (screen.width <= 480 && screen.width > 340) {
+    console.log("big phone");
+    var margin = {
+      top: 20,
+      right: 5,
+      bottom: 40,
+      left: 5
+    };
+    // var width = 340 - margin.left - margin.right;
+    var height = 350 - margin.top - margin.bottom;
+  } else if (screen.width <= 340) {
+    console.log("mini iphone")
+    var margin = {
+      top: 20,
+      right: 5,
+      bottom: 40,
+      left: 5
+    };
+    // var width = 310 - margin.left - margin.right;
+    var height = 300 - margin.top - margin.bottom;
+  }
+  var width = Math.min(windowWidth,maxWidthFlowChart) - 10;
+  if (windowWidth < maxWidthFlowChart) {
+    margin.right = 5;
+    margin.left = 5;
+  }
 
-var svg = d3.select("#flowchart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+  d3.select("#flowchart").select("svg").remove();
+  var svg = d3.select("#flowchart").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
-//set up graph in same style as original example but empty
-var graph = {"nodes" : [], "links" : []};
+  //set up graph in same style as original example but empty
+  var graph = {"nodes" : [], "links" : []};
 
-financialData.forEach(function (d) {
-  graph.nodes.push({ "name": d.source });
-  graph.nodes.push({ "name": d.target });
+  financialData.forEach(function (d) {
+    graph.nodes.push({ "name": d.source });
+    graph.nodes.push({ "name": d.target });
 
-  graph.links.push({ "source": d.source,
-                     "target": d.target,
-                     "value": +d.value });
-});
+    graph.links.push({ "source": d.source,
+                       "target": d.target,
+                       "value": +d.value });
+  });
 
-console.log(graph);
+  console.log(graph);
 
-// return only the distinct / unique nodes
-graph.nodes = d3.keys(d3.nest()
-  .key(function (d) { return d.name; })
-  .object(graph.nodes));
+  // return only the distinct / unique nodes
+  graph.nodes = d3.keys(d3.nest()
+    .key(function (d) { return d.name; })
+    .object(graph.nodes));
 
-// loop through each link replacing the text with its index from node
-graph.links.forEach(function (d, i) {
-  graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
-  graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
-});
+  // loop through each link replacing the text with its index from node
+  graph.links.forEach(function (d, i) {
+    graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+    graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
+  });
 
-// now loop through each nodes to make nodes an array of objects
-// rather than an array of strings
-graph.nodes.forEach(function (d, i) {
-  graph.nodes[i] = { "name": d };
-});
+  // now loop through each nodes to make nodes an array of objects
+  // rather than an array of strings
+  graph.nodes.forEach(function (d, i) {
+    graph.nodes[i] = { "name": d };
+  });
 
-var tooltip = document.querySelector("#flowchart-tooltip");
+  var tooltip = document.querySelector("#flowchart-tooltip");
 
-function color_sankey(index,type) {
-  // color the nodes
-  if (type == "node") {
-    if (index == 0) {
-      return "#45B57B";//red
-    } else if (index == 1) {
-      return "#d8d8d8";
-    } else if (index == 2) {
-      return "#5E9BB8";//blue
+  function color_sankey(index,type) {
+    // color the nodes
+    if (type == "node") {
+      if (index == 0) {
+        return "#45B57B";//red
+      } else if (index == 1) {
+        return "#d8d8d8";
+      } else if (index == 2) {
+        return "#5E9BB8";//blue
+      }
+    // color the links
+    } else {
+      if (index == 1) {
+        return "#45B57B";//red
+      } else if (index == 2) {
+        return "#5E9BB8";//blue
+      }
     }
-  // color the links
-  } else {
-    if (index == 1) {
-      return "#45B57B";//red
-    } else if (index == 2) {
-      return "#5E9BB8";//blue
+  }
+
+  var showTooltip = function(d, target) {
+    tooltip.classList.add("show");
+    if (d.source.depth == 1){
+      tooltip.innerHTML = `
+        <div class="tooltip-title">Expenditure:</div>
+        <div>${d.target.name}</div>
+        <div class="tooltip-num">$ ${d.target.value} M</div>
+      `;
+    } else {
+      tooltip.innerHTML = `
+        <div class="tooltip-title">Funding source:</div>
+        <div>${d.source.name}</div>
+        <div class="tooltip-num">$${d.source.value} M</div>
+      `;
     }
   }
+
+  var showNodeTooltip = function(d, target) {
+    tooltip.classList.add("show");
+    if (d.depth == 0){
+      tooltip.innerHTML = `
+        <div class="tooltip-title">Funding source:</div>
+        <div>${d.name}</div>
+        <div>$ ${d.value} M</div>
+      `;
+    } else {
+      tooltip.innerHTML = `
+        <div class="tooltip-title">Expenditure:</div>
+        <div>${d.name}</div>
+        <div>$ ${d.value} M</div>
+      `;
+    }
+  }
+
+  document.querySelector("#flowchart").addEventListener("mousemove", function(e) {
+    var x = e.clientX;
+    if (e.screenX > window.innerWidth/2) {
+      x = e.clientX - 200;
+    }
+    var y = e.clientY;
+    tooltip.style.left = x + 20 + "px";
+    tooltip.style.top = y + 20 + "px";
+  });
+
+  // Set the sankey diagram properties
+  var sankey = d3Sankey.sankey()
+    .nodeWidth(20)
+    .nodePadding(10)
+    .size([width,height])
+    // .extent([[1, 1], [width - 1, height - 6]]);
+
+  var link = svg.append("g")
+      .attr("class", "links")
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+      .attr("stroke-opacity", 0.2)
+    .selectAll("path");
+
+  var node = svg.append("g")
+      .attr("class", "nodes")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+    .selectAll("g");
+
+  sankey(graph);
+
+  link = link
+   .data(graph.links)
+   .enter().append("path")
+     .attr("d", d3Sankey.sankeyLinkHorizontal())
+     .attr("stroke-width", function(d) {
+       return Math.max(1, d.width);
+     })
+     .attr("stroke",function (d) {
+       return color_sankey(d.target.depth,"link");
+     })
+     .on("mouseover", function(d) {
+       showTooltip(d, this);
+        d3.select(this)
+          .attr("opacity", '1.0') // Un-sets the "explicit" fill (might need to be null instead of '')
+          .classed("active", true ) // should then accept fill from CSS
+      })
+      .on("mouseout",  function() {
+        tooltip.classList.remove("show");
+        d3.select(this)
+          .attr("opacity","0.6")
+          .classed("active", false)
+      });
+
+  node = node
+   .data(graph.nodes)
+   .enter().append("g");
+
+  node.append("rect")
+     .attr("x", function(d) {
+       return d.x0;
+     })
+     .attr("y", function(d) { return d.y0; })
+     .attr("height", function(d) {
+       return d.y1 - d.y0;
+     })
+     .attr("width", function(d) {
+       return d.x1 - d.x0;
+     })
+     .attr("fill",function(d) {
+       return color_sankey(d.depth,"node");
+     })
+     .on("mouseover", function(d) {
+       showNodeTooltip(d, this);
+        d3.select(this)
+          .attr("opacity", '1.0') // Un-sets the "explicit" fill (might need to be null instead of '')
+          .classed("active", true ) // should then accept fill from CSS
+      })
+      .on("mouseout",  function() {
+        tooltip.classList.remove("show");
+        d3.select(this)
+          .attr("opacity","0.8")
+          .classed("active", false)
+      });
+
+  node.append("text")
+     .attr("x", function(d) { return d.x0 - 6; })
+     .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+     .attr("dy", "0.35em")
+     .attr("text-anchor", "end")
+     .text(function(d) { return d.name; })
+   .filter(function(d) { return d.x0 < width / 2; })
+     .attr("x", function(d) { return d.x1 + 6; })
+     .attr("text-anchor", "start");
 }
 
-var showTooltip = function(d, target) {
-  tooltip.classList.add("show");
-  if (d.source.depth == 1){
-    tooltip.innerHTML = `
-      <div class="tooltip-title">Expenditure:</div>
-      <div>${d.target.name}</div>
-      <div class="tooltip-num">$ ${d.target.value} M</div>
-    `;
-  } else {
-    tooltip.innerHTML = `
-      <div class="tooltip-title">Funding source:</div>
-      <div>${d.source.name}</div>
-      <div class="tooltip-num">$${d.source.value} M</div>
-    `;
-  }
-}
 
-var showNodeTooltip = function(d, target) {
-  tooltip.classList.add("show");
-  if (d.depth == 0){
-    tooltip.innerHTML = `
-      <div class="tooltip-title">Funding source:</div>
-      <div>${d.name}</div>
-      <div>$ ${d.value} M</div>
-    `;
-  } else {
-    tooltip.innerHTML = `
-      <div class="tooltip-title">Expenditure:</div>
-      <div>${d.name}</div>
-      <div>$ ${d.value} M</div>
-    `;
-  }
-}
+flowChart();
 
-document.querySelector("#flowchart").addEventListener("mousemove", function(e) {
-  console.log(e);
-  var x = e.clientX;
-  console.log(window.innerWidth);
-  if (e.screenX > window.innerWidth/2) {
-    x = e.clientX - 200;
-  }
-  var y = e.clientY;
-  tooltip.style.left = x + 20 + "px";
-  tooltip.style.top = y + 20 + "px";
+$(window).resize(function () {
+  windowWidth = $(window).width();
+  flowChart();
 });
-
-// Set the sankey diagram properties
-var sankey = d3Sankey.sankey()
-  .nodeWidth(20)
-  .nodePadding(10)
-  .size([width,height])
-  // .extent([[1, 1], [width - 1, height - 6]]);
-
-var link = svg.append("g")
-    .attr("class", "links")
-    .attr("fill", "none")
-    .attr("stroke", "#000")
-    .attr("stroke-opacity", 0.2)
-  .selectAll("path");
-
-var node = svg.append("g")
-    .attr("class", "nodes")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-  .selectAll("g");
-
-sankey(graph);
-
-link = link
- .data(graph.links)
- .enter().append("path")
-   .attr("d", d3Sankey.sankeyLinkHorizontal())
-   .attr("stroke-width", function(d) {
-     return Math.max(1, d.width);
-   })
-   .attr("stroke",function (d) {
-     return color_sankey(d.target.depth,"link");
-   })
-   .on("mouseover", function(d) {
-     showTooltip(d, this);
-      d3.select(this)
-        .attr("opacity", '1.0') // Un-sets the "explicit" fill (might need to be null instead of '')
-        .classed("active", true ) // should then accept fill from CSS
-    })
-    .on("mouseout",  function() {
-      tooltip.classList.remove("show");
-      d3.select(this)
-        .attr("opacity","0.6")
-        .classed("active", false)
-    });
-
-node = node
- .data(graph.nodes)
- .enter().append("g");
-
-node.append("rect")
-   .attr("x", function(d) {
-     return d.x0;
-   })
-   .attr("y", function(d) { return d.y0; })
-   .attr("height", function(d) {
-     return d.y1 - d.y0;
-   })
-   .attr("width", function(d) {
-     return d.x1 - d.x0;
-   })
-   .attr("fill",function(d) {
-     return color_sankey(d.depth,"node");
-   })
-   .on("mouseover", function(d) {
-     showNodeTooltip(d, this);
-      d3.select(this)
-        .attr("opacity", '1.0') // Un-sets the "explicit" fill (might need to be null instead of '')
-        .classed("active", true ) // should then accept fill from CSS
-    })
-    .on("mouseout",  function() {
-      tooltip.classList.remove("show");
-      d3.select(this)
-        .attr("opacity","0.8")
-        .classed("active", false)
-    });
-
-node.append("text")
-   .attr("x", function(d) { return d.x0 - 6; })
-   .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
-   .attr("dy", "0.35em")
-   .attr("text-anchor", "end")
-   .text(function(d) { return d.name; })
- .filter(function(d) { return d.x0 < width / 2; })
-   .attr("x", function(d) { return d.x1 + 6; })
-   .attr("text-anchor", "start");
