@@ -8,31 +8,37 @@
 
     <div  class="floor-info" id="showfloor<%=didx%>">
 
-      <div id="stick-ph<%=didx%>"></div>
       <div class="floor-image" id="floor<%=didx%>">
         <img src="../assets/graphics/<%=d.Plan%>" id="background-floor<%=didx%>">
-        <img src='../assets/graphics/nada_background.png%>' id="overlay-floor<%=didx%>"></img>
-        <div class="inset" id="inset<%=didx%>">
-          <div class="inset-textblock" id="inset-textblock<%=didx%>"><%=d.Deck%></div>
-          <div class="inset-image" id="inset-image<%=didx%>"></div>
-          <div class="inset-image" id="inset-caption<%=didx%>"></div>
-        </div>
+        <img src='../assets/graphics/<%=d.Plan%>' id="overlay-floor<%=didx%>"></img>
       </div>
+      <div id="stick-ph<%=didx%>"></div>
 
-      <div class="big-space-container">
-        <div id="floor<%=didx%>marker0" class="update-marker  update-marker<%=didx%>"></div>
-        <div id="floor<%=didx%>marker1" class="update-marker  update-marker<%=didx%>"></div>
+      <div class="intro"><%=d.Deck%></div>
+
+      <div class="intro"><%=d.FlowLines%></div>
+
+      <div id="zoom-floor<%=didx%>">
+
         <% d.images.forEach(function(im,imidx){ %>
-          <div id="floor<%=didx%>marker<%=imidx+2%>" class="update-marker update-marker<%=didx%>"></div>
-        <% }) %>
+
+          <div class="inset-container" id="stage<%=didx%>image<%=imidx%>">
+            <div class="inset <%=im.Class%>">
+              <div class="inset-image">
+                <img src="../assets/photos/part1/<%=im.Image%>"></img>
+              </div>
+              <div class="inset-caption"><%=im.Caption%></div>
+            </div>
+          </div>
+
+        <% }); %>
       </div>
 
     </div>
 
   <% }); %>
+
   <div id="stop-stick-here"></div>
-
-
   <div class="credits-container">
     <div class="credit floorplan">
       <div class="entry">Illustrator: <a href="mailto:jblanchard@sfchronicle.com">John Blanchard</a></div>

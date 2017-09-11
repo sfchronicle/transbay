@@ -10,13 +10,13 @@
 
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
 
-    <%= t.include("partials/_head.html") %>
+    <%= t.include("partials/_head_part3.html") %>
 
   </head>
 
   <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
 
-    <%= t.include("partials/_nav.html") %>
+    <%= t.include("partials/_nav_part3.html") %>
 
 
     <div class="container">

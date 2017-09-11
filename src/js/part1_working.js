@@ -6,8 +6,8 @@ var d3Sankey = require("d3-sankey");
 // ANIMATIONS variables
 // -----------------------------------------------------------------------------
 
-var timeoutTime = 700;
-var fadeTime = 500;
+var timeoutTime = 500;
+var fadeTime = 300;
 var timer;
 
 // ----------------------------------------------------------------------------
@@ -128,6 +128,22 @@ document.getElementById("close-timeline-button").addEventListener("click",functi
 
 window.onscroll = function() {activate()};
 
+// desktop scrolling controls ----------------------------------------------------------------
+
+// we are not using this but I'm keeping it for now in case I need it
+function getPageScroll() {
+  var yScroll;
+
+  if (window.pageYOffset) {
+    yScroll = window.pageYOffset;
+  } else if (document.documentElement && document.documentElement.scrollTop) {
+    yScroll = document.documentElement.scrollTop;
+  } else if (document.body) {
+    yScroll = document.body.scrollTop;
+  }
+  return yScroll;
+}
+
 // setting scrolly interactive variables
 
 var IDXprev = -1;
@@ -153,16 +169,20 @@ var circleFlag, circleTop, circleLeft;
 // this is the monster scrolling function
 function activate() {
 
-  // get scrolling position
-  var window_top = document.body.scrollTop;
-
-  // scrolling commands for floorplan ----------------
+  // general scrolling position and direction ----------------------------
+  var window_top = document.body.scrollTop;//getPageScroll();//
+  if (window_top > lastScrollTop) {
+    direction = "down";
+  } else {
+    direction = "up";
+  }
+  lastScrollTop = window_top;
 
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top-screen.height;
+  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
 
-  var swapPark = 0, swapBus = 0, swapMez = 0, swapGround = 0;
+  // loop through the floors to see which one we are in and display appropriate layers etc
 
   // initialize circle highlight to be hidden, in case we're not in the image section
   circleFlag = 0;
@@ -170,13 +190,26 @@ function activate() {
   // starting the loop
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
 
-    // div that we are going to fix at the top
-    var f = document.getElementById("floor"+s);
+    // placeholder for each section for when we take top image out of the page
+    var sticker_ph = document.getElementById('stick-ph'+s);
 
-    // container div that contains all the stuff for the floor
+    // how big the placeholder is (the top image)
+    var placeholderHeight = document.getElementById('floor'+s).clientHeight;
+    var placeholderWidth = document.getElementById('floor'+s).clientWidth;
+
+    // top of section
     var showf = document.getElementById("showfloor"+s);
     var f_top = showf.getBoundingClientRect().top + window_top - 37;
     var f_bottom = showf.getBoundingClientRect().bottom + window_top;
+
+    // fixed image at top of section
+    var f = document.getElementById("floor"+s);
+
+    // start of zooming part of section
+    var zoomf = document.getElementById("zoom-floor"+s);
+
+    // where to start zooming
+    var zoomf_top = zoomf.getBoundingClientRect().top + window_top - 37 - zoomOffset;
 
     // image that we're going to fix at the top
     var floorImg = document.getElementById("background-floor"+s);
@@ -184,169 +217,162 @@ function activate() {
     // overlay image that we are going to swap out to show arrows
     var overlayDiv = document.getElementById("overlay-floor"+s);
 
-    // placeholder for each section for when we take top image out of the page
-    var sticker_ph = document.getElementById('stick-ph'+s);
-
-    // inset for the floor
-    var inset = document.getElementById("inset"+s);
-
-    // checking to see if we are in the container for the floor
+    // we are in a section of the interactive, above the bottom and below the top
     if (window_top >= f_top && window_top <= f_bottom) {
 
-      console.log("in the container");
-
-      // how big the placeholder is (the top image)
-      var placeholderHeight = document.getElementById('floor'+s).clientHeight;
-      var placeholderWidth = document.getElementById('floor'+s).clientWidth;
-
-      // fix the div at the top and show the inset
+      // console.log("we are in the interactive");
       f.classList.add('fixed');
       sticker_ph.style.height = placeholderHeight+"px";
       sticker_ph.style.display = 'block';
-      inset.style.visibility = "visible";
       IDXprev = s;
 
-      // show the image
-      floorImg.style.opacity = "1";
+      // at the bottom of a section, un-zoom the image but keep it visible and sticky
+      if ((window_top + 350) > f_bottom){
+        // console.log("at the bottom of a section, unzooming but keeping it visible and sticky");
+        floorImg.style.opacity = "1";
+        floorImg.style.visibility = "visible";
+        floorImg.style.width  = "100%";
+        floorImg.style.marginLeft = "0px";
 
-      // show the overlay
-      // overlayDiv.style.opacity = "1";
+        overlayDiv.style.opacity = "1";
+        overlayDiv.style.marginLeft = "0px";
 
-      // figure out how many images belong to this floor
-      var insetList = document.getElementsByClassName("update-marker"+s);
-      console.log("should be this many insets");
-      console.log(insetList.length);
-      // loop through images and fill in inset accordingly
-      for (var insetIDX = 0; insetIDX < insetList.length; insetIDX++) {
-        var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37 - screen.height/2;
-        var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - screen.height/2;
-        if (window_top >= inset_top && window_top <= inset_bottom) {
-          // console.log("AT INDEX");
-          console.log(insetIDX);
-          // at 0 index, we display a text bloock
-          if (insetIDX == 0) {
-            document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck;
+      // going through the images part of a section: zoom & pan image
+      } else if (window_top > zoomf_top){
+        console.log("in the middle of a section, zooming and panning");
 
-            // hide the overlay
-            // overlayDiv.style.opacity = "0";
-            overlayDiv.style.visibility  = "hidden";
+        // show the background image and zoom it (on mobile only)
+        floorImg.style.opacity = "1";
+        floorImg.style.width = floorZoom;
 
-          // at 1 index, we display info about arrows
-          } else if (insetIDX == 1) {
-            // console.log("looping through the overlays");
+        // hide the overlay
+        overlayDiv.style.opacity = "0";
+        overlayDiv.style.visibility  = "hidden";
 
-            floorImg.style.opacity = "1";
-            floorImg.style.visibility = "visible";
-            floorImg.style.width  = "100%";
-            floorImg.style.marginLeft = "0px";
-            // here we want to loop through the arrows
-            // activate correct overlays
-            if ((s == 3) && (swapPark != 1)) {
-              // console.log("loop park overlays");
-              setTimeout(swap_park, timeoutTime);
-              swapPark = 1;
-            } else if ((s == 2) && (swapBus != 1)) {
-              // console.log("loop bus overlays");
-              setTimeout(swap_bus, timeoutTime);
-              swapBus = 1;
-            } else if ((s == 1) && (swapMez != 1)) {
-              // console.log("loop mezzanine overlays");
-              setTimeout(swap_mez, timeoutTime);
-              swapMez = 1;
-            } else if ((s == 0) && (swapGround != 1)) {
-              // console.log("loop ground overlays");
-              setTimeout(swap_ground, timeoutTime);
-              swapGround = 1;
-            }
+        // show the highlight circle
+        circleFlag = 1;
 
-            document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].FlowLines;
-            document.getElementById("inset-image"+s).innerHTML = "";
-            document.getElementById("inset-caption"+s).innerHTML = "";
+        // on mobile, we want to zoom & pan the image and move the highlight up and down a little
+        if (screen.width <= 480) {
 
-            // showing the overlay and unzooming and unpanning it
-            // overlayDiv.style.opacity = "1";
-            overlayDiv.style.visibility  = "visible";
+          // was thinking about using this as a variable but not actually using it
+          var panDiff = (zoomMult-1)*screen.width;
 
-          // at the other indicies, we display an image and caption
+          // which image are we showing in the image sequence
+          var testIDX = Math.min(Math.max(Math.floor((window_top - zoomf_top)/1000),0),floorplanData["stages"][s]["images"].length-1);
+
+          // finding the left percent for that image
+          var leftNum = +floorplanData["stages"][s]["images"][testIDX]["LeftPercent"]*zoomMult;
+
+          // the feature is on the left side of the image
+          if (leftNum <= 0.5) {
+            console.log("feature is on left");
+            var scrollLeft = (0.5 - leftNum)*placeholderWidth-20;//-20/zoomMult;
+            circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight+5*zoomMult;//*zoomMult;//*zoomMult;
+
+          // the feature is on the right side of the image
           } else {
-            var imageIDX = insetIDX-2;
-            // here we want to fill in image/text/move circle
-            var tempData = floorplanData.stages[s].images[imageIDX];
-            document.getElementById("inset-textblock"+s).innerHTML = "";
-            document.getElementById("inset-image"+s).innerHTML = "<img src=../assets/photos/part1/"+tempData.Image+"></img>";
-            if (tempData.Class == "vertical") {
-              document.getElementById("inset-image"+s).classList.add("vertical");
-            }
-            document.getElementById("inset-caption"+s).innerHTML = tempData.Caption;
-
-            // compute how to move the circle to center on the feature
-            circleTop = tempData["TopPercent"]*placeholderHeight;
-            circleLeft = tempData["LeftPercent"]*placeholderWidth;
-
-            // show the highlight circle
-            circleFlag = 1;
-
-            // hide the overlay
-            overlayDiv.style.visibility  = "hidden";
+            console.log("feature is on right");
+            var scrollLeft = -(leftNum - 0.5)*placeholderWidth-30;
+            circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight+5*zoomMult;//*zoomMult;//*zoomMult;//*zoomMult;
           }
+
+          // apply the panning to the image and overlay
+          floorImg.style.marginLeft = scrollLeft+ 'px';
+          overlayDiv.style.marginLeft = scrollLeft+ 'px';
+
+        } else {
+          // find the image that we are showing in the image sequence
+          var testIDX = Math.min(Math.max(Math.floor((window_top - zoomf_top)/600),0),floorplanData["stages"][s]["images"].length-1);
+
+          // compute how to move the circle to center on the feature
+          circleTop = floorplanData["stages"][s]["images"][testIDX]["TopPercent"]*placeholderHeight;
+          circleLeft = floorplanData["stages"][s]["images"][testIDX]["LeftPercent"]*placeholderWidth;
         }
-      // } else {
-        // overlayDiv.style.opacity = "0";
-        // circle.style.opacity = "0";
+
+      // at the top of the image, showing the overlays and no zoom and no pan
+      } else {
+        // console.log("at top of section, showing overlays, no zoom, no pan");
+
+        // activate correct overlays
+        if ((s == 3) && (swapPark != 1)) {
+          console.log("loop park overlays");
+          setTimeout(swap_park, timeoutTime);
+          swapPark = 1;
+        } else if ((s == 2) && (swapBus != 1)) {
+          console.log("loop bus overlays");
+          setTimeout(swap_bus, timeoutTime);
+          swapBus = 1;
+        } else if ((s == 1) && (swapMez != 1)) {
+          console.log("loop mezzanine overlays");
+          setTimeout(swap_mez, timeoutTime);
+          swapMez = 1;
+        } else if ((s == 0) && (swapGround != 1)) {
+          console.log("loop ground overlays");
+          setTimeout(swap_ground, timeoutTime);
+          swapGround = 1;
+        }
+
+        // showing the main image and unzooming and unpanning it
+        floorImg.style.opacity = "1";
+        floorImg.style.width  = "100%";
+        floorImg.style.marginLeft = "0px";
+
+        // showing the overlay and unzooming and unpanning it
+        overlayDiv.style.opacity = "1";
+        overlayDiv.style.width  = "100%";
+        overlayDiv.style.marginLeft = "0px";
+        overlayDiv.style.visibility  = "visible";
       }
-    // we are not in that container
+
+    // we are not in the interactive
     } else {
-
-      console.log("not in the container");
-
-      f.classList.remove('fixed');
-      sticker_ph.style.display = 'none';
-      inset.style.visibility = "hidden";
-      floorImg.style.opacity = "0.2";
-
-      // we are hiding the highlight
-      circle.style.opacity = "0";
-
+      // do not want to show the images
+      floorImg.style.opacity = "0";
+      overlayDiv.style.opacity = "0";
     }
 
     // we are not in the interactive yet, everything should have position relative, no zooming, no overlays, no margins
     if ((window_top < sticker_start) || (window_top >= sticker_stop)) {
       f.classList.remove('fixed');
       sticker_ph.style.display = 'none';
-      inset.style.visibility = "hidden";
+      floorImg.style.width  = "100%";
+      floorImg.style.marginLeft = "0px";
+      overlayDiv.style.width  = "100%";
+      overlayDiv.style.marginLeft = "0px";
+      overlayDiv.style.visibility = "hidden";
+
+      // not showing the highlight circle
+      circleFlag = 0;
     }
     // we want to show the top image at the top
     if (window_top < sticker_start) {
       floorImg.style.opacity = "1";
     }
-
-    // checking to see if we are displaying the circle and applying styles
-    if (circleFlag == 1) {
-
-      // we are showing the highlight
-      circle.style.opacity = "1";
-
-      // we want to center the circle for mobile and move around the graphic
-      if (screen.width <= 480) {
-        circle.style.top = circleTop+"px";
-        circle.style.right = "0";
-        circle.style.left = "0";
-
-      // we want to move the circle around on desktop
-      } else {
-        circle.style.left = circleLeft+"px";
-        circle.style.top = circleTop+"px";
-      }
-    } else {
-      // we are hiding the highlight
-      circle.style.opacity = "0";
-    }
-
-
+    // NOTE: showing the image at the bottom doesn't work because the relative position is above where you would see it as a reader
   };
 
+  // checking to see if we are displaying the circle and applying styles
+  if (circleFlag == 1) {
 
+    // we are showing the highlight
+    circle.style.opacity = "1";
 
+    // we want to center the circle for mobile and move around the graphic
+    if (screen.width <= 480) {
+      circle.style.top = circleTop+"px";
+      circle.style.right = "0";
+      circle.style.left = "0";
+
+    // we want to move the circle around on desktop
+    } else {
+      circle.style.left = circleLeft+"px";
+      circle.style.top = circleTop+"px";
+    }
+  } else {
+    // we are hiding the highlight
+    circle.style.opacity = "0";
+  }
 
   // scrolling commands for timeline ------------------------------------------------------------------
 
@@ -386,6 +412,7 @@ function activate() {
   }
 
 }
+
 
 // flow chart for financial data ---------------------------------------------------
 
@@ -598,7 +625,7 @@ node.append("rect")
       d3.select(this)
         .attr("opacity","0.8")
         .classed("active", false)
-    });
+    })
 
 node.append("text")
    .attr("x", function(d) { return d.x0 - 6; })

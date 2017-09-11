@@ -1,0 +1,46 @@
+<header class="fixed">
+  <div class="navigation">
+
+    <a href="http://www.sfchronicle.com" target="_blank">
+      <div class="logo-link link">
+          <img class="desk-logo" src="../assets/logos/sf_logo_black.png"></img>
+          <img class="mobile-logo" src="../assets/logos/sfletter_c_black.png"></img>
+        </div>
+    </a>
+
+    <div class="section-links">
+
+      <a href="../_part1" class="_part1_link">
+        <div class="link">The Beginning</div>
+      </a>
+
+      <a href="../part2" class="part2_link">
+        <div class="link part2_link">The Tower</div>
+      </a>
+
+      <a href="../part3" class="part3_link">
+        <div class="link part3_link">The Future</div>
+      </a>
+
+    </div>
+
+    <div class="link social email">
+      <a id="mail-icon" title="Share via email" href="mailto:?subject=<%= grunt.data.json.project.title_part1 %>&body=<%= grunt.data.json.project.description_part1 %>%0A%0Ahttp%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %><%= grunt.data.json.project.slug_part1 %>">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <div class="link social">
+      <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %><%= grunt.data.json.project.slug_part1 %>', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </div>
+
+    <div class="link social">
+      <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %><%= grunt.data.json.project.slug_part1 %>&text=<%= grunt.data.json.project.twitter_text_part1 %>&hashtags=<%= grunt.data.json.project.hashtag %>">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </div>
+
+  </div>
+</header>
