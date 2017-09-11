@@ -29,7 +29,9 @@
 
     <% json.transbay_part_1.text.forEach(function(d,didx){ %>
       <% if (d.type == "text") { %>
-        <p><%=d.value %></p>
+        <div class="text-block">
+          <p><%=d.value %></p>
+        </div>
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
@@ -39,7 +41,7 @@
           <img src="../assets/graphics/<%=d.value[0].Image%>"></img>
         </div>
       <% } else if (d.type == "flowchart"){ %>
-        <div class="interactive">
+        <div class="interactive interactive-flowchart">
           <div class="interactive-title"><%=d.value[0].Hed%></div>
           <div class="total-head">$2.59 Billion</div>
           <div class="chart-headings">

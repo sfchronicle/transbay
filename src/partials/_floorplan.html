@@ -11,19 +11,18 @@
       <div id="stick-ph<%=didx%>"></div>
       <div class="floor-image" id="floor<%=didx%>">
         <img src="../assets/graphics/<%=d.Plan%>" id="background-floor<%=didx%>">
-        <img src='../assets/graphics/nada_background.png%>' id="overlay-floor<%=didx%>"></img>
+        <img src='../assets/graphics/nada_background.png' id="overlay-floor<%=didx%>"></img>
         <div class="inset" id="inset<%=didx%>">
           <div class="inset-textblock" id="inset-textblock<%=didx%>"><%=d.Deck%></div>
           <div class="inset-image" id="inset-image<%=didx%>"></div>
-          <div class="inset-image" id="inset-caption<%=didx%>"></div>
+          <div class="inset-caption" id="inset-caption<%=didx%>"></div>
         </div>
       </div>
 
       <div class="big-space-container">
         <div id="floor<%=didx%>marker0" class="update-marker  update-marker<%=didx%>"></div>
-        <div id="floor<%=didx%>marker1" class="update-marker  update-marker<%=didx%>"></div>
         <% d.images.forEach(function(im,imidx){ %>
-          <div id="floor<%=didx%>marker<%=imidx+2%>" class="update-marker update-marker<%=didx%>"></div>
+          <div id="floor<%=didx%>marker<%=imidx+1%>" class="update-marker update-marker<%=didx%>"></div>
         <% }) %>
       </div>
 

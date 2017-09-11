@@ -160,7 +160,7 @@ function activate() {
 
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top-37;
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top-screen.height;
+  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top;
 
   var swapPark = 0, swapBus = 0, swapMez = 0, swapGround = 0;
 
@@ -225,14 +225,6 @@ function activate() {
           console.log(insetIDX);
           // at 0 index, we display a text bloock
           if (insetIDX == 0) {
-            document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck;
-
-            // hide the overlay
-            // overlayDiv.style.opacity = "0";
-            overlayDiv.style.visibility  = "hidden";
-
-          // at 1 index, we display info about arrows
-          } else if (insetIDX == 1) {
             // console.log("looping through the overlays");
 
             floorImg.style.opacity = "1";
@@ -259,7 +251,7 @@ function activate() {
               swapGround = 1;
             }
 
-            document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].FlowLines;
+            document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck + "<div class='arrows-desc'>"+floorplanData.stages[s].FlowLines+"</div>";
             document.getElementById("inset-image"+s).innerHTML = "";
             document.getElementById("inset-caption"+s).innerHTML = "";
 
@@ -269,7 +261,7 @@ function activate() {
 
           // at the other indicies, we display an image and caption
           } else {
-            var imageIDX = insetIDX-2;
+            var imageIDX = insetIDX-1;
             // here we want to fill in image/text/move circle
             var tempData = floorplanData.stages[s].images[imageIDX];
             document.getElementById("inset-textblock"+s).innerHTML = "";
@@ -306,6 +298,8 @@ function activate() {
 
       // we are hiding the highlight
       circle.style.opacity = "0";
+
+      overlayDiv.style.visibility  = "hidden";
 
     }
 
@@ -518,7 +512,12 @@ var showNodeTooltip = function(d, target) {
 }
 
 document.querySelector("#flowchart").addEventListener("mousemove", function(e) {
+  console.log(e);
   var x = e.clientX;
+  console.log(window.innerWidth);
+  if (e.screenX > window.innerWidth/2) {
+    x = e.clientX - 200;
+  }
   var y = e.clientY;
   tooltip.style.left = x + 20 + "px";
   tooltip.style.top = y + 20 + "px";
