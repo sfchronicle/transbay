@@ -137,8 +137,8 @@ var IDXprev = -1;
 
 if (screen.width <= 480) {
   // we are zooming on mobile
-  var floorZoom = "120%";
-  var zoomMult = 1.2;
+  var floorZoom = "160%";
+  var zoomMult = 1.6;
   // var zoomOffset = 450;
 } else {
   // we are not zooming on desktop
@@ -193,9 +193,6 @@ function activate() {
 
     // checking to see if we are in the container for the floor
     if (window_top >= f_top && window_top <= f_bottom) {
-
-      console.log("changing to");
-      console.log(s);
 
       // how big the placeholder is (the top image)
       var placeholderHeight = document.getElementById('floor'+s).getElementsByTagName('img')[0].clientHeight;
@@ -285,26 +282,18 @@ function activate() {
               if (screen.width <= 480) {
 
                 // finding the left percent for that image
-                var leftNum = +floorplanData["stages"][s]["images"][imageIDX]["LeftPercent"]*zoomMult;
-                console.log(leftNum);
+                var leftNum = +floorplanData["stages"][s]["images"][imageIDX]["LeftPercent"];
 
                 // the feature is on the left side of the image
                 if (leftNum <= 0.5) {
-                  console.log("feature is on left");
-                  var scrollLeft = (0.5 - leftNum)*placeholderWidth - 20*zoomMult;//-20/zoomMult;
-                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15*zoomMult;//*zoomMult;//*zoomMult;
+                  var scrollLeft = (0.5 - leftNum)*placeholderWidth - (placeholderWidth - screen.width)/2 - 20;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15;
 
                 // the feature is on the right side of the image
                 } else {
-                  console.log("feature is on right");
-                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth - (placeholderWidth - screen.width)/2 + 30*zoomMult;
-                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15*zoomMult;//*zoomMult;//*zoomMult;//*zoomMult;
+                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth - (placeholderWidth - screen.width)/2 - 20;///5 + 80;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15;
                 }
-                // console.log((zoomMult-1)*screen.width/2);
-                // scrollLeft = scrollLeft + (zoomMult-1)*screen.width/2;
-                console.log((screen.width - placeholderWidth)/2);
-                console.log(scrollLeft);
-                // scrollLeft = scrollLeft + (placeholderWidth - screen.width)/2;//20*zoomMult;
                 // apply the panning to the image and overlay
                 floorImg.style.marginLeft = scrollLeft+ 'px';
 

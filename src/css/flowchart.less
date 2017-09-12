@@ -8,6 +8,23 @@
 
 .interactive-flowchart {
   padding: 50px 0;
+  .interactive-title {
+    @media @mobile {
+      font-size: 24px;
+    }
+  }
+  .interactive-deck {
+    @media @mobile {
+      font-size: 20px;
+    }
+  }
+  .interactive-title, .interactive-deck {
+    text-align: center;
+    @media @mobile {
+      line-height: 1.2;
+      padding: 20px 15px;
+    }
+  }
 }
 
 rect {
