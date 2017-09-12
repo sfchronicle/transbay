@@ -134,14 +134,14 @@ var IDXprev = -1;
 
 if (screen.width <= 480) {
   // we are zooming on mobile
-  var floorZoom = "160%";
-  var zoomMult = 1.6;
-  var zoomOffset = 450;
+  var floorZoom = "100%";
+  var zoomMult = 1;
+  // var zoomOffset = 450;
 } else {
   // we are not zooming on desktop
   var floorZoom = "100%";
   var zoomMult = 1;
-  var zoomOffset = 250;
+  // var zoomOffset = 250;
 }
 
 var lastScrollTop = document.body.scrollTop;
@@ -283,20 +283,24 @@ function activate() {
 
                 // finding the left percent for that image
                 var leftNum = +floorplanData["stages"][s]["images"][imageIDX]["LeftPercent"]*zoomMult;
+                console.log(leftNum);
 
                 // the feature is on the left side of the image
                 if (leftNum <= 0.5) {
                   console.log("feature is on left");
-                  var scrollLeft = (0.5 - leftNum)*placeholderWidth/1.25;//-20/zoomMult;
+                  var scrollLeft = (0.5 - leftNum)*placeholderWidth;//-20/zoomMult;
                   circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;//*zoomMult;//*zoomMult;
 
                 // the feature is on the right side of the image
                 } else {
                   console.log("feature is on right");
-                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth/1.25;
+                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth;
                   circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;//*zoomMult;//*zoomMult;//*zoomMult;
                 }
+                console.log((zoomMult-1)*screen.width/2);
+                // scrollLeft = scrollLeft + (zoomMult-1)*screen.width/2;
                 console.log(scrollLeft);
+                scrollLeft = scrollLeft - 20;
                 // apply the panning to the image and overlay
                 floorImg.style.marginLeft = scrollLeft+ 'px';
 
@@ -435,7 +439,7 @@ function flowChart() {
   } else if (screen.width <= 480 && screen.width > 340) {
     console.log("big phone");
     var margin = {
-      top: 20,
+      top: 10,
       right: 5,
       bottom: 40,
       left: 5
@@ -445,13 +449,13 @@ function flowChart() {
   } else if (screen.width <= 340) {
     console.log("mini iphone")
     var margin = {
-      top: 20,
+      top: 0,
       right: 5,
-      bottom: 40,
+      bottom: 30,
       left: 5
     };
     // var width = 310 - margin.left - margin.right;
-    var height = 300 - margin.top - margin.bottom;
+    var height = 350 - margin.top - margin.bottom;
   }
   var width = Math.min(windowWidth,maxWidthFlowChart) - 10;
   if (windowWidth < maxWidthFlowChart) {
@@ -559,8 +563,13 @@ function flowChart() {
       x = e.clientX - 200;
     }
     var y = e.clientY;
-    tooltip.style.left = x + 20 + "px";
-    tooltip.style.top = y + 20 + "px";
+    if (screen.width >= 480) {
+      tooltip.style.left = x + 20 + "px";
+      tooltip.style.top = y + 20 + "px";
+    } else {
+      tooltip.style.left = "40px";
+      tooltip.style.top = y + 20 + "px";
+    }
   });
 
   // Set the sankey diagram properties

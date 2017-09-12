@@ -287,6 +287,12 @@ text {
   font-size: 18px;
   font-family: @body;
   cursor: pointer;
+  @media @mobile {
+    font-size: 14px;
+  }
+  @media @mini-mobile {
+    font-size: 13px;
+  }
 
   &.active {
     background: @active-link;
