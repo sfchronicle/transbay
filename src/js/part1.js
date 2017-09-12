@@ -101,6 +101,9 @@ var timeline_close;
 // show the timeline on button click
 document.getElementById("timeline-open").addEventListener("click",function() {
   document.getElementById("timeline-wrapper").classList.add("view");
+  // document.getElementById('timeline-top-border').scrollIntoView();
+  var top = $('#e0').offset().top - 70;
+  $('html,body').animate({scrollTop: top}, 1000);
   timelineOpen = 1;
   if (timeline_ticker) {
     timeline_ticker.classList.remove('sticky');
@@ -134,8 +137,8 @@ var IDXprev = -1;
 
 if (screen.width <= 480) {
   // we are zooming on mobile
-  var floorZoom = "100%";
-  var zoomMult = 1;
+  var floorZoom = "120%";
+  var zoomMult = 1.2;
   // var zoomOffset = 450;
 } else {
   // we are not zooming on desktop
@@ -288,19 +291,20 @@ function activate() {
                 // the feature is on the left side of the image
                 if (leftNum <= 0.5) {
                   console.log("feature is on left");
-                  var scrollLeft = (0.5 - leftNum)*placeholderWidth;//-20/zoomMult;
-                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;//*zoomMult;//*zoomMult;
+                  var scrollLeft = (0.5 - leftNum)*placeholderWidth - 20*zoomMult;//-20/zoomMult;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15*zoomMult;//*zoomMult;//*zoomMult;
 
                 // the feature is on the right side of the image
                 } else {
                   console.log("feature is on right");
-                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth;
-                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;//*zoomMult;//*zoomMult;//*zoomMult;
+                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth - (placeholderWidth - screen.width)/2 + 30*zoomMult;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15*zoomMult;//*zoomMult;//*zoomMult;//*zoomMult;
                 }
-                console.log((zoomMult-1)*screen.width/2);
+                // console.log((zoomMult-1)*screen.width/2);
                 // scrollLeft = scrollLeft + (zoomMult-1)*screen.width/2;
+                console.log((screen.width - placeholderWidth)/2);
                 console.log(scrollLeft);
-                scrollLeft = scrollLeft - 20;
+                // scrollLeft = scrollLeft + (placeholderWidth - screen.width)/2;//20*zoomMult;
                 // apply the panning to the image and overlay
                 floorImg.style.marginLeft = scrollLeft+ 'px';
 

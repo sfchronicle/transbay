@@ -80,9 +80,17 @@
   //   line-height: 1.2;
   // }
   padding-top: 50px;
+  .interactive-title, .interactive-deck {
+    @media @mobile {
+      padding: 10px;
+    }
+  }
   .interactive-deck {
     padding: 20px 0 30px 0;
     line-height: 1.2;
+    @media @tablet-horiz {
+      padding: 20px;
+    }
     @media @mobile {
       padding: 20px;
       padding-bottom: 30px;
