@@ -4,10 +4,75 @@
   height: 100%;
 }
 
-.deck {
-  width: 80%;
-  margin: auto;
+// heading styles ---------------------------------------
+
+.title-container-part1 {
+  text-align: center;
+  position: relative;
+  margin-bottom: 50px;
+  .background-photo {
+    max-width: 1500px;
+    z-index: -10;
+    img {
+      width: 100%;
+    }
+    @media @mobile {
+      padding-top: 37px;
+    }
+  }
+  .title-overlay {
+    // font-family: @body;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    color: white;
+    max-width: 700px;
+    margin: auto;
+    @media @mobile {
+      position: relative;
+      color: #333;
+      bottom: 0;
+    }
+    .title {
+      font-size: 50px;
+      line-height: 1.2;
+      max-width: 640px;
+      padding-bottom: 20px;
+      @media @mobile {
+        font-size: 35px;
+      }
+    }
+    .title, .deck {
+      @media @mobile {
+        line-height: 1.1;
+        padding: 10px;
+      }
+    }
+    .deck {
+      max-width: 800px;
+      margin: auto;
+    }
+    .author {
+      padding-top: 20px;
+      a {
+        color: white;
+        text-decoration: underline;
+        @media @mobile {
+          color: @highlight;
+        }
+        // font-family: @body-bold;
+      }
+    }
+    .author, .date {
+      font-size: 18px;
+      @media @mobile {
+        font-size: 16px;
+      }
+    }
+  }
 }
+
 
 
 .absolute-class {

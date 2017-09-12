@@ -18,11 +18,14 @@
 
     <%= t.include("partials/_nav_part1.html") %>
 
-    <div class="title-container">
+    <div class="title-container-part1">
+      <div class="background-photo">
+        <img src="http://ww2.hdnux.com/photos/61/64/55/14092645/5/1500x0.jpg"></img>
+      </div>
       <div class="title-overlay">
         <div class="title"><%=json.transbay_part_1.Title%></div>
         <div class="deck"><%=json.transbay_part_1.Deck%></div>
-        <div class="date">By <a href="mailto:jking@sfchronicle.com">John King</a></div>
+        <div class="author">By <a href="mailto:jking@sfchronicle.com">John King</a></div>
         <div class="date"><%=json.transbay_part_1.Date%></div>
       </div>
     </div>
@@ -34,6 +37,11 @@
         </div>
       <% } else if (d.type == "infobox"){ %>
         <%= t.include("partials/_infobox.html") %>
+      <% } else if (d.type == "photo"){ %>
+
+
+
+
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
