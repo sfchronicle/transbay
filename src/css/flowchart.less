@@ -66,9 +66,15 @@ text {
     display: inline-block;
     &.left {
       float: left;
+      @media @mobile {
+        padding-left: 10px;
+      }
     }
     &.right {
       float: right;
+      @media @mobile {
+        padding-right: 10px;
+      }
     }
   }
 }
@@ -80,7 +86,7 @@ text {
 }
 
 .credit.flowchart, .source.flowchart {
-  max-width: 800px;
+  max-width: 700px;
   margin: auto;
 }
 .source.flowchart {

@@ -293,16 +293,8 @@ function activate() {
     // we are not in that container
     } else {
 
-      // f.classList.remove('fixed');
-      // sticker_ph.style.display = 'none';
-
       inset.style.visibility = "hidden";
-      //
-      floorImg.style.opacity = "0.3";
-      //
-      // // we are hiding the highlight
-      // circle.style.opacity = "0";
-      //
+      floorImg.style.opacity = "0";
       overlayDiv.style.visibility  = "hidden";
 
     }
@@ -310,6 +302,13 @@ function activate() {
     if (window_top < sticker_start) {
       floorImg.style.opacity = "1";
       console.log("supposed to show the top image");
+    }
+
+    // we have to do some fudging about when we fix it because of jitter in the scrolling
+    if ((window_top < f_top - 8) || (window_top >= f_bottom + 8)) {
+      console.log("change to fixed class");
+      f.classList.remove('fixed');
+      sticker_ph.style.display = 'none';
     }
 
   };
