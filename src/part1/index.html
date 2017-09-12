@@ -32,6 +32,8 @@
         <div class="text-block">
           <p><%=d.value %></p>
         </div>
+      <% } else if (d.type == "infobox"){ %>
+        <%= t.include("partials/_infobox.html") %>
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
