@@ -2,6 +2,9 @@
   <div class="interactive-title"><%=json.transbay_interactive_text.Title%></div>
   <div class="interactive-deck"><%=json.transbay_interactive_text.Deck%></div>
 
+  <div class="interactive-instructions"><%=json.transbay_interactive_text.Instructions%></div>
+  <div class="floorplan-arrow"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+
   <div id="stick-here"></div>
   <div class="circleBase" id="highlightCircle"></div>
   <% json.transbay_interactive_text.stages.forEach(function(d,didx){ %>
@@ -12,7 +15,9 @@
         <img src="../assets/graphics/<%=d.Plan%>" id="background-floor<%=didx%>">
         <img src='../assets/graphics/nada_background.png' id="overlay-floor<%=didx%>"></img>
         <div class="inset" id="inset<%=didx%>">
-          <div class="inset-textblock" id="inset-textblock<%=didx%>"><%=d.Deck%></div>
+          <div class="inset-textblock" id="inset-textblock<%=didx%>"><%=d.Deck%>
+            <div class='arrows-desc'><%=d.FlowLines%></div>
+          </div>
           <div class="inset-image" id="inset-image<%=didx%>"></div>
           <div class="inset-caption" id="inset-caption<%=didx%>"></div>
         </div>
@@ -34,7 +39,7 @@
 
   <div class="credits-container">
     <div class="credit floorplan">
-      <div class="entry">Illustrator: <a href="mailto:jblanchard@sfchronicle.com">John Blanchard</a></div>
+      <div class="entry">Graphic artist: <a href="mailto:jblanchard@sfchronicle.com">John Blanchard</a></div>
       <div class="entry">Interactive producer: <a href="mailto:eoneill@sfchronicle.com">Emma O'Neill</a></div>
     </div>
     <div class="source">Source: <%=json.transbay_interactive_text.Source%></div>
