@@ -15,7 +15,7 @@
     "chalk": "^1.0.0",
     "commonmark": "^0.24.0",
     "csv": "^0.4.2",
-    "d3": "^4.10.0",
+    "d3": "^4.10.2",
     "d3-sankey": "^0.7.1",
     "exorcist": "^0.4.0",
     "google-spreadsheets": "^0.5.1",
