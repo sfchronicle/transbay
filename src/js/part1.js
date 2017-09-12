@@ -165,9 +165,6 @@ function activate() {
   // initialize circle highlight to be hidden, in case we're not in the image section
   circleFlag = 0;
 
-  console.log("position is");
-  console.log(window_top);
-
   // starting the loop
   for (var s = 0; s < floorplanData.stages.length; s++ ) {
 
@@ -211,9 +208,10 @@ function activate() {
       inset.style.visibility = "visible";
       IDXprev = s;
 
-      // show the image
+      // show the image and zoom it
       floorImg.style.opacity = "1";
       floorImg.style.visibility = "visible";
+      floorImg.style.width = floorZoom;
 
       // show the overlay
       // overlayDiv.style.opacity = "1";
@@ -261,6 +259,10 @@ function activate() {
               // overlayDiv.style.opacity = "1";
               overlayDiv.style.visibility  = "visible";
 
+              // showing the main image and unzooming and unpanning it
+              floorImg.style.width  = "100%";
+              floorImg.style.marginLeft = "0px";
+
             // at the other indicies, we display an image and caption
             } else {
               var imageIDX = insetIDX-1;
@@ -277,9 +279,32 @@ function activate() {
               }
               document.getElementById("inset-caption"+s).innerHTML = tempData.Caption;
 
-              // compute how to move the circle to center on the feature
-              circleTop = tempData["TopPercent"]*placeholderHeight;
-              circleLeft = tempData["LeftPercent"]*placeholderWidth;
+              if (screen.width <= 480) {
+
+                // finding the left percent for that image
+                var leftNum = +floorplanData["stages"][s]["images"][imageIDX]["LeftPercent"]*zoomMult;
+
+                // the feature is on the left side of the image
+                if (leftNum <= 0.5) {
+                  console.log("feature is on left");
+                  var scrollLeft = (0.5 - leftNum)*placeholderWidth/1.25;//-20/zoomMult;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;//*zoomMult;//*zoomMult;
+
+                // the feature is on the right side of the image
+                } else {
+                  console.log("feature is on right");
+                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth/1.25;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;//*zoomMult;//*zoomMult;//*zoomMult;
+                }
+                console.log(scrollLeft);
+                // apply the panning to the image and overlay
+                floorImg.style.marginLeft = scrollLeft+ 'px';
+
+              } else {
+                // compute how to move the circle to center on the feature
+                circleTop = tempData["TopPercent"]*placeholderHeight;
+                circleLeft = tempData["LeftPercent"]*placeholderWidth;
+              }
 
               // show the highlight circle
               circleFlag = 1;
@@ -300,13 +325,14 @@ function activate() {
     }
     // we want to show the top image at the top
     if (window_top < sticker_start) {
+      // showing the main image and unzooming and unpanning it
       floorImg.style.opacity = "1";
-      console.log("supposed to show the top image");
+      floorImg.style.width  = "100%";
+      floorImg.style.marginLeft = "0px";
     }
 
     // we have to do some fudging about when we fix it because of jitter in the scrolling
     if ((window_top < f_top - 8) || (window_top >= f_bottom + 8)) {
-      console.log("change to fixed class");
       f.classList.remove('fixed');
       sticker_ph.style.display = 'none';
     }
