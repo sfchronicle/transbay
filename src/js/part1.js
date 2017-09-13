@@ -114,7 +114,6 @@ document.getElementById("floorplan-instructions").addEventListener("click",funct
   $('html,body').animate({scrollTop: top}, 1000);
 });
 
-
 // show the timeline on button click
 document.getElementById("timeline-open").addEventListener("click",function() {
   document.getElementById("timeline-wrapper").classList.add("view");
