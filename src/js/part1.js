@@ -10,6 +10,15 @@ var timeoutTime = 600;
 var fadeTime = 500;
 var timer;
 
+// -----------------------------------------------------------------------------
+// WIDTH variables
+// -----------------------------------------------------------------------------
+
+var windowWidth = $(window).width();
+console.log("window width = ");
+console.log(windowWidth);
+var maxWidthFlowChart = 700;
+
 // ----------------------------------------------------------------------------
 // PARK animations --------------------------------------------------
 // -----------------------------------------------------------------------------
@@ -151,12 +160,12 @@ if (screen.width <= 480) {
   // we are zooming on mobile
   var floorZoom = "160%";
   var zoomMult = 1.6;
-  // var zoomOffset = 450;
+  var zoomOffset = 0;
 } else {
   // we are not zooming on desktop
   var floorZoom = "100%";
   var zoomMult = 1;
-  // var zoomOffset = 250;
+  var zoomOffset = 0;
 }
 
 if (window.innerWidth > 1600) {
@@ -181,9 +190,14 @@ function activate() {
 
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top - 37;
-  var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37;
+  if (screen.width <= 480) {
+    var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37 - 200;
+  } else {
+    var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37;
+  }
 
   // initialize circle highlight to be hidden, in case we're not in the image section
+  console.log("initialize circle flag");
   circleFlag = 0;
 
   // starting the loop
@@ -194,8 +208,13 @@ function activate() {
 
     // container div that contains all the stuff for the floor
     var showf = document.getElementById("showfloor"+s);
-    var f_top = showf.getBoundingClientRect().top + window_top - 37;
-    var f_bottom = showf.getBoundingClientRect().bottom + window_top - 37;
+    if (s == 0) {
+      var f_top = showf.getBoundingClientRect().top + window_top - 37;
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top - 37;
+    } else {
+      var f_top = showf.getBoundingClientRect().top + window_top - 37 - zoomOffset;
+      var f_bottom = showf.getBoundingClientRect().bottom + window_top - 37 - zoomOffset;
+    }
 
     // image that we're going to fix at the top
     var floorImg = document.getElementById("background-floor"+s);
@@ -229,7 +248,6 @@ function activate() {
       // show the image and zoom it
       floorImg.style.opacity = "1";
       floorImg.style.visibility = "visible";
-      floorImg.style.width = floorZoom;
 
       // show the overlay
       // overlayDiv.style.opacity = "1";
@@ -244,7 +262,8 @@ function activate() {
           if (window_top >= inset_top && window_top < inset_bottom) {
 
             // f.style.opacity = "1";
-            // console.log("AT INDEX");
+            console.log("AT INDEX");
+            console.log(insetIDX);
             // at 0 index, we display a text bloock
             if (insetIDX == 0) {
               // console.log("looping through the overlays");
@@ -269,10 +288,14 @@ function activate() {
                 swapGround = 1;
               }
 
-              document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck + "<div class='arrows-desc'>"+floorplanData.stages[s].FlowLines+"</div>";
-              $( ".inset-image-image" ).addClass("hide-image");
-              // document.getElementById("inset-image"+s).innerHTML = "";
-              document.getElementById("inset-caption"+s).innerHTML = "";
+              // only swap inset text on desktop
+              if (windowWidth <= 480) {
+                console.log("not swapping text");
+              } else {
+                document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck + "<div class='arrows-desc'>"+floorplanData.stages[s].FlowLines+"</div>";
+                $( ".inset-image-image" ).addClass("hide-image");
+                document.getElementById("inset-caption"+s).innerHTML = "";
+              }
 
               // showing the overlay and unzooming and unpanning it
               // overlayDiv.style.opacity = "1";
@@ -284,23 +307,30 @@ function activate() {
 
             // at the other indicies, we display an image and caption
             } else {
+
+              floorImg.style.width = floorZoom;
+
               var imageIDX = insetIDX-1;
               // here we want to fill in image/text/move circle
-              var tempData = floorplanData.stages[s].images[imageIDX];
-              document.getElementById("inset-textblock"+s).innerHTML = "";
-              $( ".inset-image-image" ).addClass("hide-image");
-              document.getElementById("inset-image"+s+imageIDX).classList.remove("hide-image");
-              // document.getElementById("inset-image"+s).innerHTML = "<img src=../assets/photos/part1/"+tempData.Image+"></img>";
-              if (tempData.Class == "vertical") {
-                document.getElementById("inset-image"+s).classList.add("vertical");
-                document.getElementById("inset-caption"+s).classList.add("vertical");
+              // only swap inset image on desktop
+              if (windowWidth <= 480) {
+                console.log("not swapping text");
               } else {
-                document.getElementById("inset-image"+s).classList.remove("vertical");
-                document.getElementById("inset-caption"+s).classList.remove("vertical");
+                var tempData = floorplanData.stages[s].images[imageIDX];
+                document.getElementById("inset-textblock"+s).innerHTML = "";
+                $( ".inset-image-image" ).addClass("hide-image");
+                document.getElementById("inset-image"+s+imageIDX).classList.remove("hide-image");
+                if (tempData.Class == "vertical") {
+                  document.getElementById("inset-image"+s).classList.add("vertical");
+                  document.getElementById("inset-caption"+s).classList.add("vertical");
+                } else {
+                  document.getElementById("inset-image"+s).classList.remove("vertical");
+                  document.getElementById("inset-caption"+s).classList.remove("vertical");
+                }
+                document.getElementById("inset-caption"+s).innerHTML = tempData.Caption;
               }
-              document.getElementById("inset-caption"+s).innerHTML = tempData.Caption;
 
-              if (screen.width <= 480) {
+              if (windowWidth <= 480) {
 
                 // finding the left percent for that image
                 var leftNum = +floorplanData["stages"][s]["images"][imageIDX]["LeftPercent"];
@@ -383,6 +413,7 @@ function activate() {
       circle.style.top = circleTop+"px";
     }
   } else {
+    console.log("circleFlag is 0");
     // we are hiding the highlight
     circle.style.opacity = "0";
   }
@@ -428,11 +459,6 @@ function activate() {
 }
 
 // flow chart for financial data ---------------------------------------------------
-
-var windowWidth = $(window).width();
-console.log("window width = ");
-console.log(windowWidth);
-var maxWidthFlowChart = 700;
 
 var formatthousands = d3.format(",");
 

@@ -14,7 +14,7 @@
       <div class="floor-image" id="floor<%=didx%>">
         <img src="../assets/graphics/<%=d.Plan%>" id="background-floor<%=didx%>">
         <img src='../assets/graphics/nada_background.png' id="overlay-floor<%=didx%>"></img>
-        <div class="inset" id="inset<%=didx%>">
+        <div class="inset desktop" id="inset<%=didx%>">
           <div class="inset-textblock" id="inset-textblock<%=didx%>"><%=d.Deck%>
             <div class='arrows-desc'><%=d.FlowLines%></div>
           </div>
@@ -29,9 +29,20 @@
       <div id="stick-ph<%=didx%>"></div>
 
       <div class="big-space-container">
-        <div id="floor<%=didx%>marker0" class="update-marker  update-marker<%=didx%>"></div>
+        <div id="floor<%=didx%>marker0" class="update-marker  update-marker<%=didx%>">
+          <div class="inset-textblock-mobile"><%=d.Deck%>
+            <div class='arrows-desc'><%=d.FlowLines%></div>
+          </div>
+        </div>
         <% d.images.forEach(function(im,imidx){ %>
-          <div id="floor<%=didx%>marker<%=imidx+1%>" class="update-marker update-marker<%=didx%>"></div>
+          <div id="floor<%=didx%>marker<%=imidx+1%>" class="update-marker update-marker<%=didx%>">
+            <div class="mobile-inset mobile">
+              <div class="inset-image">
+                <img src="../assets/photos/part1/<%=im.Image%>"></img>
+              </div>
+              <div class="inset-caption"><%=im.Caption%></div>
+            </div>
+          </div>
         <% }) %>
       </div>
 
