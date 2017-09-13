@@ -105,6 +105,16 @@ var timeline_ticker;
 var timeline_bottom;
 var timeline_close;
 
+document.getElementById("floorplan-instructions").addEventListener("click",function() {
+  if (screen.width <= 480) {
+    var top = $('#floor0').offset().top+100;
+  } else {
+    var top = $('#floor0').offset().top;
+  }
+  $('html,body').animate({scrollTop: top}, 1000);
+});
+
+
 // show the timeline on button click
 document.getElementById("timeline-open").addEventListener("click",function() {
   document.getElementById("timeline-wrapper").classList.add("view");

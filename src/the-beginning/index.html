@@ -96,6 +96,7 @@
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
+        <div class="story-continues-text">Story continues below.</div>
         <%= t.include("partials/_floorplan.html") %>
       <% } else if (d.type == "graphic"){ %>
         <div class="wide-inline-img desktop">

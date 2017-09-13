@@ -2,8 +2,10 @@
   <div class="interactive-title"><%=json.transbay_interactive_text.Title%></div>
   <div class="interactive-deck"><%=json.transbay_interactive_text.Deck%></div>
 
-  <div class="interactive-instructions"><%=json.transbay_interactive_text.Instructions%></div>
-  <div class="floorplan-arrow"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+  <div id="floorplan-instructions">
+    <div class="interactive-instructions"><%=json.transbay_interactive_text.Instructions%></div>
+    <div class="floorplan-arrow"><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+  </div>
 
   <div id="stick-here"></div>
   <div class="circleBase" id="highlightCircle"></div>
@@ -30,7 +32,7 @@
 
       <div class="big-space-container">
         <div id="floor<%=didx%>marker0" class="update-marker  update-marker<%=didx%>">
-          <div class="inset-textblock-mobile"><%=d.Deck%>
+          <div class="inset-textblock-mobile top"><%=d.Deck%>
             <div class='arrows-desc'><%=d.FlowLines%></div>
           </div>
         </div>
