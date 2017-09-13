@@ -15,8 +15,6 @@ var timer;
 // -----------------------------------------------------------------------------
 
 var windowWidth = $(window).width();
-console.log("window width = ");
-console.log(windowWidth);
 var maxWidthFlowChart = 700;
 
 // ----------------------------------------------------------------------------
@@ -197,7 +195,6 @@ function activate() {
   }
 
   // initialize circle highlight to be hidden, in case we're not in the image section
-  console.log("initialize circle flag");
   circleFlag = 0;
 
   // starting the loop
@@ -261,9 +258,6 @@ function activate() {
           var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - 37 - screen.height/2;
           if (window_top >= inset_top && window_top < inset_bottom) {
 
-            // f.style.opacity = "1";
-            console.log("AT INDEX");
-            console.log(insetIDX);
             // at 0 index, we display a text bloock
             if (insetIDX == 0) {
               // console.log("looping through the overlays");
