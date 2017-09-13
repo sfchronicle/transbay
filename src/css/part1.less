@@ -4,6 +4,26 @@
   height: 100%;
 }
 
+.desktop {
+  @media @mobile {
+    display: none;
+  }
+}
+.mobile {
+  display: none;
+  @media @mobile {
+    display: block;
+  }
+}
+
+.inline-graphic {
+  padding: 0 20px;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+
 // heading styles ---------------------------------------
 
 .title-container-part1 {
@@ -38,7 +58,8 @@
     .title {
       font-size: 50px;
       line-height: 1.2;
-      max-width: 640px;
+      max-width: 590px;
+      margin: auto;
       padding-bottom: 20px;
       @media @mobile {
         font-size: 35px;

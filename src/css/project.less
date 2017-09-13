@@ -23,8 +23,15 @@
    cursor: default;
    color: @light-gray;
    font-weight: 400;
+   display: none;
 }
 
 .activesection {
   font-weight: 700;
+}
+
+.part1_link, .part2_link, .part3_link {
+  @media @mobile {
+    display: none;
+  }
 }

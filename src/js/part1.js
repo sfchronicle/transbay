@@ -131,6 +131,19 @@ document.getElementById("close-timeline-button").addEventListener("click",functi
 
 window.onscroll = function() {activate()};
 
+// var timer;
+//
+// $(window).scroll(function() {
+// 	if(timer) {
+// 		window.clearTimeout(timer);
+// 	}
+//
+// 	timer = window.setTimeout(function() {
+// 		// actual callback
+// 		activate();
+// 	}, 10);
+// });
+
 // setting scrolly interactive variables
 
 var IDXprev = -1;
@@ -252,7 +265,8 @@ function activate() {
               }
 
               document.getElementById("inset-textblock"+s).innerHTML = floorplanData.stages[s].Deck + "<div class='arrows-desc'>"+floorplanData.stages[s].FlowLines+"</div>";
-              document.getElementById("inset-image"+s).innerHTML = "";
+              $( ".inset-image-image" ).addClass("hide-image");
+              // document.getElementById("inset-image"+s).innerHTML = "";
               document.getElementById("inset-caption"+s).innerHTML = "";
 
               // showing the overlay and unzooming and unpanning it
@@ -269,7 +283,9 @@ function activate() {
               // here we want to fill in image/text/move circle
               var tempData = floorplanData.stages[s].images[imageIDX];
               document.getElementById("inset-textblock"+s).innerHTML = "";
-              document.getElementById("inset-image"+s).innerHTML = "<img src=../assets/photos/part1/"+tempData.Image+"></img>";
+              $( ".inset-image-image" ).addClass("hide-image");
+              document.getElementById("inset-image"+s+imageIDX).classList.remove("hide-image");
+              // document.getElementById("inset-image"+s).innerHTML = "<img src=../assets/photos/part1/"+tempData.Image+"></img>";
               if (tempData.Class == "vertical") {
                 document.getElementById("inset-image"+s).classList.add("vertical");
                 document.getElementById("inset-caption"+s).classList.add("vertical");
@@ -413,6 +429,8 @@ console.log("window width = ");
 console.log(windowWidth);
 var maxWidthFlowChart = 700;
 
+var formatthousands = d3.format(",");
+
 
 function flowChart() {
 
@@ -475,8 +493,6 @@ function flowChart() {
                        "value": +d.value });
   });
 
-  console.log(graph);
-
   // return only the distinct / unique nodes
   graph.nodes = d3.keys(d3.nest()
     .key(function (d) { return d.name; })
@@ -522,13 +538,13 @@ function flowChart() {
       tooltip.innerHTML = `
         <div class="tooltip-title">Expenditure:</div>
         <div>${d.target.name}</div>
-        <div class="tooltip-num">$ ${d.target.value} M</div>
+        <div class="tooltip-num">$${formatthousands(d.target.value)} M</div>
       `;
     } else {
       tooltip.innerHTML = `
         <div class="tooltip-title">Funding source:</div>
         <div>${d.source.name}</div>
-        <div class="tooltip-num">$${d.source.value} M</div>
+        <div class="tooltip-num">$${formatthousands(d.source.value)} M</div>
       `;
     }
   }

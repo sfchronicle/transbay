@@ -1,4 +1,4 @@
-<div class="interactive interactive-graphic">
+<div class="interactive interactive-graphic" id="floorplan">
   <div class="interactive-title"><%=json.transbay_interactive_text.Title%></div>
   <div class="interactive-deck"><%=json.transbay_interactive_text.Deck%></div>
 
@@ -18,7 +18,11 @@
           <div class="inset-textblock" id="inset-textblock<%=didx%>"><%=d.Deck%>
             <div class='arrows-desc'><%=d.FlowLines%></div>
           </div>
-          <div class="inset-image" id="inset-image<%=didx%>"></div>
+          <div class="inset-image" id="inset-image<%=didx%>">
+            <% d.images.forEach(function(im,imidx){ %>
+              <img id="inset-image<%=didx%><%=imidx%>" src="../assets/photos/part1/<%=im.Image%>" class="hide-image inset-image-image"></img>
+            <% }) %>
+          </div>
           <div class="inset-caption" id="inset-caption<%=didx%>"></div>
         </div>
       </div>

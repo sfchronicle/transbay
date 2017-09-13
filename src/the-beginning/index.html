@@ -47,8 +47,11 @@
       <% } else if (d.type == "interactive"){ %>
         <%= t.include("partials/_floorplan.html") %>
       <% } else if (d.type == "graphic"){ %>
-        <div class="wide-inline-img">
+        <div class="wide-inline-img desktop">
           <img src="../assets/graphics/<%=d.value[0].Image%>"></img>
+        </div>
+        <div class="inline-graphic mobile">
+          <img src="../assets/graphics/<%=d.value[0].MobileImage%>"></img>
         </div>
       <% } else if (d.type == "flowchart"){ %>
         <div class="interactive interactive-flowchart">

@@ -12,13 +12,21 @@
     @media @mobile {
       height: 50px;
       width: 50px;
-      transition: all 500ms ease-in;
+      // transition: all 500ms ease-in;
     }
+}
+
+.hide-image {
+  display: none;
 }
 
 .interactive-instructions {
   font-family: @med-graphics;
   font-size: 18px;
+  @media @mobile {
+    padding: 5px 10px;
+    line-height: 1;
+  }
 }
 
 .floorplan-arrow {
@@ -133,6 +141,7 @@
     @media @mobile {
       margin-left: 20px;
       margin-right: 20px;
+      bottom: 40px;
     }
     padding: 20px;
     z-index: 200;
@@ -185,6 +194,9 @@
   }
   .update-marker {
     height: 50vh;
+    @media @mobile {
+      height: 65vh;
+    }
   }
   padding-bottom: 0;
   margin-bottom: 0;

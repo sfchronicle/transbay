@@ -242,12 +242,12 @@ text {
   font-size: 18px;
   font-family: @body;
   cursor: pointer;
-  @media @mobile {
-    font-size: 14px;
-  }
-  @media @mini-mobile {
-    font-size: 13px;
-  }
+  // @media @mobile {
+  //   font-size: 1px;
+  // }
+  // @media @mini-mobile {
+  //   font-size: 13px;
+  // }
 
   &.active {
     background: @active-link;
@@ -265,9 +265,6 @@ text {
     padding: 4px 2px;
     a {
       color: @highlight;
-    }
-    @media @mobile {
-      display: none;
     }
   }
   &.email {
