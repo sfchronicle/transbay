@@ -159,6 +159,12 @@ if (screen.width <= 480) {
   // var zoomOffset = 250;
 }
 
+if (window.innerWidth > 1600) {
+  var marginOffset = (window.innerWidth - 1600)/2;
+} else {
+  var marginOffset = 0;
+}
+
 var lastScrollTop = document.body.scrollTop;
 var direction;
 var swapPark = 0, swapBus = 0, swapMez = 0, swapGround = 0;
@@ -315,7 +321,7 @@ function activate() {
               } else {
                 // compute how to move the circle to center on the feature
                 circleTop = tempData["TopPercent"]*placeholderHeight;
-                circleLeft = tempData["LeftPercent"]*placeholderWidth;
+                circleLeft = tempData["LeftPercent"]*placeholderWidth + marginOffset;
               }
 
               // show the highlight circle
@@ -673,4 +679,10 @@ flowChart();
 $(window).resize(function () {
   windowWidth = $(window).width();
   flowChart();
+
+  if (window.innerWidth > 1600) {
+    marginOffset = (window.innerWidth - 1600)/2;
+  } else {
+    marginOffset = 0;
+  }
 });

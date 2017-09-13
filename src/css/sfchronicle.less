@@ -342,11 +342,13 @@ header {
   text-align: left;
   font-family: @med-graphics;
   font-size: 12px;
-  margin-top: 5px;
+  // margin-top: 5px;
   padding: 0 10px;
   max-width: 100%;
   &.landing {
-    margin-bottom: 2.5em;
+    max-width: 1500px;
+    margin: auto;
+    margin-bottom: 2em;
   }
 }
 
@@ -371,6 +373,7 @@ header {
 .full-width-img {
   margin: 2em auto;
   width: 100%;
+  max-width: 1500px;
 
   img {
     width:100%;
@@ -424,6 +427,10 @@ header {
       max-width: 100%;
     }
   }
+}
+
+img {
+  line-height: 0;
 }
 
 .float-img-container {
