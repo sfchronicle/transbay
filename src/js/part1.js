@@ -132,7 +132,6 @@ document.getElementById("close-timeline-button").addEventListener("click",functi
 window.onscroll = function() {activate()};
 
 // var timer;
-//
 // $(window).scroll(function() {
 // 	if(timer) {
 // 		window.clearTimeout(timer);
