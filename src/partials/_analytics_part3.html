@@ -1,10 +1,10 @@
 <!-- Begin Hearst analytics -->
 <script type="text/javascript">
     var omni_channelPath = "<%= json.project.hearst_category %> :: Special Projects";
-    var omni_title = "<%= json.project.title %>";
-    var omni_className = "channel";
+    var omni_title = "<%= json.project.seo_title_part3 %>";
+    var omni_className = "article";
     var omni_paywallSite = "1";
-    var omni_publicationDate = "<%= json.project.date_landing %> 00:00:00";
+    var omni_publicationDate = "<%= json.project.date %> 00:00:00";
     var omni_authorName = "<%= json.project.author %>";
     var omni_authorTitle = "San Francisco Chronicle staff";
     var HDN = HDN || {};
@@ -13,12 +13,12 @@
     // HDN.dataLayer object for content and href data
     HDN.dataLayer.content = HDN.dataLayer.content || {};
     HDN.dataLayer.href = HDN.dataLayer.href || {};
-    HDN.dataLayer.content.title = "<%= json.project.seo_title_landing %>";
+    HDN.dataLayer.content.title = "<%= json.project.seo_title_part3 %>";
     HDN.dataLayer.content.subtitle = "";
     HDN.dataLayer.content.objectId = "";
-    HDN.dataLayer.content.objectType = "channel";
+    HDN.dataLayer.content.objectType = "article";
     HDN.dataLayer.content.sectionPath = ['<%= json.project.hearst_category %>', 'Special Projects'];
-    HDN.dataLayer.content.pubDate = "<%= json.project.date_landing %> 00:00:00";
+    HDN.dataLayer.content.pubDate = "<%= json.project.date_part3 %> 00:00:00";
     HDN.dataLayer.content.wordCount = "";
     HDN.dataLayer.content.keywords = [];
     HDN.dataLayer.content.keySubjects = [];
@@ -46,11 +46,11 @@
     
     // HDN.dataLayer object for sharing information
     HDN.dataLayer.sharing = HDN.dataLayer.sharing || {};
-    HDN.dataLayer.sharing.openGraphUrl = "<%= json.project.url_landing + json.project.slug_landing%>";
+    HDN.dataLayer.sharing.openGraphUrl = "<%= json.project.url_part3 + json.project.slug_landing + json.project.slug_part3 %>";
     HDN.dataLayer.sharing.openGraphType = "article";
 
-    HDN.dataLayer.href.pageUrl = "<%= json.project.url_landing + json.project.slug_landing%>";
-    HDN.dataLayer.href.canonicalUrl = "<%= json.project.url_landing + json.project.slug_landing%>";
+    HDN.dataLayer.href.pageUrl = "<%= json.project.url_part3 + json.project.slug_landing + json.project.slug_part3 %>";
+    HDN.dataLayer.href.canonicalUrl = "<%= json.project.url_part3 + json.project.slug_landing + json.project.slug_part3 %>";
     HDN.dataLayer.href.pageUrlPath = window.location.pathname;
     HDN.dataLayer.href.pageUrlPathFolders = window.location.pathname.replace(/[A-Za-z0-9-_.]+$/, '');
     HDN.dataLayer.href.pageUrlQueryParams = window.location.search.replace(/^\?/, '');
@@ -58,10 +58,10 @@
 
     // HDN.dataLayer object for presentation information
     HDN.dataLayer.presentation = HDN.dataLayer.presentation || {};
-    HDN.dataLayer.presentation.hasSlideshow = false;
+    HDN.dataLayer.presentation.hasSlideshow = true;
     HDN.dataLayer.presentation.hasSlideshowListView = false;
     HDN.dataLayer.presentation.hasVideo = false;
-    HDN.dataLayer.presentation.hasInteractive = false;
+    HDN.dataLayer.presentation.hasInteractive = true;
 
     // HDN.dataLayer object for paywall information
     HDN.dataLayer.paywall = HDN.dataLayer.paywall || {};

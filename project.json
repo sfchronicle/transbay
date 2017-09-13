@@ -1,8 +1,8 @@
 {
   "year":"2017",
   "author":"John King, John Blanchard, Emma O'Neill",
-  "hearst_category":"",
-  "date":"2017-09-14",
+  "hearst_category":"Metro",
+  "date":"2017-09-15",
   "hashtag":"",
   "sheets": [],
   "docsID":["1GK-bDkZNMnF9nj5c9HOCUNGTKqIgU5DOAJKj-e1ji8o","1174oET6aeXRS8199GDwXolfzkRbqkS-rSiTFQoEYtf0","1JQqww_T0JEdnoIptG4Ivc3jWtjbJSgWV9hLNDX_WxSY"],
@@ -16,10 +16,12 @@
   "title_landing": "",
   "description_landing": "",
   "seo_title_landing": "",
+  "date_landing":"2017-09-15",
 
   "slug_part1": "the-beginning/",
   "image_part1": "assets/photos/part1/social.jpg",
   "twitter_text_part1":"",
+  "date_part1":"2017-09-15",
   "url_part1": "http://projects.sfchronicle.com/2017/",
   "title_part1": "",
   "description_part1": "",
