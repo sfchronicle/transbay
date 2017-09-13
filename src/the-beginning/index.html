@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
 
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
@@ -75,6 +77,20 @@
           </div>
 
         <% } %>
+
+      <% } else if ( d.type == 'slideshow' ){ %>
+
+          <div class="carousel slideshow js-flickity" data-flickity-options='{ "imagesLoaded": true }'>
+            <% d.value.forEach(function(slide) { %>
+
+             <div class="carousel-cell">
+              <img src="http://ww2.hdnux.com/photos/61/64/55/<%= slide.image %>/3/1500x0.jpg">
+              <div class="caption"><%= slide.caption %> <span class="byline"><%= slide.credit %></span></div>
+            </div>
+
+            <% }); %>
+
+          </div>
 
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
