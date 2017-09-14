@@ -28,7 +28,7 @@
   @media @mobile {
     padding: 5px 10px;
     line-height: 1;
-    text-align: left;
+    // text-align: left;
     // padding-bottom: 30px;
   }
   cursor: pointer;
@@ -43,10 +43,6 @@
   line-height: 1;
   margin-top: -5px;
   padding-bottom: 30px;
-  @media @mobile {
-    text-align: left;
-    padding-left: 15px;
-  }
 
 }
 
@@ -87,7 +83,7 @@
     @media @mobile {
       height: auto;
       z-index: 100;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,1);
     }
   }
   height: auto;
@@ -132,8 +128,9 @@
   text-align: center;
   .interactive-title, .interactive-deck {
     @media @mobile {
+      font-size: 18px;
       padding: 10px;
-      text-align: left !important;
+      // text-align: left !important;
       line-height: 1.2;
       padding: 20px 15px;
     }
@@ -210,7 +207,7 @@
       img {
         width: 100%;
         @media @mobile {
-          width: 50%;
+          width: 40%;
         }
         // width: 50%;
       }

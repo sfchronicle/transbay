@@ -416,7 +416,6 @@ function activate() {
       circle.style.top = circleTop+"px";
     }
   } else {
-    console.log("circleFlag is 0");
     // we are hiding the highlight
     circle.style.opacity = "0";
   }
