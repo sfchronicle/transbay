@@ -190,6 +190,10 @@ var circleFlag, circleTop, circleLeft;
 // this is the monster scrolling function
 function activate() {
 
+  // hide tooltip on scroll
+  var tooltip = document.querySelector("#flowchart-tooltip");
+  tooltip.classList.remove("show");
+
   // get scrolling position
   var window_top = document.body.scrollTop;
 
