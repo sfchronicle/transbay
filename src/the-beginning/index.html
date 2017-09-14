@@ -35,12 +35,20 @@
       <div class="caption landing desktop"><span class="byline">Michael Short, Special to The Chronicle</span></div>
     </div>
 
+    <% var flag = 0; %>
+
 
     <% json.transbay_part_1.text.forEach(function(d,didx){ %>
       <% if (d.type == "text") { %>
-        <div class="text-block">
-          <p><%=d.value %></p>
-        </div>
+        <% if (flag == 1) { %>
+          <div class="text-block bottom-page">
+            <p><%=d.value %></p>
+          </div>
+        <% } else { %>
+          <div class="text-block">
+            <p><%=d.value %></p>
+          </div>
+        <% } %>
       <% } else if (d.type == "infobox"){ %>
         <%= t.include("partials/_infobox.html") %>
       <% } else if (d.type == "photo"){ %>
@@ -96,6 +104,7 @@
       <% } else if (d.type == "timeline"){ %>
         <%= t.include("partials/_timeline.html") %>
       <% } else if (d.type == "interactive"){ %>
+        <% flag = 1; %>
         <div class="story-continues-text">Story continues below.</div>
         <%= t.include("partials/_floorplan.html") %>
       <% } else if (d.type == "graphic"){ %>
