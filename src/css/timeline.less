@@ -57,10 +57,46 @@
   }
 }
 
+.timeline-label {
+  font-family: @banner;
+  color: @highlight;
+  font-weight: 900;
+  position: absolute;
+  top: 0;
+  background: rgba(255,255,255,0.6);
+  padding: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 50;
+  border-bottom: 2px solid @highlight;
+  border-top: 2px solid @highlight;
+  // width: 0%;
+  margin: auto;
+  @media @mobile {
+    font-size: 18px;
+    background: none;
+    border: none;
+  }
+}
+
 .clicky-image-wrapper {
   position: relative;
   max-width: 1200px;
   margin: auto;
+  @media @tablet {
+    max-width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../assets/photos/part1/emma_mosaic.png");
+    // opacity: 0.5;
+    // background: lighten(@light-gray,8%);
+    width: 100%;
+    z-index: 0;
+    border-top: 2px solid @highlight;
+    border-bottom: 2px solid @highlight;
+  }
 }
 
 .clicky-image {
@@ -69,9 +105,13 @@
   text-align: center;
   margin-top: 20px;
   line-height: 0;
+  opacity: 0.6;
   img {
     width: 100%;
     // border: 2px solid @highlight;
+  }
+  @media @mobile {
+    display: none;
   }
 }
 
@@ -89,8 +129,11 @@
   @media @tablet {
     max-width: 100%;
     position: relative;
-    background: lighten(@light-gray,8%);
+    padding: 50px 0 50px 0;
+    background: rgba(255,255,255,0.6);
+    // background: lighten(@light-gray,8%);
     width: 100%;
+    z-index: 10;
   }
 }
 
@@ -139,18 +182,24 @@
     }
   }
   .button {
+    font-family: @bold-graphics;
     margin: auto;
     margin-top: 30px;
     font-size: 17px;
     padding: 5px 20px;
-    color: white;
+    color: @highlight;
     width: 280px;
     border-radius: 2px;
+    border-bottom: 2px solid @highlight;
     // text-decoration: underline;
-    background: @highlight;
+    // background: @highlight;
     cursor: pointer;
     .fa {
-      padding-left: 10px;
+      padding-right: 10px;
+    }
+    @media @mobile {
+      border-bottom: none;
+      background: white;
     }
   }
 }

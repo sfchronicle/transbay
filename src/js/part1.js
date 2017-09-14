@@ -118,7 +118,7 @@ document.getElementById("floorplan-instructions").addEventListener("click",funct
 document.getElementById("timeline-open").addEventListener("click",function() {
   document.getElementById("timeline-wrapper").classList.add("view");
   // document.getElementById('timeline-top-border').scrollIntoView();
-  var top = $('#e0').offset().top - 70;
+  var top = $('#e0').offset().top - 60;
   $('html,body').animate({scrollTop: top}, 1000);
   timelineOpen = 1;
   if (timeline_ticker) {
@@ -592,13 +592,13 @@ function flowChart() {
       tooltip.innerHTML = `
         <div class="tooltip-title">Funding source:</div>
         <div>${d.name}</div>
-        <div>$ ${d.value} M</div>
+        <div class="tooltip-num">$ ${formatthousands(d.value)} M</div>
       `;
     } else {
       tooltip.innerHTML = `
         <div class="tooltip-title">Expenditure:</div>
         <div>${d.name}</div>
-        <div>$ ${d.value} M</div>
+        <div class="tooltip-num">$ ${formatthousands(d.value)} M</div>
       `;
     }
   }
