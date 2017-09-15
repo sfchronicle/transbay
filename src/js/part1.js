@@ -202,7 +202,7 @@ function activate() {
   // scrolling commands for interactive graphic ----------------
   var sticker_start = document.getElementById('stick-here').getBoundingClientRect().top + window_top - 37;
   if (screen.width <= 480) {
-    var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37 - 200;
+    var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37 - 300;
   } else {
     var sticker_stop = document.getElementById('stop-stick-here').getBoundingClientRect().top + window_top - 37;
   }
@@ -258,6 +258,9 @@ function activate() {
       // show the image and zoom it
       floorImg.style.opacity = "1";
       floorImg.style.visibility = "visible";
+      if (screen.width >= 480) {
+        overlayDiv.style.visibility  = "visible";
+      }
 
       // show the overlay
       // overlayDiv.style.opacity = "1";
@@ -267,8 +270,19 @@ function activate() {
 
         // loop through images and fill in inset accordingly
         for (var insetIDX = 0; insetIDX < insetList.length; insetIDX++) {
-          var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37 - screen.height/2;
-          var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - 37 - screen.height/2;
+          if (screen.width <= 480) {
+            var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37 - screen.height/2;
+            var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - 37 - screen.height/2;
+          } else {
+            if (insetIDX == 0 && s == 0) {
+               var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37 - $(window).height();
+               var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - 37;
+            } else {
+              var inset_top = insetList[insetIDX].getBoundingClientRect().top + window_top - 37;
+              var inset_bottom = insetList[insetIDX].getBoundingClientRect().bottom + window_top - 37;
+            }
+          }
+
           if (window_top >= inset_top && window_top < inset_bottom) {
 
             // at 0 index, we display a text bloock
@@ -277,19 +291,22 @@ function activate() {
 
               // here we want to loop through the arrows
               // activate correct overlays
-              if ((s == 3) && (swapPark != 1)) {
+              if (swapPark != 1) {
                 console.log("loop park overlays");
                 setTimeout(swap_park, timeoutTime);
                 swapPark = 1;
-              } else if ((s == 2) && (swapBus != 1)) {
+              }
+              if (swapBus != 1) {
                 console.log("loop bus overlays");
                 setTimeout(swap_bus, timeoutTime);
                 swapBus = 1;
-              } else if ((s == 1) && (swapMez != 1)) {
+              }
+              if (swapMez != 1) {
                 console.log("loop mezzanine overlays");
                 setTimeout(swap_mez, timeoutTime);
                 swapMez = 1;
-              } else if ((s == 0) && (swapGround != 1)) {
+              }
+              if (swapGround != 1) {
                 console.log("loop ground overlays");
                 setTimeout(swap_ground, timeoutTime);
                 swapGround = 1;
@@ -344,13 +361,13 @@ function activate() {
 
                 // the feature is on the left side of the image
                 if (leftNum <= 0.5) {
-                  var scrollLeft = (0.5 - leftNum)*placeholderWidth - (placeholderWidth - screen.width)/2 - 20;
-                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15;
+                  var scrollLeft = (0.5 - leftNum)*placeholderWidth - (placeholderWidth - screen.width)/2 - 25;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;
 
                 // the feature is on the right side of the image
                 } else {
-                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth - (placeholderWidth - screen.width)/2 - 20;///5 + 80;
-                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+15;
+                  var scrollLeft = -(leftNum - 0.5)*placeholderWidth - (placeholderWidth - screen.width)/2 - 25;///5 + 80;
+                  circleTop = floorplanData["stages"][s]["images"][imageIDX]["TopPercent"]*placeholderHeight+20;
                 }
                 // apply the panning to the image and overlay
                 floorImg.style.marginLeft = scrollLeft+ 'px';

@@ -62,9 +62,11 @@
 
         <% } else if (d.value[0].Class == "Inline") { %>
 
-          <div class="inline-img">
-            <img src="http://ww2.hdnux.com/photos/61/64/55/<%=d.value[0].PhotoID%>/5/1500x0.jpg"></img>
-            <div class="caption"><%= d.value[0].Caption %><span class="byline"> <%= d.value[0].Photographer %></span></div>
+          <div class="inline-img-container">
+            <div class="inline-img">
+              <img src="http://ww2.hdnux.com/photos/61/64/55/<%=d.value[0].PhotoID%>/5/1500x0.jpg"></img>
+              <div class="caption"><%= d.value[0].Caption %><span class="byline"> <%= d.value[0].Photographer %></span></div>
+            </div>
           </div>
 
         <% } else if (d.value[0].Class == "Float-left") { %>
