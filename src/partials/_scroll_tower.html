@@ -1,0 +1,31 @@
+<div class="tower-interactive" id="tower-interactive">
+  <div class="hed">Salesforce Tower, inside and out</div>
+  <div class="chatter">It’s 217 feet taller than the Transamerica Pyramid and 93 feet taller than Sutro Tower, but there’s more to Salesforce Tower than simple size. The high-rise set to open by January 2018 is an ambitious work of engineering, from the underground piles to the hazy artwork that will seem to float in the sky.</div>
+
+  <div id="sticky-map-top"></div>
+  <div class="scroll-image">
+    <img src="../assets/tower-graphics/SALESFORCE_INTERACTIVE.png" id="scroll-png"></img>
+    <div class="floor-info">
+      <% json.salesforce_tower.pullouts.forEach(function(d,dIDX) { %>
+        <div class="floor" id="floor<%=dIDX%>">
+          <% if (d.Image){ %>
+            <div class='title'><%=d.Title%></div>
+            <div class='deck'><%=d.Deck%></div>
+            <div class='inset-img'><img src='<%=d.Image%>'></div>
+          <% } else { %>
+            <div class='title'><%=d.Title%></div>
+            <div class='deck'><%=d.Deck%></div>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+
+  </div>
+  <div id="sticky-map-bottom"></div>
+
+  <div class="interactive-credit">
+    <div class="entry">John Blanchard  &bull; <a href="mailto:jblanchard@sfchronicle.com">jblanchard@sfchronicle.com</a></div>
+    <div class="entry">Emma O'Neill  &bull; <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a>   &bull; <a href = "https://twitter.com/emmaruthoneill" target="_blank">@emmaruthoneill</a></div>
+  </div>
+
+</div>
