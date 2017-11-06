@@ -101,6 +101,8 @@
 
       <% } else if (d.type == "towerinteractive"){ %>
         <%= t.include("partials/_scroll_tower.html") %>
+      <% } else if (d.type == "timelinehistoricalbuildings"){ %>
+        <%= t.include("partials/_timeline_historicalbuildings.html") %>
       <% } else if (d.type == "graphic"){ %>
         <div class="float-img-container">
           <div class="float-img right vertical">

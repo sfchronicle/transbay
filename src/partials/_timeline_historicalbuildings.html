@@ -1,0 +1,20 @@
+<div class="timeline-buildings-interactive" id="timeline-buildings-interactive">
+  <div class="hed"><%= json.salesforce_tower.TimelineHed %></div>
+  <div class="chatter"><%= json.salesforce_tower.TimelineDeck %></div>
+  <div class="timeline-buildings-wrapper">
+  <% json.salesforce_tower.timeline.forEach(function(d,dIDX) { %>
+    <div class="building-image">
+      <img src=""></img>
+    </div>
+    <div class="info">
+      <div class="hed"><%=d.Building%></div>
+      <div class="deck"><%=d.Deck%></div>
+    </div>
+  <% }); %>
+  </div>
+
+  <div class="interactive-credit">
+    <div class="entry">John Blanchard  &bull; <a href="mailto:jblanchard@sfchronicle.com">jblanchard@sfchronicle.com</a></div>
+    <div class="entry">Emma O'Neill  &bull; <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a>   &bull; <a href = "https://twitter.com/emmaruthoneill" target="_blank">@emmaruthoneill</a></div>
+  </div>
+</div>
