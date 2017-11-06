@@ -102,11 +102,10 @@
       <% } else if (d.type == "towerinteractive"){ %>
         <%= t.include("partials/_scroll_tower.html") %>
       <% } else if (d.type == "graphic"){ %>
-        <div class="wide-inline-img desktop">
-          <img src="../assets/graphics/<%=d.value[0].Image%>"></img>
-        </div>
-        <div class="inline-graphic mobile">
-          <img src="../assets/graphics/<%=d.value[0].MobileImage%>"></img>
+        <div class="float-img-container">
+          <div class="float-img right vertical">
+            <img src="<%=d.value[0].Image%>"></img>
+          </div>
         </div>
 
       <% } %>
