@@ -51,8 +51,6 @@ function changeText() {
 
 	  tick();
 
-    console.log(e);
-
     e.innerHTML = r[count];
     count < statementsData.length - 1 ? count++ : count = 0;
 }
