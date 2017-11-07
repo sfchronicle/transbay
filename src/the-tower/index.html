@@ -44,9 +44,7 @@
         	<%=json.transbay_part_2.Infobox %>
         </div>
       <% } else if (d.type == "bythenumbers"){ %>
-        <div class="float-img-container">
-            <%= t.include("partials/_salesforce_by_the_numbers.html") %>
-        </div>
+          <%= t.include("partials/_salesforce_by_the_numbers.html") %>
       <% } else if (d.type == "photo"){ %>
 
         <% if (d.value[0].Class == "Wide") { %>
@@ -119,6 +117,7 @@
 
     <script>
       var interactiveData = <%= JSON.stringify(json.salesforce_tower.pullouts) %>
+      var statementsData = <%= JSON.stringify(json.salesforce_tower.statements) %>
     </script>
 
 

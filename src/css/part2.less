@@ -1,56 +1,24 @@
 @transbay-blue: darken(#5AA9DD,20%);
 
-.number-box {
+#statement {
+  max-width: 600px;
+  margin: 10px auto 30px auto;
   background: lighten(@light-gray,15%);
-  border: 1px solid @light-gray;
-  padding: 10px 0 40px 0;
-  margin-bottom: 30px;
+  padding: 20px 40px;
   font-family: @med-graphics;
-  font-size: 16px;
-  padding: 20px;
-  @media @mobile {
-    font-size: 14px;
-  }
-  .number-hed {
-    font-family: @bold-graphics;
-    font-size: 18px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid @dark-gray;
-    @media @mobile {
-      font-size: 16px;
-    }
-  }
-  .cat {
-    font-style: italic;
-    color: @dark-gray;
-    color: @transbay-blue;
-    font-family: @block-graphics;
-    padding-right: 10px;
-  }
-  .line {
-
-    line-height: 1.2;
-    padding-bottom: 3px;
-    // font-family: @block-graphics;
-  }
+  color: @dark-gray;
   .num {
-    font-family: @block-graphics;
+    font-family: @bold-graphics;
+    color: @transbay-blue;
+    font-size: 25px;
+  }
+}
 
-    // color: darken(@dark-gray,15%);
-    // color: @highlight;
-  }
-  width: 450px;
-  max-width: 100%;
-  margin: 1em 2.5em 1em -7.5em;
-  float: left;
-  @media (max-width: 1000px){
-    float: none;
-    margin: 2em auto;
-  }
-  @media @mobile {
-    // margin: 1em 2em;
-    width: 95%;
-  }
+.interactive-caption {
+  padding-left: 0;
+  padding-right: 0;
+  color: @dark-gray;
+  font-style: italic;
 }
 
 .interactive-credit {
