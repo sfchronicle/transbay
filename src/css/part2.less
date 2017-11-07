@@ -5,6 +5,9 @@
   margin: 30px auto 50px auto;
   border: 2px solid @transbay-blue;
   padding-bottom: 20px;
+  @media @mobile {
+    margin: 30px 20px 50px 20px;
+  }
   #statement {
     height: 120px;
     // background: lighten(@light-gray,15%);
@@ -18,9 +21,14 @@
       color: @transbay-blue;
       font-size: 25px;
     }
+    @media @mobile {
+      padding: 10px 20px;
+      height: 140px;
+      line-height: 1.2;
+    }
   }
   .statement-graphic {
-    max-width: 250px;
+    max-width: 400px;
     margin: auto;
     img {
       width: 100%;
@@ -44,6 +52,9 @@
   line-height: 1.4;
   .source-entry {
     padding-top: 5px;
+  }
+  @media @mobile {
+    padding: 10px 20px;
   }
 }
 
@@ -110,8 +121,25 @@
   }
 }
 
+.caption {
+  padding-top: 10px;
+  &.desktop {
+    display: block;
+    @media @mobile {
+      display: none;
+    }
+  }
+  &.mobile {
+    display: none;
+    @media @mobile {
+      display: block;
+      padding-top: 10px;
+    }
+  }
+}
+
 .timeline-buildings-interactive {
-  max-width: 800px;
+  max-width: 600px;
   padding: 30px 0 70px 0;
   margin: auto;
   .chatter {
@@ -121,15 +149,43 @@
   .hed {
     line-height: 1.2;
   }
+  .interactive-credit {
+    padding-top: 25px;
+  }
   .timeline-buildings-wrapper {
     .display-flex;
     .flex-wrap(wrap);
     .info {
+      border-bottom: 1px solid @light-gray;
       padding-bottom: 30px;
+      @media @mobile {
+        border-bottom: 0;
+        padding: 20px;
+        padding-top: 0;
+      }
+    }
+    .building-image {
+      border-bottom: 1px solid @light-gray;
+      text-align: center;
+      padding: 30px;
+      @media @mobile {
+        border-bottom: 0;
+        padding: 20px;
+        padding-bottom: 0;
+      }
+      img {
+        max-width: 200px;
+        max-height: 200px;
+        // width: 100%;
+      }
     }
 
     .info, .building-image {
+      // border-top: 1px solid @light-gray;
       .flex(0 0 50%);
+      @media @mobile {
+        .flex(0 0 100%);
+      }
       font-family: @med-graphics;
       .hed {
         text-align: left;
@@ -138,6 +194,9 @@
         margin-bottom: 10px;
         color: @transbay-blue;
         border-bottom: 2px solid @transbay-blue;
+        @media @mobile {
+          text-align: center;
+        }
       }
       .deck {
         font-size: 16px;
@@ -165,13 +224,7 @@
     }
   }
   .title-overlay {
-    // font-family: @body;
     position: absolute;
-    // bottom: 70px;
-    // @media @tablet {
-    //   bottom: 50px;
-    // }
-    // right: 0;
     top: 70px;
     left: 20px;
     color: white;
@@ -186,6 +239,9 @@
     @media @mobile {
       position: relative;
       color: #333;
+      top: 0;
+      right: 0;
+      left: 0;
       bottom: 0;
     }
     .title {
@@ -195,9 +251,9 @@
       margin: auto;
       padding-bottom: 20px;
       @media @mobile {
-        max-width: 360px;
         font-size: 28px;
-        padding-top: 0;
+        text-align: center;
+        padding-top: 20px;
       }
     }
     .deck {
@@ -209,6 +265,9 @@
     }
     .author {
       padding-top: 20px;
+      @media @mobile {
+        padding-top: 0;
+      }
       a {
         color: white;
         font-weight: 600;
@@ -223,6 +282,7 @@
       font-size: 18px;
       @media @mobile {
         font-size: 16px;
+        text-align: center;
       }
     }
   }

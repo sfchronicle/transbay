@@ -1,3 +1,9 @@
+if (screen.width <= 340) {
+  var popup_padding = 50;
+} else {
+  var popup_padding = 280;
+}
+
 $(window).scroll(function(){
 
   var pos = $(this).scrollTop();
@@ -5,7 +11,11 @@ $(window).scroll(function(){
   var bottom_pos = $('#sticky-map-bottom').offset().top;
   var mapHeight = $("#scroll-png").height();
 
-  var inc = mapHeight/5; //how often we should see new map element
+  if (screen.width <= 340) {
+    var inc = mapHeight/8; //how often we should see new map element
+  } else {
+    var inc = mapHeight/6; //how often we should see new map element
+  }
   if(pos >= top_pos) {
       $('.floor-info').css("display","none");
   }
@@ -13,7 +23,12 @@ $(window).scroll(function(){
     $('.floor-info').css("display","block");
     var idx = Math.round((pos-top_pos)/inc);
     if (idx < 5 && idx >= 0) {
-      var inc_new = inc*idx+20;
+      // console.log(idx);
+      if (idx == 4) {
+        var inc_new = inc*idx+popup_padding;
+      } else {
+        var inc_new = inc*idx+20;
+      }
       var top_padding = inc_new+"px";
       $(".floor").css("display","none")
       $("#floor"+idx).css("display","block")
