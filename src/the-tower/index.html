@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
+
 
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
 
@@ -21,7 +24,7 @@
 
     <div class="title-container-part2">
       <div class="background-video">
-        <iframe src="https://player.vimeo.com/video/241533210?autoplay=1&loop=1&background=1" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe src="https://player.vimeo.com/video/241781335?autoplay=1&loop=1&background=1" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
       <div class="caption landing-part2"><span class="byline">Carlos Avila Gonzalez, The Chronicle</span></div>
       <div class="title-overlay">
@@ -37,9 +40,7 @@
 
     <% json.transbay_part_2.text.forEach(function(d,didx){ %>
       <% if (d.type == "text") { %>
-        <div class="text-block">
-          <p><%=d.value %></p>
-        </div>
+        <p><%=d.value %></p>
       <% } else if (d.type == "infobox"){ %>
         <div id="infobox">
         	<p class="title">About the project</p>
@@ -105,8 +106,8 @@
         <%= t.include("partials/_timeline_historicalbuildings.html") %>
       <% } else if (d.type == "video1"){ %>
         <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/241552205?autoplay=1&loop=1&background=1" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-          <div class="caption">Carlos Avila Gonzalez, The Chronicle</div>
+          <iframe src="https://player.vimeo.com/video/241791675?autoplay=1&loop=1&background=1" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          <div class="caption"><span class="byline">Carlos Avila Gonzalez, The Chronicle</span></div>
         </div>
       <% } else if (d.type == "graphic"){ %>
         <div class="float-img-container">

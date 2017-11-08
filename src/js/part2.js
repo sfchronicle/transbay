@@ -3,12 +3,13 @@ console.log(windowWidth);
 if (windowWidth <= 480) {
   var popup_padding = 20;
   var popup_padding_min = 5;
+} else if (windowWidth <= 800) {
+  var popup_padding = 200;
+  var popup_padding_min = 5;
 } else {
-  var popup_padding = 280;
+  var popup_padding = 300;
   var popup_padding_min = 20;
 }
-
-console.log(popup_padding);
 
 $(window).scroll(function(){
 
