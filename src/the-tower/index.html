@@ -114,8 +114,10 @@
         <%= t.include("partials/_timeline_historicalbuildings.html") %>
       <% } else if (d.type == "video1"){ %>
         <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/241791675?autoplay=1&loop=1&background=1" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-          <div class="caption"><span class="byline">Carlos Avila Gonzalez, The Chronicle</span></div>
+          <video controls class="video-class">
+            <source src="../assets/photos/part2/videoliciousJK.webm" type='video/webm;codecs="vp8, vorbis"' >
+          </video>
+          <div class="caption"><span class="byline">John King, The Chronicle</span></div>
         </div>
       <% } else if (d.type == "graphic"){ %>
         <div class="float-img-container">
