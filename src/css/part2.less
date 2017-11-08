@@ -310,19 +310,28 @@
   }
 }
 
+.caption {
+  &.landing-part2 {
+    margin-top: -5px;
+    @media @tablet {
+      margin-top: 0;
+    }
+  }
+}
+
 .tower-landing-video {
   max-width: 100%;
   line-height: 1;
   img {
     width: 100%;
   }
-  &.mobile {
+  &.mobilevid {
     display: none;
     @media @mobile {
       display: block;
     }
   }
-  &.tablet {
+  &.tabletvid {
     display: none;
     @media @tablet {
       display: block;
@@ -331,7 +340,7 @@
       display: none;
     }
   }
-  &.desktop {
+  &.desktopvid {
     @media @tablet {
       display: none;
     }
