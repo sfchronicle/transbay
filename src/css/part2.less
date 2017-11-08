@@ -30,6 +30,9 @@
   .statement-graphic {
     max-width: 400px;
     margin: auto;
+    @media @mobile {
+      max-width: 90%;
+    }
     img {
       width: 100%;
     }
@@ -122,20 +125,16 @@
 }
 
 .caption {
-  padding-top: 10px;
-  &.desktop {
-    display: block;
-    @media @mobile {
-      display: none;
-    }
+  &.landing-part2 {
+    padding-top: 5px;
   }
-  &.mobile {
-    display: none;
-    @media @mobile {
-      display: block;
-      padding-top: 10px;
-    }
-  }
+}
+
+.statement-credit {
+  padding-top: 20px;
+  padding-left: 10px;
+  // font-size: 10px;
+  margin-bottom: -5px;
 }
 
 .timeline-buildings-interactive {
