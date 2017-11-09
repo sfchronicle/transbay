@@ -277,13 +277,16 @@
         font-size: 28px;
         text-align: center;
         padding-top: 20px;
+        padding-bottom: 0;
       }
     }
     .deck {
       max-width: 800px;
       margin: auto;
       @media @mobile {
-        font-size: 18px;
+        font-size: 20px;
+        text-align: center;
+        padding-bottom: 25px;
       }
     }
     .author {
@@ -353,4 +356,8 @@
 
 .video-class {
   border: 1px solid @light-gray;
+  max-width: 100%;
+  @media @mobile {
+    width: 95%;
+  }
 }
