@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.css">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css?3">
 
 
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
@@ -36,7 +36,11 @@
       </video>
       <div class="caption landing-part2"><span class="byline">Carlos Avila Gonzalez, The Chronicle</span></div>
       <div class="title-overlay">
-        <div class="title">Symbol of a New S.F.</div>
+        <div class="title desktop">Symbol of a New San Francisco</div>
+        <div class="title mobile">
+          <div>Symbol of a new</div>
+          <div>San Francisco</div>
+        </div>
         <div class="deck">
           <div>Soaring Salesforce Tower</div>
           <div>reflects a changing city</div>
@@ -117,7 +121,7 @@
           <video controls class="video-class">
             <source src="../assets/photos/part2/videoliciousJK.webm" type='video/webm;codecs="vp8, vorbis"' >
           </video>
-          <div class="caption"><span class="byline">John King, The Chronicle</span></div>
+          <div class="caption video-caption"><span class="byline">John King, The Chronicle</span></div>
         </div>
       <% } else if (d.type == "graphic"){ %>
         <div class="float-img-container">

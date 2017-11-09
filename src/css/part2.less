@@ -248,7 +248,10 @@
     top: 70px;
     left: 20px;
     color: white;
-    max-width: 700px;
+    max-width: 900px;
+    @media @laptop {
+      max-width: 700px;
+    }
     margin: auto;
     .title, .deck {
       @media @mobile {
@@ -265,11 +268,14 @@
       bottom: 0;
     }
     .title {
-      font-size: 40px;
+      font-size: 55px;
       line-height: 1.2;
-      max-width: 580px;
+
       margin: auto;
       padding-bottom: 20px;
+      @media @laptop {
+        font-size: 40px;
+      }
       @media @tablet-horiz {
         font-size: 38px;
       }
@@ -283,6 +289,13 @@
     .deck {
       max-width: 800px;
       margin: auto;
+      font-size: 35px;
+      padding-bottom: 30px;
+      line-height: 1.4;
+      @media @laptop {
+        padding-bottom: 5px;
+        font-size: 25px;
+      }
       @media @mobile {
         font-size: 20px;
         text-align: center;
@@ -327,7 +340,9 @@
 }
 
 .tower-landing-video {
-  max-width: 100%;
+  // max-width: 1500px;
+  width: 100%;
+  // margin: auto;
   line-height: 1;
   img {
     width: 100%;
@@ -356,8 +371,26 @@
 
 .video-class {
   border: 1px solid @light-gray;
-  max-width: 100%;
+  width: 100%;
+  @media @tablet {
+    width: 90%;
+  }
   @media @mobile {
     width: 95%;
+  }
+}
+.caption {
+  &.video-caption {
+    padding: 0;
+    .byline {
+      padding-left: 0;
+    }
+    margin: auto;
+    @media @tablet {
+      width: 90%;
+    }
+    @media @mobile {
+      width: 95%;
+    }
   }
 }
