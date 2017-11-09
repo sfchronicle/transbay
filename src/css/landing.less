@@ -1,0 +1,100 @@
+.landingtitle {
+  padding-top: 80px;
+  text-align: center;
+
+  @media @mobile {
+    padding-top: 50px;
+  }
+}
+
+.linkbox {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 30px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.linkimg {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  height: 250px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  display: block;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.95;
+  }
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.overlay:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+
+.linkdesc {
+  text-align: center;
+  color: white;
+  font-size: 28px;
+  padding: 10px;
+  line-height: 1.2;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+}
+
+.linkimg:hover {
+  // text-shadow: 1px 1px black;
+
+  &#r {
+    text-shadow: none;
+  }
+}
+
+.imgbtm {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-top: 10px;
+  font-size: 16px;
+  line-height: 1.3;
+  font-family: @med-graphics;
+}
+
+.embolden {
+  font-size: 18px;
+  font-family: @bold-graphics;
+  padding-right: 10px;
+}
+
+.hideme {
+  @media screen and (max-width: 974px) {
+    display: none;
+  }
+}
+
+#p1 {
+    background-image: url("../assets/photos/part1/social.jpg");
+    background-position: center 35%;
+}
+#p2 {
+    background-image: url("../assets/photos/part2/social.jpg");
+    background-position: center top;
+}
+// #p3{
+//     background-image: url("./assets/photos/PART3.jpg");
+//     background-position: center top;
+// }
