@@ -1,3 +1,5 @@
+require("./lib/social"); //Do not delete
+
 var windowWidth = screen.width;
 console.log(windowWidth);
 if (windowWidth <= 480) {

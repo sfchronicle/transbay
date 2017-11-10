@@ -16,6 +16,7 @@ module.exports = function(grunt) {
 
     //specify starter files here - if you need additionally built JS, just add it.
     var seeds = {
+      "./src/js/landing.js": "build/app_landing.js",
       "./src/js/part1.js": "build/app_part1.js",
       "./src/js/part2.js": "build/app_part2.js",
       "./src/js/part3.js": "build/app_part3.js"
