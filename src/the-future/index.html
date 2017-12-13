@@ -8,11 +8,17 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
 
+    <link rel="stylesheet" href="http://projects.sfchronicle.com/shared/js/photo-sphere-viewer.css">
+    <script src="http://projects.sfchronicle.com/shared/js/three.min.js"></script>
+    <script src="http://projects.sfchronicle.com/shared/js/uevent.js"></script>
+    <script src="http://projects.sfchronicle.com/shared/js/doT.js"></script>
+    <script src="http://projects.sfchronicle.com/shared/js/D.js"></script>
+    <script src="http://projects.sfchronicle.com/shared/js/photo-sphere-viewer.js"></script>
+
     <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
 
     <%= t.include("partials/_head_part3.html") %>
     <%= t.include("partials/_analytics_part3.html") %>
-
 
   </head>
 
@@ -20,14 +26,14 @@
 
     <%= t.include("partials/_nav_part3.html") %>
 
-
-    <div class="container">
-      <p>Content goes here...</p>
-    </div>
+    <div id="panorama1"></div>
+    <div id="panorama2"></div>
+    <div id="panorama3"></div>
 
     <%= t.include("partials/_footer.html") %>
 
-    <script src="../app.js" async></script>
+
+    <script src="../app_part3.js" async></script>
     <%= t.include("partials/_helloSFC.html") %>
 
   </body>
