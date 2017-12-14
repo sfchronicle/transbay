@@ -30,7 +30,27 @@
 
 .neighborhoodmap-container {
   max-width: 100%;
+  position: relative;
+  path {
+    z-index: 98;
+    opacity: 0.4;
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
   img {
     max-width: 100%;
+  }
+  .overlay-basemap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    // opacity: 1;
+    z-index: 98;
+    svg {
+      max-width: 100%;
+    }
   }
 }

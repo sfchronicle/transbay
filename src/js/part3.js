@@ -15,10 +15,19 @@ audio_info.forEach(function(d,dIDX){
   });
 });
 
-$(document).ready(function(e) {
-	$('img[usemap]').rwdImageMaps();
 
-	$('area').on('click', function() {
-		alert($(this).attr('alt') + ' clicked');
-	});
+$("#SalesforceTower").on("click",function(){
+  console.log("CLICK");
+});
+
+console.log(flyover_info);
+
+flyover_info.forEach(function(d,dIDX){
+  console.log(d.Id);
+  if (d.Id){
+    document.getElementById(d.Id).addEventListener("mouseenter", function( event ) {
+      event.target.addClass("highlight");
+      console.log("HERE");
+    });
+  };
 });
