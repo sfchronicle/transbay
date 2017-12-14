@@ -1,10 +1,19 @@
 <div class="audiotour-container">
-<div class="hed"><%= json.part_3_graphics.AudioTourHed %></div>
-<div class="chatter"><%= json.part_3_graphics.AudioTourDeck %></div>
-<% json.part_3_graphics.audiotour.forEach(function(elem,elemIDX){ %>
-  <div class="panorama-element">
-    <div class="panorama-hed"><%=elem.Location%></div>
-    <div id="panorama<%=elemIDX%>" class="panorama"></div>
+  <div class="hed"><%= json.part_3_graphics.AudioTourHed %></div>
+  <div class="chatter"><%= json.part_3_graphics.AudioTourDeck %></div>
+  <div id="stick-here">
+  <div class="audio-wrapper">
+    <div class="audio-map" id="audio-map">
+      <%= t.include("assets/neighborhood-graphics/insettransbaymap.svg") %>
+    </div>
+    <div class="audio-placeholder" id="audio-placeholder"></div>
+    <div class="audio-panos">
+    <% json.part_3_graphics.audiotour.forEach(function(elem,elemIDX){ %>
+      <div class="panorama-element">
+        <div class="panorama-hed"><%=elem.Location%></div>
+        <div id="panorama<%=elemIDX%>" class="panorama"></div>
+      </div>
+    <% }); %>
+    </div>
   </div>
-<% }); %>
 </div>
