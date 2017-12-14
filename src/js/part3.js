@@ -1,34 +1,24 @@
 require("./lib/social"); //Do not delete
 
-var viewer = PhotoSphereViewer({
-  container: 'panorama1',
-  panorama: '../assets/photos/part3/1406.jpg',
-  navbar: [
-    'autorotate',
-    'zoom',
-    'caption',
-    'fullscreen'
-  ]
+audio_info.forEach(function(d,dIDX){
+  var viewer = PhotoSphereViewer({
+    container: 'panorama'+dIDX,
+    panorama: d.Photo,
+    default_fov: 90,
+    time_anim: false,
+    navbar: [
+      'autorotate',
+      'zoom',
+      'caption',
+      'fullscreen'
+    ]
+  });
 });
 
-var viewer = PhotoSphereViewer({
-  container: 'panorama2',
-  panorama: '../assets/photos/part3/1407.jpg',
-  navbar: [
-    'autorotate',
-    'zoom',
-    'caption',
-    'fullscreen'
-  ]
-});
+$(document).ready(function(e) {
+	$('img[usemap]').rwdImageMaps();
 
-var viewer = PhotoSphereViewer({
-  container: 'panorama3',
-  panorama: '../assets/photos/part3/1408.jpg',
-  navbar: [
-    'autorotate',
-    'zoom',
-    'caption',
-    'fullscreen'
-  ]
+	$('area').on('click', function() {
+		alert($(this).attr('alt') + ' clicked');
+	});
 });
