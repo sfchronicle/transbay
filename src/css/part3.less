@@ -8,8 +8,8 @@
 .panorama-element {
   // margin: 30px auto;
   .panorama-hed {
-    font-size: 20px;
-    padding-bottom: 20px;
+    font-size: 18px;
+    padding-bottom: 10px;
     max-width: 600px;
     margin: auto;
   }
@@ -19,13 +19,26 @@
 .audio-wrapper {
   .display-flex;
   .flex-wrap(wrap);
-  padding: 20px;
+  margin: 20px;
+  .audio-placeholder {
+    height: 100px;
+    .flex(0 0 35%);
+    display: none;
+  }
   .audio-map {
-    .flex(0 0 30%);
+    width: 35%;
+    &.fixedmap {
+      position: fixed;
+      top: 37px;
+      margin-right: 20px;
+      // margin: 20px;
+      left: 20px;
+    }
   }
   .audio-panos {
-    .flex(0 0 70%);
-    padding: 20px;
+    .flex(0 0 55%);
+    padding-top: 20px;
+    padding-left: 20px;
     max-width: 100%;
   }
 }
@@ -60,15 +73,31 @@
 
 .flyover-wrapper {
   margin: 50px auto;
+  .hed {
+    line-height: 1.4;
+  }
   .chatter {
     max-width: 600px;
     margin: auto;
+    line-height: 1.4;
   }
   font-family: @med-graphics;
   .instructions {
     font-size: 14px;
     text-align: center;
     padding: 5px 0;
+    &.desktop {
+      display: block;
+      @media @mobile {
+        display: none;
+      }
+    }
+    &.mobile {
+      display: none;
+      @media @mobile {
+        display: block;
+      }
+    }
   }
 }
 
@@ -95,6 +124,7 @@
     opacity: 1;
     // opacity: 1;
     z-index: 98;
+    width: 100%;
     svg {
       max-width: 100%;
     }
@@ -111,17 +141,62 @@
     border: 1px solid @dark-gray;
     font-size: 16px;
     line-height: 1.4;
+    @media @mobile {
+      font-size: 14px;
+      position: relative;
+      width: 90%;
+      margin: auto;
+      right: 0; left: 0;
+      top: 0;
+      padding: 10px 20px;
+    }
     .name {
       border-bottom: 2px solid @light-gray;
       padding-bottom: 3px;
       margin-bottom: 3px;
       color: @dark-gray;
       font-size: 20px;
+      @media @mobile {
+        font-size: 16px;
+      }
       // text-transform: uppercase;
     }
     &:empty {
       border: 0;
       padding: 0;
+    }
+  }
+}
+
+.legend-container {
+  text-align: center;
+  line-height: 1.2;
+  padding: 5px 0;
+  .legend-element {
+    width: 200px;
+    font-size: 14px;
+    display: inline-block;
+    @media @mobile {
+      padding: 0 5px;
+      width: auto;
+    }
+  }
+  .legend-box {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+    display: inline-block;
+    border: 1px solid @dark-gray;
+    border-radius: 2px;
+    vertical-align: text-bottom;
+    &.tan {
+      background-color: @tan;
+    }
+    &.yellow {
+      background-color: @yellow;
+    }
+    &.green {
+      background-color: @green;
     }
   }
 }

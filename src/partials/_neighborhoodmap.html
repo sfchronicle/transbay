@@ -3,13 +3,20 @@
   <div class="hed"><%= json.part_3_graphics.FlyoverHed %></div>
   <div class="chatter"><%= json.part_3_graphics.FlyoverDeck %></div>
 
-  <div class="instructions"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Put your cursor over the buildings to see more about each building.</div>
+  <div class="legend-container">
+    <div class="legend-element"><span class="legend-box green"></span>Completed</div>
+    <div class="legend-element"><span class="legend-box tan"></span>Under construction</div>
+    <div class="legend-element"><span class="legend-box yellow"></span>In the works</div>
+  </div>
+
+  <div class="instructions desktop"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <%= json.part_3_graphics.FlyoverInstructionsDesktop %></div>
+  <div class="instructions mobile"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <%= json.part_3_graphics.FlyoverInstructionsMobile %></div>
 
   <div class="neighborhoodmap-container">
-    <div class="overlay-textbox" id="flyover-text"></div>
     <img class="basemap" src="../assets/neighborhood-graphics/transbaybuildings_online_2.jpg"></img>
     <div class="overlay-basemap">
       <%= t.include("assets/neighborhood-graphics/transbaybuildings_online_5.svg") %>
     </div>
+    <div class="overlay-textbox" id="flyover-text"></div>
   </div>
 </div>

@@ -26,3 +26,24 @@ flyover_info.forEach(function(d,dIDX){
     });
   };
 });
+
+$(window).scroll(function(){
+
+  var pos = $(this).scrollTop();
+  var top_pos = $("#stick-here").offset().top-37;
+  var bottom_pos = $("#stop-stick").offset().top - 400;
+
+  if(pos <= top_pos) {
+    $('.audio-placeholder').css("display","none");
+    $('#audio-map').removeClass("fixedmap");
+  }
+  if(pos > top_pos) {
+    $('.audio-placeholder').css("display","block");
+    $('#audio-map').addClass("fixedmap");
+  }
+  if (pos > bottom_pos) {
+    $('#audio-map').removeClass("fixedmap");
+    $('.audio-placeholder').css("display","none");
+  }
+
+});
