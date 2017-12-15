@@ -51,15 +51,15 @@
   text {
     font-family: @med-graphics !important;
   }
-  #PATH1 {
+  // #PATH1 {
     polyline {
-      visiblility: hidden !important;
+      // stroke-width: 0 !important;
     }
-  }
+  // }
 }
 
 .audiotour-container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 50px auto;
   font-family: @block-graphics;
   text-align: center;
@@ -68,6 +68,17 @@
   }
   .chatter {
     margin-bottom: 0;
+  }
+  .audio-element {
+    font-family: @bold-graphics;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    font-size: 18px;
+    font-style: italic;
+    color: @transbay-blue;
+    audio {
+      vertical-align: middle;
+    }
   }
 }
 

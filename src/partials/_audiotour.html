@@ -9,9 +9,13 @@
     <div class="audio-placeholder" id="audio-placeholder"></div>
     <div class="audio-panos">
     <% json.part_3_graphics.audiotour.forEach(function(elem,elemIDX){ %>
-      <div class="panorama-element">
-        <div class="panorama-hed"><%=elem.Location%></div>
+      <div class="panorama-element" id="audiotour<%=elemIDX%>">
         <div id="panorama<%=elemIDX%>" class="panorama"></div>
+        <div class="audio-element"> Listen to narration:
+          <audio controls>
+            <source src="<%=elem.Audio%>" type="audio/mp3">
+          </audio>
+        </div>
       </div>
     <% }); %>
     </div>
