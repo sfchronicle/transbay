@@ -1,7 +1,8 @@
 require("./lib/social"); //Do not delete
 
+var viewer = {};
 audio_info.forEach(function(d,dIDX){
-  var viewer = PhotoSphereViewer({
+  viewer[dIDX] = PhotoSphereViewer({
     container: 'panorama'+dIDX,
     panorama: d.Photo,
     default_fov: 90,
@@ -18,7 +19,6 @@ audio_info.forEach(function(d,dIDX){
 });
 
 flyover_info.forEach(function(d,dIDX){
-  console.log(d.Id);
   if (d.Id){
     document.getElementById(d.Id).addEventListener("mouseenter", function( event ) {
       document.getElementById("flyover-text").innerHTML = "<div class='name'>"+d.Title+"</div><div class='address'>"+d.Address+"</div><div class='description'>"+d.Description+"</div><div class='timeline'>"+d.Timeline+"</div>";
@@ -29,6 +29,7 @@ flyover_info.forEach(function(d,dIDX){
   };
 });
 
+var prevPDX = -1;
 $(window).scroll(function(){
 
   var pos = $(this).scrollTop();
@@ -44,10 +45,15 @@ $(window).scroll(function(){
   }
   if(pos > top_pos) {
     $('.audio-placeholder').css("display","block");
+    $('.audio-placeholder').css("height","300px");
     $('#audio-map').addClass("fixedmap");
     // check to see where you are along paths
     audio_info.forEach(function(p,pdx){
-      var SectionStart = $('#audiotour'+pdx).offset().top-100;
+      if (pdx == 0){
+        var SectionStart = $('#audiotour'+pdx).offset().top-200;
+      } else {
+        var SectionStart = $('#audiotour'+pdx).offset().top-100;
+      }
       if (pdx<audio_info.length-1){
         var SectionEnd = $('#audiotour'+(pdx+1)).offset().top-100;
       } else {
@@ -56,9 +62,14 @@ $(window).scroll(function(){
       if (pos > SectionStart && pos < SectionEnd) {
         var scrollPercentage = 1-(SectionEnd-pos)/(SectionEnd-SectionStart);
         var num = pdx+1;
-        if (num < audio_info.length){
-          drawLine("#PATH"+num,scrollPercentage)
+        document.getElementById("audio-textbox").innerHTML = audio_info[pdx].Location;
+        if (prevPDX != pdx){
+          viewer[pdx].startAutorotate();
         }
+        if (num < audio_info.length){
+          drawLine("#PATH"+num,scrollPercentage);
+        }
+        prevPDX = pdx;
       }
     });
   }
@@ -75,12 +86,9 @@ $(window).scroll(function(){
 
 function drawLine(pathName,scrollPercentage){
   // Get a reference to the <path>
-  console.log(pathName);
-  console.log(document.querySelector(pathName));
   var path = document.querySelector(pathName).getElementsByTagName("polyline")[0];
-  console.log(path);
-  path.style["stroke-width"] = "4 !important";
-  // Get length of path... ~577px in this case
+
+  // Get length of path
   var pathLength = path.getTotalLength();
 
   // Make very long dashes (the length of the path itself)
@@ -88,9 +96,6 @@ function drawLine(pathName,scrollPercentage){
 
   // Offset the dashes so the it appears hidden entirely
   path.style.strokeDashoffset = pathLength;
-
-  // Jake Archibald says so
-  // https://jakearchibald.com/2013/animated-line-drawing-svg/
   path.getBoundingClientRect();
 
   // Length to offset the dashes

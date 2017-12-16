@@ -1,68 +1,96 @@
-.panorama {
-  width: 600px;
-  max-width: 100%;
-  height: 400px;
-  margin: auto;
-}
-
-.panorama-element {
-  // margin: 30px auto;
-  .panorama-hed {
-    font-size: 18px;
-    padding-bottom: 10px;
-    max-width: 600px;
-    margin: auto;
-  }
-  padding-bottom: 50px;
-}
-
 .audio-wrapper {
   .display-flex;
   .flex-wrap(wrap);
-  margin: 20px;
+  max-width: 1200px;
+  margin: auto;
+  #audio-textbox {
+    font-family: @bold-graphics;
+    line-height: 1.2;
+    color: @red;
+    padding-top: 10px;
+    font-size: 18px;
+    @media @mobile {
+      padding: 10px;
+    }
+  }
   .audio-placeholder {
     height: 100px;
     .flex(0 0 35%);
+    margin-left: 5%;
     display: none;
   }
   .audio-map {
     width: 35%;
+    margin-left: 5%;
+    padding-top: 40px;
+    z-index: 0;
+    @media @mobile {
+      padding-top: 0;
+    }
+    svg {
+      max-width: 100%;
+      margin: auto;
+      text {
+        font-family: @med-graphics !important;
+      }
+    }
     &.fixedmap {
       position: fixed;
       top: 37px;
-      margin-right: 20px;
-      // margin: 20px;
-      left: 20px;
+      @media @mobile {
+        z-index: -1;
+      }
+    }
+    @media @mobile {
+      width: 100%;
+      margin: auto;
     }
   }
   .audio-panos {
-    .flex(0 0 55%);
+    .flex(0 0 60%);
     padding-top: 20px;
-    padding-left: 20px;
     max-width: 100%;
+    @media @mobile {
+      .flex(0 0 100%);
+    }
+    .panorama-element {
+      z-index: 9999;
+      // margin: 30px auto;
+      .panorama-hed {
+        font-size: 18px;
+        padding-bottom: 10px;
+        max-width: 600px;
+        margin: auto;
+      }
+      padding-bottom: 50px;
+      @media @mobile {
+        background: white;
+        padding: 30px 0;
+        margin-bottom: 600px;
+        border-top: 1px solid @light-gray;
+        border-bottom: 1px solid @light-gray;
+      }
+      .panorama {
+        // width: 600px;
+        width: 90%;
+        margin: auto;
+        height: 400px;
+        margin: auto;
+        @media @mobile {
+          height: 300px;
+        }
+      }
+    }
   }
 }
 
-.audio-map {
-  max-width: 100%;
-  svg {
-    width: 100%;
-  }
-  text {
-    font-family: @med-graphics !important;
-  }
-  // #PATH1 {
-    polyline {
-      // stroke-width: 0 !important;
-    }
-  // }
-}
 
 .audiotour-container {
   max-width: 1200px;
   margin: 50px auto;
   font-family: @block-graphics;
   text-align: center;
+  line-height: 1.4;
   @media @tablet-horiz {
     padding: 30px 0;
   }
@@ -75,10 +103,20 @@
     padding-bottom: 40px;
     font-size: 18px;
     font-style: italic;
-    color: @transbay-blue;
+    color: @red;
+    background: white;
+    @media @mobile {
+      padding-bottom: 0;
+    }
     audio {
       vertical-align: middle;
     }
+  }
+  .instructions {
+    font-size: 14px;
+    font-family: @med-graphics;
+    text-align: center;
+    padding: 5px 0;
   }
 }
 
@@ -91,6 +129,9 @@
     max-width: 600px;
     margin: auto;
     line-height: 1.4;
+    @media @mobile {
+      padding: 10px;
+    }
   }
   font-family: @med-graphics;
   .instructions {
