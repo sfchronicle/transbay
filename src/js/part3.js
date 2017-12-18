@@ -65,7 +65,7 @@ $(window).scroll(function(){
         var num = pdx+1;
         document.getElementById("audio-textbox").innerHTML = audio_info[pdx].Location;
         if (prevPDX != pdx){
-          // viewer[pdx].startAutorotate();
+          viewer[pdx].startAutorotate();
         }
         if (num < audio_info.length){
           drawLine("#PATH"+num,scrollPercentage);
