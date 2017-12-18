@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.css">
     <link rel="stylesheet" type="text/css" href="../style.css?2">
 
     <link rel="stylesheet" href="http://projects.sfchronicle.com/shared/js/photo-sphere-viewer.css">
@@ -26,8 +28,137 @@
 
     <%= t.include("partials/_nav_part3.html") %>
 
-    <%= t.include("partials/_neighborhoodmap.html") %>
-    <%= t.include("partials/_audiotour.html") %>
+    <div class="title-container-part3">
+      <div class="background-photo">
+        <img src="http://ww2.hdnux.com/photos/61/64/55/14719793/5/1500x0.jpg?"></img>
+
+        <!-- <img src="http://ww2.hdnux.com/photos/61/64/55/14719789/5/1500x0.jpg?"></img> -->
+        <!-- <img src="http://ww2.hdnux.com/photos/61/64/55/14719787/5/1500x0.jpg?"></img> -->
+        <div class="caption landing mobile"><span class="byline">Carlos Avila Gonzalez, The Chronicle</span></div>
+      </div>
+      <div class="title-overlay">
+        <div class="title"><%=json.transbay_part_3.Title%></div>
+        <div class="deck"><%=json.transbay_part_3.Deck%></div>
+        <div class="author">By <a href="mailto:jking@sfchronicle.com">John King</a></div>
+        <div class="date"><%=json.transbay_part_3.Date%></div>
+      </div>
+      <div class="caption landing desktop"><span class="byline">Carlos Avila Gonzalez, The Chronicle</span></div>
+    </div>
+
+
+    <% json.transbay_part_3.text.forEach(function(d,didx){ %>
+      <% if (d.type == "text") { %>
+        <p><%=d.value %></p>
+      <% } else if (d.type == "infobox"){ %>
+        <div id="infobox">
+          <p class="title">About the project</p>
+          <%=json.transbay_part_3.Infobox %>
+        </div>
+      <% } else if (d.type == "bythenumbers_part3"){ %>
+          <%= t.include("partials/_bythenumbers_part3.html") %>
+      <% } else if (d.type == "slider1"){ %>
+
+        <div class="slider-wrapper">
+          <div class="hed"><%= json.part_3_graphics.SliderHed %></div>
+          <div class="chatter"><%= json.part_3_graphics.SliderDeck %></div>
+          <div class="instructions"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <%= json.part_3_graphics.SliderInstructions %></div>
+
+          <image-slider style="width: 100%; max-width: 900px; overflow: hidden; margin: auto;">
+            <img src="../assets/photos/part3/SFaerial-old-001.jpg">
+            <img src="../assets/photos/part3/SFaerial-001.jpg">
+          </image-slider>
+
+          <div class="interactive-credit">
+            <div class="entry">Photos obtained from ????</div>
+          </div>
+
+        </div>
+
+      <% } else if (d.type == "slider2"){ %>
+
+        <div class="slider-wrapper">
+          <div class="hed"><%= json.part_3_graphics.SliderHed %></div>
+          <div class="chatter"><%= json.part_3_graphics.SliderDeck %></div>
+          <div class="instructions"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <%= json.part_3_graphics.SliderInstructions %></div>
+
+          <image-slider style="width: 100%; max-width: 900px; overflow: hidden; margin: auto;">
+            <img src="../assets/photos/part3/SFaerial-old-005.jpg">
+            <img src="../assets/photos/part3/SFaerial-005.jpg">
+          </image-slider>
+
+          <div class="interactive-credit">
+            <div class="entry">Photos obtained from ????</div>
+          </div>
+
+        </div>
+
+      <% } else if (d.type == "photo"){ %>
+
+        <% if (d.value[0].Class == "Wide") { %>
+
+          <div class="full-width-img">
+            <img src="http://ww2.hdnux.com/photos/61/64/55/<%=d.value[0].PhotoID%>/5/1500x0.jpg"></img>
+            <div class="caption"><%= d.value[0].Caption %><span class="byline"> <%= d.value[0].Photographer %></span></div>
+          </div>
+
+        <% } else if (d.value[0].Class == "Inline") { %>
+
+          <div class="inline-img-container">
+            <div class="inline-img">
+              <img src="http://ww2.hdnux.com/photos/61/64/55/<%=d.value[0].PhotoID%>/5/1500x0.jpg"></img>
+              <div class="caption"><%= d.value[0].Caption %><span class="byline"> <%= d.value[0].Photographer %></span></div>
+            </div>
+          </div>
+
+        <% } else if (d.value[0].Class == "Float-left") { %>
+
+          <div class="float-img-container">
+            <div class="float-img left">
+              <img src="http://ww2.hdnux.com/photos/61/64/55/<%=d.value[0].PhotoID%>/5/1500x0.jpg"></img>
+              <div class="caption"><%= d.value[0].Caption %><span class="byline"> <%= d.value[0].Photographer %></span></div>
+            </div>
+          </div>
+
+        <% } else if (d.value[0].Class == "Float-right") { %>
+
+          <div class="float-img-container">
+            <div class="float-img right">
+              <img src="http://ww2.hdnux.com/photos/61/64/55/<%=d.value[0].PhotoID%>/5/1500x0.jpg"></img>
+              <div class="caption"><%= d.value[0].Caption %><span class="byline"> <%= d.value[0].Photographer %></span></div>
+            </div>
+          </div>
+
+        <% } %>
+
+      <% } else if ( d.type == 'slideshow' ){ %>
+
+          <div class="carousel slideshow js-flickity" data-flickity-options='{ "imagesLoaded": true }'>
+            <% d.value.forEach(function(slide) { %>
+
+             <div class="carousel-cell">
+              <img src="http://ww2.hdnux.com/photos/61/64/55/<%= slide.image %>/3/1500x0.jpg">
+              <div class="caption"><%= slide.caption %> <span class="byline"><%= slide.credit %></span></div>
+            </div>
+
+            <% }); %>
+
+          </div>
+
+      <% } else if (d.type == "clickymap"){ %>
+        <%= t.include("partials/_neighborhoodmap.html") %>
+      <% } else if (d.type == "audiotour"){ %>
+        <%= t.include("partials/_audiotour.html") %>
+      <% } else if (d.type == "graphic"){ %>
+        <div class="float-img-container">
+          <div class="float-img right vertical">
+            <img src="<%=d.value[0].Image%>"></img>
+          </div>
+        </div>
+
+      <% } %>
+    <% }) %>
+
+    <div class="author-credit"><p>John King is The San Francisco Chronicle’s urban design critic. Email: <a href="mailto:jking@sfchronicle.com">jking@sfchronicle.com</a> Twitter: <a href = "https://twitter.com/JohnKingSFChron" target="_blank">@JohnKingSFChron</a></p></div>
 
     <%= t.include("partials/_footer.html") %>
 

@@ -13,8 +13,8 @@
     <% json.part_3_graphics.audiotour.forEach(function(elem,elemIDX){ %>
       <div class="panorama-element" id="audiotour<%=elemIDX%>">
         <div id="panorama<%=elemIDX%>" class="panorama"></div>
-        <div class="audio-element"><span class="listen-text">Listen to narration: </span>
-          <audio controls>
+        <div class="audio-element"><span class="listen-text">Audio tour</span>
+          <audio controls controlsList="nodownload">
             <source src="<%=elem.Audio%>" type="audio/mp3"></source>
           </audio>
         </div>
@@ -23,4 +23,11 @@
     </div>
   </div>
   <div id="stop-stick"></div>
+
+  <div class="interactive-credit">
+    <div class="entry">Photographer: Carlos Avila Gonzalez  &bull; <a href="mailto:cgonzalez@sfchronicle.com">cgonzalez@sfchronicle.com</a></div>
+    <div class="entry">Graphic artist: John Blanchard  &bull; <a href="mailto:jblanchard@sfchronicle.com">jblanchard@sfchronicle.com</a></div>
+    <div class="entry">Interactive developer: Emma O'Neill  &bull; <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a></div>
+  </div>
+
 </div>

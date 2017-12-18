@@ -25,6 +25,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "html-entities": "^1.2.0",
     "htmlparser2": "^3.9.0",
+    "image-slider": "0.0.5",
     "less": "^2.6.1",
     "mime": "^1.2.11",
     "resolve": "^1.1.7",

@@ -1,4 +1,5 @@
 require("./lib/social"); //Do not delete
+require('image-slider');
 
 var viewer = {};
 audio_info.forEach(function(d,dIDX){
@@ -34,7 +35,7 @@ $(window).scroll(function(){
 
   var pos = $(this).scrollTop();
   var top_pos = $("#stick-here").offset().top-37;
-  var bottom_pos = $("#stop-stick").offset().top - 400;
+  var bottom_pos = $("#stop-stick").offset().top - 450;
 
   if(pos <= top_pos) {
     $('.audio-placeholder').css("display","none");
@@ -64,7 +65,7 @@ $(window).scroll(function(){
         var num = pdx+1;
         document.getElementById("audio-textbox").innerHTML = audio_info[pdx].Location;
         if (prevPDX != pdx){
-          viewer[pdx].startAutorotate();
+          // viewer[pdx].startAutorotate();
         }
         if (num < audio_info.length){
           drawLine("#PATH"+num,scrollPercentage);
