@@ -30,6 +30,11 @@ flyover_info.forEach(function(d,dIDX){
   };
 });
 
+if (screen.width <= 480) {
+  var mapHeight = document.getElementById("audio-map").offsetHeight;
+  $("#audio-placeholder-mobile").css("height",mapHeight+"px");
+}
+
 var prevPDX = -1;
 $(window).scroll(function(){
 
@@ -38,6 +43,9 @@ $(window).scroll(function(){
   var bottom_pos = $("#stop-stick").offset().top - 450;
 
   if(pos <= top_pos) {
+    if (screen.width <= 480) {
+      $("#audio-placeholder-mobile").css("display","none");
+    }
     $('#audio-map').removeClass("fixedmap");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,0);
@@ -58,6 +66,9 @@ $(window).scroll(function(){
         var SectionEnd = bottom_pos;
       }
       if (pos > SectionStart && pos < SectionEnd) {
+        if (screen.width <= 480) {
+          $("#audio-placeholder-mobile").css("display","block");
+        }
         var scrollPercentage = 1-(SectionEnd-pos)/(SectionEnd-SectionStart);
         var num = pdx+1;
         document.getElementById("audio-textbox").innerHTML = audio_info[pdx].Location;
@@ -72,6 +83,9 @@ $(window).scroll(function(){
     });
   }
   if (pos > bottom_pos) {
+    if (screen.width <= 480) {
+      $("#audio-placeholder-mobile").css("display","none");
+    }
     $('#audio-map').removeClass("fixedmap");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,1)
