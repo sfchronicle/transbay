@@ -83,9 +83,9 @@ $(window).scroll(function(){
     });
   }
   if (pos > bottom_pos) {
-    if (screen.width <= 480) {
-      $("#audio-placeholder-mobile").css("display","none");
-    }
+    // if (screen.width <= 480) {
+    //   $("#audio-placeholder-mobile").css("display","none");
+    // }
     $('#audio-map').removeClass("fixedmap");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,1)
@@ -98,9 +98,24 @@ $(window).scroll(function(){
 function drawLine(pathName,scrollPercentage){
   // Get a reference to the <path>
   var path = document.querySelector(pathName).getElementsByTagName("polyline")[0];
+  console.log(path);
 
   // Get length of path
-  var pathLength = path.getTotalLength();
+  try {
+    var pathLength = path.getTotalLength();
+  }
+  catch(d) {
+    var pathLength = 0;
+    var prevPos;
+    for (var i = 0 ; i < path.points.numberOfItems;i++) {
+      var pos = path.points.getItem(i);
+      if (i > 0) {
+          pathLength += Math.sqrt(Math.pow((pos.x - prevPos.x), 2) + Math.pow((pos.y - prevPos.y), 2));
+      }
+      prevPos = pos;
+    }
+  }
+
 
   // Make very long dashes (the length of the path itself)
   path.style.strokeDasharray = pathLength + ' ' + pathLength;
