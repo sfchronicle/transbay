@@ -4,9 +4,11 @@
   <div class="instructions"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <%= json.part_3_graphics.AudioInstructions %></div>
   <div id="stick-here"></div>
   <div class="audio-wrapper">
-    <div class="audio-map" id="audio-map">
-      <%= t.include("assets/neighborhood-graphics/insettransbaymap.svg") %>
-      <div id="audio-textbox"></div>
+    <div class="audio-absolute">
+      <div class="audio-map" id="audio-map">
+        <%= t.include("assets/neighborhood-graphics/insettransbaymap.svg") %>
+        <div id="audio-textbox"></div>
+      </div>
     </div>
     <div class="audio-placeholder" id="audio-placeholder"></div>
     <div class="audio-panos">

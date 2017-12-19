@@ -38,15 +38,12 @@ $(window).scroll(function(){
   var bottom_pos = $("#stop-stick").offset().top - 450;
 
   if(pos <= top_pos) {
-    $('.audio-placeholder').css("display","none");
     $('#audio-map').removeClass("fixedmap");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,0);
     };
   }
   if(pos > top_pos) {
-    $('.audio-placeholder').css("display","block");
-    $('.audio-placeholder').css("height","300px");
     $('#audio-map').addClass("fixedmap");
     // check to see where you are along paths
     audio_info.forEach(function(p,pdx){
@@ -76,7 +73,6 @@ $(window).scroll(function(){
   }
   if (pos > bottom_pos) {
     $('#audio-map').removeClass("fixedmap");
-    $('.audio-placeholder').css("display","none");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,1)
     };

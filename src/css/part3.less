@@ -3,6 +3,17 @@
   .flex-wrap(wrap);
   max-width: 1200px;
   margin: auto;
+  position: relative;
+  #audio-absolute-class{//}.absolutemap {
+    position: absolute;
+    top: 0;
+    .flex(0 0 35%);
+    // margin-left: 5%;
+    margin: auto;
+    // &.absolutemap {
+    //   margin: auto;
+    // }
+  }
   #audio-textbox {
     font-family: @banner;
     max-width: 340px;
@@ -11,23 +22,41 @@
     color: @red;
     padding-top: 10px;
     font-size: 16px;
+    text-align: center;
     @media @mobile {
       padding: 10px;
+    }
+  }
+  .audio-absolute {
+    .flex(0 0 35%);
+    max-width: 35%;
+    position: absolute;
+    margin-left: 5%;
+    @media @mobile {
+      position: relative;
+      max-width: 100%;
+      .flex(0 0 100%);
+      margin-left: 0;
     }
   }
   .audio-placeholder {
     height: 100px;
     .flex(0 0 35%);
-    // margin-left: 5%;
-    display: none;
+    margin-left: 5%;
+    @media @mobile {
+      .flex(0 0 100%);
+      margin-left: 0;
+    }
   }
   .audio-map {
-    width: 35%;
-    margin-left: 5%;
+    // width: 35%;
+    // margin-left: 5%;
+    .flex(0 0 35%);
     padding-top: 40px;
     z-index: 0;
     @media @mobile {
       padding-top: 0;
+      .flex(0 0 100%);
     }
     svg {
       max-width: 100%;
@@ -39,8 +68,13 @@
     &.fixedmap {
       position: fixed;
       top: 37px;
-      width: 35%;
+      max-width: 35%;
+      // background: white;
+      // width: 35%;
+      // left: 50%;
+      // transform: translateX(-60%);
       @media @mobile {
+        max-width: 100%;
         z-index: -1;
       }
     }
@@ -118,6 +152,9 @@
       vertical-align: text-top;
     }
     border-bottom: 2px solid @red;
+    @media @mobile {
+      border: 0;
+    }
   }
   .instructions {
     font-size: 14px;
