@@ -98,7 +98,6 @@ $(window).scroll(function(){
 function drawLine(pathName,scrollPercentage){
   // Get a reference to the <path>
   var path = document.querySelector(pathName).getElementsByTagName("polyline")[0];
-  console.log(path);
 
   // Get length of path
   try {

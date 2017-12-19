@@ -551,31 +551,44 @@ img {
 
 // don't miss ------------------------------------------
 
+.dont-miss-hed {
+  padding-top: 60px;
+  font-family: @med-graphics;
+  text-align: center;
+  font-size: 16px;
+  border-bottom: 1px solid @light-gray;
+  padding-bottom: 5px;
+  max-width: 1000px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
 .dont-miss {
   .display-flex;
   .flex-wrap(wrap);
   margin-bottom: 20px;
   font-size: 17px;
   font-family: @block-graphics;
+  max-width: 1000px;
+  margin: auto;
+  // padding-top: 20px;
   @media @mobile {
     margin-bottom: 40px;
   }
 
   .story {
-    .flex(0 0 25%);
+    .flex(0 0 50%);
+    padding: 10px;
 
     @media @mobile {
       .flex(1 1 50%)
     }
   }
-  .padded {
-    padding: 10px;
-  }
-  .small {
-    font-size: 15px;
-  }
   img {
     width: 100%;
+    &:hover {
+      opacity: 0.95;
+    }
   }
 }
 
