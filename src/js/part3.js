@@ -2,7 +2,7 @@ require("./lib/social"); //Do not delete
 require('image-slider');
 
 if (screen.width <= 480) {
-  var scrollmult = 1.1;
+  var scrollmult = 2;
 } else {
   var scrollmult = 1;
 }
@@ -38,6 +38,8 @@ flyover_info.forEach(function(d,dIDX){
 
 if (screen.width <= 480) {
   var mapHeight = document.getElementById("audio-map").offsetHeight;
+  console.log("map height is");
+  console.log(mapHeight);
   $("#audio-placeholder-mobile").css("height",mapHeight+"px");
 }
 

@@ -108,7 +108,7 @@
       @media @mobile {
         background: white;
         padding: 30px 0;
-        margin-bottom: 1000px;
+        // margin-bottom: 500px;
         border-top: 1px solid @light-gray;
         border-bottom: 1px solid @light-gray;
       }
@@ -120,7 +120,18 @@
         margin: auto;
         @media @mobile {
           height: 300px;
+          display: none;
         }
+      }
+    }
+    #audiotour0, #audiotour1, #audiotour2, #audiotour3 {
+      @media @mobile {
+        margin-bottom: 500px;
+      }
+    }
+    #audiotour4 {
+      @media @mobile {
+        margin-bottom: 0;
       }
     }
   }
@@ -155,6 +166,7 @@
 
     @media @mobile {
       padding-bottom: 0;
+      padding-top: 0;
     }
     audio {
       vertical-align: text-top;
@@ -184,6 +196,9 @@
       @media @mobile {
         padding-bottom: 5px;
       }
+    }
+    @media @mobile {
+      margin-top: 50px;
     }
   }
 }
