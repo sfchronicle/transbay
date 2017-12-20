@@ -1,6 +1,12 @@
 require("./lib/social"); //Do not delete
 require('image-slider');
 
+if (screen.width <= 480) {
+  var scrollmult = 2;
+} else {
+  var scrollmult = 1;
+}
+
 var viewer = {};
 audio_info.forEach(function(d,dIDX){
   viewer[dIDX] = PhotoSphereViewer({
@@ -76,7 +82,7 @@ $(window).scroll(function(){
           viewer[pdx].startAutorotate();
         }
         if (num < audio_info.length){
-          drawLine("#PATH"+num,scrollPercentage);
+          drawLine("#PATH"+num,scrollPercentage*scrollmult);
         }
         prevPDX = pdx;
       }
