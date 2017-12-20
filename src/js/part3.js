@@ -2,7 +2,7 @@ require("./lib/social"); //Do not delete
 require('image-slider');
 
 if (screen.width <= 480) {
-  var scrollmult = 2;
+  var scrollmult = 1.1;
 } else {
   var scrollmult = 1;
 }
