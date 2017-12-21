@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="__sync_contentCategory" content="meterA">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.css">
-    <link rel="stylesheet" type="text/css" href="../style.css?2">
-
     <link rel="stylesheet" href="http://projects.sfchronicle.com/shared/js/photo-sphere-viewer.css">
+    <link rel="stylesheet" type="text/css" href="../style.css?3">
+
+    <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
     <script src="http://projects.sfchronicle.com/shared/js/three.min.js"></script>
     <script src="http://projects.sfchronicle.com/shared/js/uevent.min.js"></script>
     <script src="http://projects.sfchronicle.com/shared/js/doT.min.js"></script>
@@ -161,17 +161,22 @@
     <div class="dont-miss-hed">Read the rest of the series</div>
     <div class="dont-miss">
         <div class="story">
-          <a href="http://projects.sfchronicle.com/transbay-terminal/the-beginning/">
+          <a href="http://projects.sfchronicle.com/2017/transbay-terminal/the-beginning/">
             <img src="../assets/photos/part1/social.jpg">
             <div class="desc">Transbay Transit Center – a difficult journey</div>
           </a>
         </div>
         <div class="story">
-          <a href="http://projects.sfchronicle.com/transbay-terminal/the-tower/">
+          <a href="http://projects.sfchronicle.com/2017/transbay-terminal/the-tower/">
             <img src="../assets/photos/part2/social.jpg">
             <div class="desc">Soaring Salesforce Tower</div>
           </a>
         </div>
+    </div>
+
+    <div class="panorama-mobile">
+      <div class="close-button" id="close-box"><i class="fa fa-times" aria-hidden="true"></i></div>
+      <div id="panorama-mobile"></div>
     </div>
 
     <%= t.include("partials/_footer.html") %>
@@ -181,7 +186,7 @@
       var flyover_info= <%= JSON.stringify(json.part_3_graphics.flyover) %>
     </script>
 
-    <script src="../app_part3.js?2" async></script>
+    <script src="../app_part3.js?4" async></script>
     <%= t.include("partials/_helloSFC.html") %>
 
   </body>

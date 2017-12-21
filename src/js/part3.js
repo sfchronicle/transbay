@@ -7,23 +7,53 @@ if (screen.width <= 480) {
   var scrollmult = 1;
 }
 
-var viewer = {};
-audio_info.forEach(function(d,dIDX){
-  viewer[dIDX] = PhotoSphereViewer({
-    container: 'panorama'+dIDX,
-    panorama: d.Photo,
-    default_fov: 90,
-    time_anim: false,
-    navbar: [
-      'autorotate',
-      'zoom',
-      'caption',
-      'fullscreen'
-    ],
-    default_long: +d.Lon,//d.Lon
-    default_lat: 0//d.Lat,
+if (screen.width <= 480) {
+  audio_info.forEach(function(d,dIDX){
+    document.getElementById("click-audiotour"+dIDX).addEventListener("click", function( event ) {
+      // document.getElementById("panorama-mobile").innerHTML = "";
+      console.log(d.Photo);
+      $(".panorama-mobile").css("display","block");
+      var photoView = PhotoSphereViewer({
+        container: 'panorama-mobile',
+        panorama: d.Photo,
+        default_fov: 90,
+        time_anim: false,
+        navbar: [
+          'autorotate',
+          'zoom',
+          'caption',
+          'fullscreen'
+        ],
+        default_long: +d.Lon,//d.Lon
+        default_lat: 0//d.Lat,
+      });
+      photoView.startAutorotate();
+    });
   });
-});
+  document.getElementById("close-box").addEventListener("click",function(){
+    document.getElementById("panorama-mobile").innerHTML = "";
+    $(".panorama-mobile").css("display","none");
+  });
+
+} else {
+  var viewer = {};
+  audio_info.forEach(function(d,dIDX){
+    viewer[dIDX] = PhotoSphereViewer({
+      container: 'panorama'+dIDX,
+      panorama: d.Photo,
+      default_fov: 90,
+      time_anim: false,
+      navbar: [
+        'autorotate',
+        'zoom',
+        'caption',
+        'fullscreen'
+      ],
+      default_long: +d.Lon,//d.Lon
+      default_lat: 0//d.Lat,
+    });
+  });
+}
 
 flyover_info.forEach(function(d,dIDX){
   if (d.Id){
@@ -46,14 +76,14 @@ if (screen.width <= 480) {
 var prevPDX = -1;
 $(window).scroll(function(){
 
+  var mapHeight = document.getElementById("audio-map").offsetHeight;
+  $("#audio-placeholder-mobile").css("height",mapHeight+"px");
+
   var pos = $(this).scrollTop();
   var top_pos = $("#stick-here").offset().top-37;
   var bottom_pos = $("#stop-stick").offset().top - 450;
 
   if(pos <= top_pos) {
-    if (screen.width <= 480) {
-      $("#audio-placeholder-mobile").css("display","none");
-    }
     $('#audio-map').removeClass("fixedmap");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,0);
@@ -81,7 +111,9 @@ $(window).scroll(function(){
         var num = pdx+1;
         document.getElementById("audio-textbox").innerHTML = audio_info[pdx].Location;
         if (prevPDX != pdx){
-          viewer[pdx].startAutorotate();
+          if (screen.width > 480){
+            viewer[pdx].startAutorotate();
+          }
         }
         if (num < audio_info.length){
           drawLine("#PATH"+num,scrollPercentage*scrollmult);
@@ -91,9 +123,6 @@ $(window).scroll(function(){
     });
   }
   if (pos > bottom_pos) {
-    // if (screen.width <= 480) {
-    //   $("#audio-placeholder-mobile").css("display","none");
-    // }
     $('#audio-map').removeClass("fixedmap");
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,1)
