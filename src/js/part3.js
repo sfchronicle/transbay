@@ -81,6 +81,7 @@ $(window).scroll(function(){
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,0);
     };
+    $("#finalcircle").css("display","none");
   }
   if(pos > top_pos) {
     $('#audio-map').addClass("fixedmap");
@@ -99,6 +100,11 @@ $(window).scroll(function(){
       if (pos > SectionStart && pos < SectionEnd) {
         if (screen.width <= 480) {
           $("#audio-placeholder-mobile").css("display","block");
+        }
+        if (pdx == 4) {
+          $("#finalcircle").css("display","block");
+        } else {
+          $("#finalcircle").css("display","none");
         }
         var scrollPercentage = 1-(SectionEnd-pos)/(SectionEnd-SectionStart);
         var num = pdx+1;
@@ -120,6 +126,7 @@ $(window).scroll(function(){
     for (var idx=1; idx<audio_info.length; idx++){
       drawLine("#PATH"+idx,1)
     };
+    $("#finalcircle").css("display","block");
   }
 
 });

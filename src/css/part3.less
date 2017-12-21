@@ -386,6 +386,9 @@
   text-align: center;
   line-height: 1.2;
   padding: 5px 0;
+  @media @mobile {
+    padding: 0 10px 5px 10px;
+  }
   .legend-element {
     width: 200px;
     font-size: 14px;
@@ -413,6 +416,10 @@
       background-color: @green;
     }
   }
+}
+
+#finalcircle {
+  display: none;
 }
 
 .bythenumbers-part3 {

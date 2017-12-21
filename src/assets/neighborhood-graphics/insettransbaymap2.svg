@@ -1178,8 +1178,8 @@ dx4OgZX4v5b3Q5MG+zuUBx6jY2NZnwwJ+nwK+nwL+R4U+KMVAA==")}
 					c12.091-2.418,16.891-12.688,10.305-23.175c-3.961,2.819-6.859,2.819-10.305,0c-3.439,2.819-6.346,2.819-10.308,0
 					C292.848,237.211,297.645,247.482,309.733,249.9z"/>
 				<g>
-
-						<text transform="matrix(0.9 0 0 1 303.3965 242.9507)" style="fill:#FFFFFF; font-family:'AntennaCondTF-Regular'; font-size:14.068;">80</text>
+					
+						<text transform="matrix(0.9 0 0 1 303.3955 242.9507)" style="fill:#FFFFFF; font-family:'AntennaCondTF-Regular'; font-size:14.068;">80</text>
 				</g>
 			</g>
 		</g>
@@ -1188,8 +1188,7 @@ dx4OgZX4v5b3Q5MG+zuUBx6jY2NZnwwJ+nwK+nwL+R4U+KMVAA==")}
 	<path d="M222.377,141.051c0,3.833-3.108,6.939-6.943,6.939s-6.944-3.105-6.944-6.939c0-3.837,3.109-6.946,6.944-6.946
 		S222.377,137.214,222.377,141.051z"/>
 	<circle cx="215.152" cy="122.459" r="6.944"/>
-	<circle style="stroke:#FFF200;stroke-width:4;" cx="232.335" cy="90.913" r="6.943"/>
-	<circle cx="232.335" cy="90.913" r="6.943"/>
+	<circle style="stroke:#FFF200;stroke-width:2;" cx="232.335" cy="90.913" r="6.943"/>
 	<circle cx="279.935" cy="77.393" r="6.945"/>
 	<circle cx="196.564" cy="55.706" r="6.944"/>
 	<circle cx="163.89" cy="82.745" r="6.943"/>
@@ -1210,50 +1209,50 @@ dx4OgZX4v5b3Q5MG+zuUBx6jY2NZnwwJ+nwK+nwL+R4U+KMVAA==")}
 	<circle cx="105.87" cy="83.871" r="6.944"/>
 	<circle cx="113.193" cy="39.085" r="6.943"/>
 	<polygon points="43.904,165.554 54.887,176.82 168.959,64.437 157.413,52.608 	"/>
-	<text transform="matrix(0.7063 -0.708 0.708 0.7063 6.4893 63.9941)" style="font-family:'Antenna-Regular'; font-size:9.4925;">MARKET ST.</text>
-	<text transform="matrix(0.7063 -0.708 0.708 0.7063 17.5684 157.1216)" style="font-family:'Antenna-Regular'; font-size:9.4925;">MISSION ST.</text>
-
-		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 286.2656 61.7798)" style="font-family:'Antenna-Regular'; font-size:9.4925;">SPEAR ST.</text>
-
-		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 230.7515 63.4229)" style="font-family:'Antenna-Regular'; font-size:9.4925;">MAIN ST.</text>
-
-		<text transform="matrix(0.7003 0.7138 -0.7138 0.7003 248.2197 141.252)" style="font-family:'Antenna-Regular'; font-size:9.4925;">BEALE ST.</text>
-
-		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 77.4287 27.3828)" style="font-family:'Antenna-Regular'; font-size:9.4925;">FREMONT ST.</text>
-	<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 59.6509 64.979)" style="font-family:'Antenna-Regular'; font-size:9.4925;">FIRST ST.</text>
-
-		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 61.6562 217.2329)" style="font-family:'Antenna-Regular'; font-size:9.4925;">SECOND ST.</text>
-
-		<text transform="matrix(0.7063 -0.708 0.708 0.7063 175.0864 102.5386)" style="font-family:'Antenna-Regular'; font-size:9.4925;">HOWARD ST.</text>
-	<text transform="matrix(0.7063 -0.708 0.708 0.7063 146.6074 234.228)" style="font-family:'Antenna-Regular'; font-size:9.4925;">FOLSOM ST.</text>
-
-		<text transform="matrix(0.7063 -0.708 0.708 0.7063 261.3623 223.6929)" style="font-family:'Antenna-Regular'; font-size:9.4925;">HARRISON ST.</text>
+	<text transform="matrix(0.7062 -0.708 0.708 0.7062 6.4741 63.9795)" style="font-family:'Antenna-Regular'; font-size:9.4925;">MARKET ST.</text>
+	<text transform="matrix(0.7062 -0.708 0.708 0.7062 17.5527 157.1069)" style="font-family:'Antenna-Regular'; font-size:9.4925;">MISSION ST.</text>
+	<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 286.2334 61.75)" style="font-family:'Antenna-Regular'; font-size:9.4925;">SPEAR ST.</text>
+	
+		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 230.7202 63.3926)" style="font-family:'Antenna-Regular'; font-size:9.4925;">MAIN ST.</text>
+	
+		<text transform="matrix(0.7003 0.7138 -0.7138 0.7003 248.2236 141.2554)" style="font-family:'Antenna-Regular'; font-size:9.4925;">BEALE ST.</text>
+	<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 77.3979 27.353)" style="font-family:'Antenna-Regular'; font-size:9.4925;">FREMONT ST.</text>
+	
+		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 59.6206 64.9487)" style="font-family:'Antenna-Regular'; font-size:9.4925;">FIRST ST.</text>
+	
+		<text transform="matrix(0.6975 0.7166 -0.7166 0.6975 61.6255 217.2026)" style="font-family:'Antenna-Regular'; font-size:9.4925;">SECOND ST.</text>
+	
+		<text transform="matrix(0.7062 -0.708 0.708 0.7062 175.0708 102.5229)" style="font-family:'Antenna-Regular'; font-size:9.4925;">HOWARD ST.</text>
+	
+		<text transform="matrix(0.7062 -0.708 0.708 0.7062 146.5923 234.2144)" style="font-family:'Antenna-Regular'; font-size:9.4925;">FOLSOM ST.</text>
+	
+		<text transform="matrix(0.7062 -0.708 0.708 0.7062 261.3467 223.6772)" style="font-family:'Antenna-Regular'; font-size:9.4925;">HARRISON ST.</text>
 	<circle style="fill:#ED1C24;" cx="232.334" cy="90.913" r="5.319"/>
 	<path style="fill:#ED1C24;" d="M232.943,161.58c0,2.941-2.381,5.321-5.321,5.321c-2.938,0-5.318-2.38-5.318-5.321
 		c0-2.936,2.38-5.316,5.318-5.316C230.562,156.263,232.943,158.644,232.943,161.58z"/>
 	<path style="fill:#ED1C24;" d="M126.192,168.4c0,2.939-2.382,5.322-5.321,5.322c-2.939,0-5.319-2.383-5.319-5.322
 		c0-2.935,2.379-5.316,5.319-5.316C123.81,163.083,126.192,165.465,126.192,168.4z"/>
 	<circle style="fill:#ED1C24;" cx="43.383" cy="145.986" r="5.32"/>
-	<circle id="finalcircle" style="stroke:#FFF200;stroke-width:2;" cx="110.701" cy="111.077" r="6.943"/>
+	<circle style="stroke:#FFF200;stroke-width:2;" cx="110.701" cy="111.077" r="6.943"/>
 	<circle style="fill:#ED1C24;" cx="110.925" cy="111.343" r="5.32"/>
 </g>
 <g id="PATH1">
-
+	
 		<polyline style="fill:none;stroke:#ED1C24;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
 		232.208,90.919 217.712,105.062 243.887,131.758 220.85,154.791 227.623,161.583 	"/>
 </g>
 <g id="PATH2">
-
+	
 		<polyline style="fill:none;stroke:#ED1C24;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
-		227.623,161.583 220.85,154.791 214.567,161.073 163.054,109.129 112.83,159.355 120.986,167.941 	"/>
+		120.986,167.941 112.83,159.355 163.054,109.129 214.567,161.073 220.85,154.791 227.623,161.583 	"/>
 </g>
 <g id="PATH3">
-
+	
 		<polyline style="fill:none;stroke:#ED1C24;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
-		120.872,168.402 112.83,159.355 60.638,211.199 27.047,176.883 50.984,154.218 42.863,146.033 	"/>
+		42.863,146.033 50.984,154.218 27.047,176.883 60.638,211.199 112.83,159.355 120.872,168.402 	"/>
 </g>
 <g id="PATH4">
-
+	
 		<polyline style="fill:none;stroke:#ED1C24;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
 		43.563,146.631 59.241,161.847 111.111,111.276 	"/>
 </g>
