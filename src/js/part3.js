@@ -66,13 +66,6 @@ flyover_info.forEach(function(d,dIDX){
   };
 });
 
-if (screen.width <= 480) {
-  var mapHeight = document.getElementById("audio-map").offsetHeight;
-  console.log("map height is");
-  console.log(mapHeight);
-  $("#audio-placeholder-mobile").css("height",mapHeight+"px");
-}
-
 var prevPDX = -1;
 $(window).scroll(function(){
 

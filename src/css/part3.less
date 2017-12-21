@@ -127,7 +127,7 @@
     }
     #audiotour0, #audiotour1, #audiotour2, #audiotour3 {
       @media @mobile {
-        margin-bottom: 500px;
+        margin-bottom: 450px;
       }
     }
     #audiotour4 {
@@ -142,6 +142,7 @@
       }
       display: none;
       @media @mobile {
+        padding-top: 5px;
         display: block;
       }
     }
@@ -215,8 +216,11 @@
       padding-bottom: 0;
       padding-top: 0;
     }
+    .listen-text {
+      padding-right: 5px;
+    }
     audio {
-      vertical-align: text-top;
+      vertical-align: middle;
       @media @mobile {
         max-width: 200px;
       }
@@ -245,7 +249,7 @@
       }
     }
     @media @mobile {
-      margin-top: 40px;
+      margin-top: 30px;
     }
   }
 }
@@ -356,11 +360,12 @@
       margin-bottom: 30px;
     }
     .name {
-      border-bottom: 2px solid @light-gray;
+      border-bottom: 1px solid @light-gray;
       padding-bottom: 3px;
       margin-bottom: 3px;
       color: @dark-gray;
       font-size: 18px;
+      line-height: 1.2;
       @media @tablet-horiz {
         margin-bottom: 5px;
         font-size: 18px;
@@ -468,6 +473,9 @@
     padding-top: 0;
     @media @tablet {
       padding: 0 20px;
+    }
+    @media @mobile {
+      padding: 0 10px;
     }
   }
 }
