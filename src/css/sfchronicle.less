@@ -529,6 +529,15 @@ img {
       margin: 0 auto;
       max-width: 600px;
     }
+    &.radio-link {
+      float: right;
+      margin: 0.5em -7.5em 0.5em 1.5em;
+
+      @media (max-width: 1072px){
+        float: none;
+        margin: 2em auto;
+      }
+    }
 }
 
 // video embed code ------------------------------------
@@ -591,6 +600,7 @@ img {
   }
   img {
     width: 100%;
+    height: 80%;
     &:hover {
       opacity: 0.95;
     }

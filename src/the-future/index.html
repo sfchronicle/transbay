@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@1.2/dist/flickity.css">
     <link rel="stylesheet" href="http://projects.sfchronicle.com/shared/js/photo-sphere-viewer.css">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css?2">
 
     <script src="https://npmcdn.com/flickity@1.2/dist/flickity.pkgd.js"></script>
     <script src="http://projects.sfchronicle.com/shared/js/three.min.js"></script>
@@ -151,12 +151,18 @@
             <img src="<%=d.value[0].Image%>"></img>
           </div>
         </div>
+      <% } else if (d.type == "radio-link"){ %>
+        <div class="float-img-container">
+          <div class="float-img radio-link">
+            <div class="radio-hed">Listen for more</div>
+            <a href="<%=d.value[0].Link%>" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i><%=d.value[0].Sentence%></a>
+          </div>
+        </div>
 
       <% } %>
     <% }) %>
 
     <div class="author-credit"><p>John King is The San Francisco Chronicle’s urban design critic. Email: <a href="mailto:jking@sfchronicle.com">jking@sfchronicle.com</a> Twitter: <a href = "https://twitter.com/JohnKingSFChron" target="_blank">@JohnKingSFChron</a></p></div>
-
 
     <div class="dont-miss-hed">Read the rest of the series</div>
     <div class="dont-miss">
